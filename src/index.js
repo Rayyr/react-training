@@ -13,7 +13,7 @@ root.render(
         <App >
            <Card
             name="Raya Khasati"
-            description=" Computer Engineering student with passion in software development both frontend and backend"
+            description="Computer Engineering student with passion in software development both frontend and backend"
             profileImg={me}
           />
         </App >

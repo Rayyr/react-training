@@ -10,8 +10,7 @@ function Card(probs) {
             class="rounded-img"
             src={probs.profileImg}
             alt="img"
-            width={200}
-            height={200}
+           
           />
         </div>
       </div>
