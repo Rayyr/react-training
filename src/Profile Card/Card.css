@@ -1,0 +1,41 @@
+
+
+.outer-card{
+  width:500px;
+  height: 700px;
+  background-color: #FAFAFA;
+  border-radius: 80px;
+  text-align: center;
+}
+
+.inner-card{
+    width:500px;
+  height: 300px; 
+  background-color: #C6677A;
+  border-radius:80px 80px 0px 0px ;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.rounded-img{
+    border-radius: 50%;
+}
+
+.my-name{
+    
+    font-size: xx-large;
+    color: #808080 ;
+    margin-top: 60px;
+
+}
+
+
+.my-description{
+      color: #808080 ;
+      width: 400px;
+ 
+      margin:0 auto;
+     text-align: center;
+     margin-top: 40px;
+}
