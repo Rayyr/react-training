@@ -22,4 +22,6 @@ run the written tests in **List.test.js**
 ### References
 - https://github.com/testing-library/jest-dom?utm_source=chatgpt.com#custom-matchers
 - https://testing-library.com/
+- W3SCHOOLS
+- React docs
   
