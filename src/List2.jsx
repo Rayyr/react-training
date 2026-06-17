@@ -47,7 +47,7 @@ function List2() {
 
       <div className="tasks">
         {tasks.map((t, index) => (
-          <div key={index}>
+          <div className="added-task" key={index}>
             <p>{t}</p>
             <button onClick={()=>handleDeleteClick(index)}>Delete Task</button>
           </div>

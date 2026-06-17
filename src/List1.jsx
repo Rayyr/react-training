@@ -19,6 +19,7 @@ function List1() {
 
   return (
     <div className="main-container">
+     <div className="task-bar">
       <form>
         <input
           type="text"
@@ -32,10 +33,12 @@ function List1() {
       </form>
 
       <button onClick={handleAddClick}>Add Task</button>
+      </div>
 
+      
       <div className="tasks">
         {tasks.map((t, index) => (
-          <div key={index}>
+          <div className="added-task" key={index}>
             <p>{t}</p>
             <button onClick={()=>handleDeleteClick(index)}>Delete Task</button>
           </div>
