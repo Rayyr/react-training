@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <List2 />       {/*support local storage*/}
+    <List1 />       {/*support local storage*/}
   {/*  <List1 />*/} {/*no local storage*/}
   </React.StrictMode>
 );
