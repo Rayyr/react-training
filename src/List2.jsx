@@ -29,6 +29,7 @@ function List2() {
 
   return (
     <div className="main-container">
+      <h1 data-testid="title">To Do List with localstorage</h1>
      <div className="task-bar">
       <form>
         <input
