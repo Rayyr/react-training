@@ -1,25 +1,35 @@
 import "./List.css";
 import { useState } from "react";
 
-function List() {
+function List2() {
   const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+
+  const [tasks, setTasks] = useState(()=>{
+    const savedTasks=localStorage.getItem("tasks");
+    return savedTasks?JSON.parse(savedTasks):[];
+  });
 
   const handleAddClick = () => {
     if (task.trim() === "") return;
-    setTasks([...tasks, task]);
+    const newTasks=[...tasks, task];
+    setTasks(newTasks);
     setTask("");
+    localStorage.setItem("tasks",JSON.stringify(newTasks));
     return;
   };
 
   
 
    function handleDeleteClick(indexToDelete) {
-    setTasks(tasks.filter((_, index) => index !== indexToDelete));
+    const newTasks=tasks.filter((_, index) => index !== indexToDelete);
+    setTasks(newTasks);
+    localStorage.setItem("tasks",JSON.stringify(newTasks));
+    return;
   }
 
   return (
     <div className="main-container">
+     <div className="task-bar">
       <form>
         <input
           type="text"
@@ -33,6 +43,7 @@ function List() {
       </form>
 
       <button onClick={handleAddClick}>Add Task</button>
+      </div>
 
       <div className="tasks">
         {tasks.map((t, index) => (
@@ -46,4 +57,4 @@ function List() {
   );
 }
 
-export default List;
+export default List2;

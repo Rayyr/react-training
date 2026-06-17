@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import List from './List';
+import List1 from './List1';
+import List2 from './List2';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <List />
+    <List2 />
+  {/*  <List1 />*/} 
   </React.StrictMode>
 );
 
