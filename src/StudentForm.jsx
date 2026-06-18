@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function StudentForm() {
   const [formData, setFormData] = useState({
@@ -20,15 +21,20 @@ function StudentForm() {
       !formData.course ||
       !formData.gpa
     ) {
-      alert("Name and Email and Course and GPA are required!");
+     // alert("Name and Email and Course and GPA are required!");
+     toast.error("Name and Email and Course and GPA are required!");
       return;
     }
 
     //gpa validation
     if (formData.gpa < 0 || formData.gpa > 4) {
-      alert("GPA must be greater than zero and less than 4.00!");
+     // alert("GPA must be greater than zero and less than 4.00!");
+      toast.error("GPA must be greater than zero and less than 4.00!");
       return;
     }
+
+     toast.success("Student registered successfully");
+
     setStudents([...students, formData]);
 
     setFormData({
