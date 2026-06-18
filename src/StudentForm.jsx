@@ -1,45 +1,46 @@
 import { useState } from "react";
 
 function StudentForm() {
-  const [formData,setFormData]=useState({
-
-    name:"",
-    email:"",
-    gender:"",
-    course:"",
-    gpa:"",
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    gender: "",
+    course: "",
+    gpa: "",
   });
 
-    const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([]);
 
-
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     //general not-null values validation
-        if (!formData.name || !formData.email || !formData.course || !formData.gpa) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.course ||
+      !formData.gpa
+    ) {
       alert("Name and Email and Course and GPA are required!");
       return;
     }
 
     //gpa validation
-    if(formData.gpa<0 || formData.gpa>4) {
-         alert("GPA must be greater than zero and less than 4.00!");
+    if (formData.gpa < 0 || formData.gpa > 4) {
+      alert("GPA must be greater than zero and less than 4.00!");
       return;
     }
-        setStudents([...students, formData]);
+    setStudents([...students, formData]);
 
-
-        setFormData({
+    setFormData({
       name: "",
       email: "",
       gender: "",
       course: "",
-      gpa:""
+      gpa: "",
     });
-  }
+  };
 
-
-   const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData({
@@ -47,7 +48,6 @@ function StudentForm() {
       [name]: value,
     });
   };
-
 
   return (
     <div style={{ width: "300px", margin: "auto" }}>
@@ -63,7 +63,8 @@ function StudentForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="email"
@@ -74,9 +75,10 @@ function StudentForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
- <input
+        <input
           type="number"
           name="gpa"
           placeholder="GPA"
@@ -86,7 +88,8 @@ function StudentForm() {
           step="0.01"
         />
 
-            <br /><br />
+        <br />
+        <br />
 
         <select name="gender" value={formData.gender} onChange={handleChange}>
           <option value="">Gender</option>
@@ -94,7 +97,8 @@ function StudentForm() {
           <option value="Female">Female</option>
         </select>
 
-        <br /><br />
+        <br />
+        <br />
 
         <input
           type="text"
@@ -105,17 +109,31 @@ function StudentForm() {
           required
         />
 
-        <br /><br />
+        <br />
+        <br />
 
         <button type="submit">Register</button>
       </form>
 
+      <div className="card-preview">
+        <p className="name">Name: {formData.name}</p>
+        <p className="email">Email: {formData.email}</p>
+        <p className="gpa">GPA:{formData.gpa}</p>
+        <p className="gender">
+          Gender:{" "}
+          {formData.gender === "" ? "prefer not to say" : formData.gender}
+        </p>
+
+        <p className="course">Course: {formData.course}</p>
+      </div>
       <hr />
 
       <h3>Students</h3>
       {students.map((s, i) => (
         <div key={i}>
-          <p>{s.name} | {s.email} | {s.gender} | {s.course} | {s.gpa}</p>
+          <p>
+            {s.name} | {s.email} | {s.gender} | {s.course} | {s.gpa}
+          </p>
         </div>
       ))}
     </div>
