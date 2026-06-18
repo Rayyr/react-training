@@ -1,16 +1,19 @@
-import React from 'react';
+import  React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import List1 from './List1';
-import List2 from './List2';
+import App from './App';
+ 
 import reportWebVitals from './reportWebVitals';
+
+ 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <List1 />       {/*support local storage*/}
-  {/*  <List1 />*/} {/*no local storage*/}
-  </React.StrictMode>
+    <App/>   
+      
+      
+   </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
