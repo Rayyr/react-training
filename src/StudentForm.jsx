@@ -6,7 +6,8 @@ function StudentForm() {
     name:"",
     email:"",
     gender:"",
-    course:""
+    course:"",
+    gpa:"",
   });
 
     const [students, setStudents] = useState([]);
@@ -14,8 +15,15 @@ function StudentForm() {
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-        if (!formData.name || !formData.email || !formData.course) {
-      alert("Name and Email and Course are required!");
+    //general not-null values validation
+        if (!formData.name || !formData.email || !formData.course || !formData.gpa) {
+      alert("Name and Email and Course and GPA are required!");
+      return;
+    }
+
+    //gpa validation
+    if(formData.gpa<0 || formData.gpa>4) {
+         alert("GPA must be greater than zero and less than 4.00!");
       return;
     }
         setStudents([...students, formData]);
@@ -26,6 +34,7 @@ function StudentForm() {
       email: "",
       gender: "",
       course: "",
+      gpa:""
     });
   }
 
@@ -67,6 +76,18 @@ function StudentForm() {
 
         <br /><br />
 
+ <input
+          type="number"
+          name="gpa"
+          placeholder="GPA"
+          value={formData.gpa}
+          onChange={handleChange}
+          required
+          step="0.01"
+        />
+
+            <br /><br />
+
         <select name="gender" value={formData.gender} onChange={handleChange}>
           <option value="">Gender</option>
           <option value="Male">Male</option>
@@ -94,7 +115,7 @@ function StudentForm() {
       <h3>Students</h3>
       {students.map((s, i) => (
         <div key={i}>
-          <p>{s.name} | {s.email} | {s.gender} | {s.course}</p>
+          <p>{s.name} | {s.email} | {s.gender} | {s.course} | {s.gpa}</p>
         </div>
       ))}
     </div>
