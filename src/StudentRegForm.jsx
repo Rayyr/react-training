@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import './StudentRegForm.css';
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "./StudentRegForm.css";
 //customize them later
 
 //all input valiodation will be applied manually
@@ -11,6 +11,9 @@ function StudentRegForm() {
     email: "",
     gpa: "",
   });
+
+  //form clocking state
+  const [isBlocked, setIsBlocked] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -38,7 +41,13 @@ function StudentRegForm() {
       ...regStudents,
       { name: formData.username, email: formData.email, gpa: formData.gpa },
     ]);
-    toast.success("New student has been registered succesfully!");
+    toast.success("New student has been registered succesfully!", {
+      style: {
+        width: "500px",
+      },
+      onOpen: () => setIsBlocked(true),
+      onClose: () => setIsBlocked(false),
+    });
     reset();
     //
   };
@@ -61,13 +70,25 @@ function StudentRegForm() {
   function validateGpa() {
     //check min
     if (formData.gpa <= 0) {
-      toast.error("Sorry,the GPA must be strictlly greater than 0!");
+      toast.error("Sorry,the GPA must be strictlly greater than 0!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
     //check max
     if (formData.gpa > 4) {
-      toast.error("Sorry,the GPA must be smaller or equel 4!");
+      toast.error("Sorry,the GPA must be smaller or equel 4!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
@@ -78,7 +99,13 @@ function StudentRegForm() {
     //example@gmail.com
     //check requirness
     if (formData.email.length === 0) {
-      toast.error("Sorry,the email is required!");
+      toast.error("Sorry,the email is required!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
@@ -87,13 +114,25 @@ function StudentRegForm() {
     let atIndex = formData.email.indexOf("@");
 
     if (formData.email.substring(0, atIndex) === formData.username) {
-      toast.error("Sorry,the email must not include your username");
+      toast.error("Sorry,the email must not include your username", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
     //check if first char must is a digit or special char
     if (/[^a-zA-Z]/.test(formData.email.at(0)) === true) {
-      toast.error("Sorry,the email must not start by digit or special char!");
+      toast.error("Sorry,the email must not start by digit or special char!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
@@ -103,20 +142,38 @@ function StudentRegForm() {
   function validateUsername() {
     //check requirness
     if (formData.username.length === 0) {
-      toast.error("Sorry,the username is required!");
+      toast.error("Sorry,the username is required!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
     //check if have spaces
     if (/\s/.test(formData.username) === true) {
-      toast.error("Sorry,the username must not have spaces!");
+      toast.error("Sorry,the username must not have spaces!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
     //check if have special chars
     const specialCharsRegex = /[^a-zA-Z0-9]/;
     if (specialCharsRegex.test(formData.username) === true) {
-      toast.error("Sorry,the username must not have special chars!");
+      toast.error("Sorry,the username must not have special chars!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
       return false;
     }
 
@@ -134,6 +191,7 @@ function StudentRegForm() {
             placeholder="Username"
             value={formData.username}
             onChange={(e) => handleChange(e)}
+            disabled={isBlocked}
           ></input>{" "}
           <br />
           <input
@@ -142,6 +200,7 @@ function StudentRegForm() {
             placeholder="Email"
             value={formData.email}
             onChange={(e) => handleChange(e)}
+            disabled={isBlocked}
           ></input>{" "}
           <br />
           <input
@@ -151,32 +210,53 @@ function StudentRegForm() {
             value={formData.gpa}
             onChange={(e) => handleChange(e)}
             step="0.01"
+            disabled={isBlocked}
           ></input>{" "}
           <br />
-          <button type="submit" disabled={!formData.username || !formData.email || !formData.gpa}>Register student</button>
+          <button
+            type="submit"
+            disabled={
+              !formData.username || !formData.email || !formData.gpa ||
+              isBlocked
+            }
+          >
+            Register student
+          </button>
         </form>
       </div>
 
-<div className="child2">
-    <div className="preview-row">
-      <div className="preview-card">
-        <p>{formData.username}</p>
-        <p>{formData.email}</p>
-        <p>{formData.gpa===0?"":formData.gpa}</p>
-      </div>
-</div>
+      <div className="child2">
+        <div className="preview-row">
+          <div className="preview-card">
+            <p>{formData.username}</p>
+            <p>{formData.email}</p>
+            <p>{formData.gpa === 0 ? "" : formData.gpa}</p>
+          </div>
+        </div>
 
-  <div className="registered-students">
-  {regStudents.map((e, ind) => (
-    <div className="student-card" key={ind}>
-      <p>{e.name}</p>
-      <p>{e.email}</p>
-      <p>{e.gpa}</p>
-    </div>
-  ))}
-</div>
+        <div className="registered-students">
+          {regStudents.map((e, ind) => (
+            <div className="student-card" key={ind}>
+              <p>{e.name}</p>
+              <p>{e.email}</p>
+              <p>{e.gpa}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </div>
   );
 }
