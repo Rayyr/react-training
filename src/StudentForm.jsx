@@ -21,19 +21,27 @@ function StudentForm() {
       !formData.course ||
       !formData.gpa
     ) {
-     // alert("Name and Email and Course and GPA are required!");
-     toast.error("Name and Email and Course and GPA are required!");
+      // alert("Name and Email and Course and GPA are required!");
+      toast.error("Name and Email and Course and GPA are required!");
       return;
     }
 
     //gpa validation
-    if (formData.gpa < 0 || formData.gpa > 4) {
-     // alert("GPA must be greater than zero and less than 4.00!");
+    if (Number(formData.gpa < 0) || Number(formData.gpa > 4)) {
+      // alert("GPA must be greater than zero and less than 4.00!");
       toast.error("GPA must be greater than zero and less than 4.00!");
       return;
     }
 
-     toast.success("Student registered successfully");
+    if (
+      students.find((e) => {
+        return e.email === formData.email;
+      })
+    ) {
+      toast.error("There is a student registered with this email!");
+      return;
+    }
+    toast.success("Student registered successfully");
 
     setStudents([...students, formData]);
 
@@ -124,7 +132,7 @@ function StudentForm() {
       <div className="card-preview">
         <p className="name">Name: {formData.name}</p>
         <p className="email">Email: {formData.email}</p>
-        <p className="gpa">GPA:{formData.gpa}</p>
+        <p className="gpa">GPA:{Number(formData.gpa)}</p>
         <p className="gender">
           Gender:{" "}
           {formData.gender === "" ? "prefer not to say" : formData.gender}
@@ -136,9 +144,9 @@ function StudentForm() {
 
       <h3>Students</h3>
       {students.map((s, i) => (
-        <div key={i}>
+        <div key={s.email}>
           <p>
-            {s.name} | {s.email} | {s.gender} | {s.course} | {s.gpa}
+            {s.name} | {s.email} | {s.gender} | {s.course} | {Number(s.gpa)}
           </p>
         </div>
       ))}
