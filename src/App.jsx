@@ -2,6 +2,7 @@ import "./List.css";
 import { useState } from "react";
 import FilterBar from "./FilterBar";
 import Tasks from "./Tasks";
+import Button from './Button.jsx';
 
 function App() {
   const [task, setTask] = useState("");
@@ -44,7 +45,7 @@ function App() {
           onChange={(e) => setTask(e.target.value)}
         />
 
-        <button onClick={handleAddClick}>Add Task</button>
+        <Button onClick={handleAddClick} content="Add Task"/>
       </div>
 
       <FilterBar filter={filter} setFilter={setFilter} />
