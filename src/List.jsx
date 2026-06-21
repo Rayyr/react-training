@@ -1,5 +1,6 @@
 import "./List.css";
 import { useState } from "react";
+import ListItem from "./ListItem.jsx";
 
 function List(props) {
   const [task, setTask] = useState("");
@@ -8,8 +9,7 @@ function List(props) {
     if (props.withLocalStorage === true) {
       const savedTasks = localStorage.getItem("tasks");
       return savedTasks ? JSON.parse(savedTasks) : [];
-    }  else 
-        return [];
+    } else return [];
   });
 
   const handleAddClick = () => {
@@ -51,12 +51,11 @@ function List(props) {
 
       <div className="tasks">
         {tasks.map((t, index) => (
-          <div className="added-task" key={index}>
-            <p>{t}</p>
-            <button onClick={() => handleDeleteClick(index)}>
-              Delete Task
-            </button>
-          </div>
+          <ListItem
+            key={index}
+            taskContent={t}
+            onDelete={() => handleDeleteClick(index)}
+          />
         ))}
       </div>
     </div>
