@@ -1,5 +1,4 @@
 import List from '../List.jsx';
-import ListItem from '../ListItem.jsx';
 import {render,screen} from '@testing-library/react';
 import "@testing-library/jest-dom"; //for matchers functions
 import userEvent from "@testing-library/user-event";
