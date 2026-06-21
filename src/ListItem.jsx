@@ -1,11 +1,11 @@
 import React from "react";
 import "./List.css";
 
-function ListItem({ onDelete, taskContent, index }) {
+function ListItem({ onDelete, taskContent, id }) {
   return (
-    <div className="added-task" key={index}>
+    <div className="added-task" key={id} data-testid={`task-${id}`}>
       <p>{taskContent}</p>
-      <button onClick={onDelete}>Delete Task</button>
+      <button data-testid={`del-btn-${id}`}  onClick={onDelete}>Delete Task</button>
     </div>
   );
 }

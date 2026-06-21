@@ -36,6 +36,7 @@ function List(props) {
       <div className="task-bar">
         <form>
           <input
+          data-testid="task-input"
             type="text"
             id="task-content"
             style={{ width: "500px" }}
@@ -46,13 +47,13 @@ function List(props) {
           />
         </form>
 
-        <button onClick={handleAddClick}>Add Task</button>
+        <button data-testid="add-btn" onClick={handleAddClick}>Add Task</button>
       </div>
 
       <div className="tasks">
         {tasks.map((t, index) => (
           <ListItem
-            key={index}
+            id={index}
             taskContent={t}
             onDelete={() => handleDeleteClick(index)}
           />
