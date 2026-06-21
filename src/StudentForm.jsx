@@ -40,7 +40,7 @@ function StudentForm() {
     ) {
       toast.error("There is a student registered with this email!");
       return;
-    }
+    } 
     toast.success("Student registered successfully");
 
     setStudents([...students, formData]);
