@@ -1,14 +1,14 @@
 import "./Card.css";
  
 
-function Card(probs) {
+function Card(props) {
   return (
     <div className="outer-card">
       <div className="inner-card">
         <div className="img-containor">
           <img
-            class="rounded-img"
-            src={probs.profileImg}
+            className="rounded-img"
+            src={props.profileImg}
             alt="img"
            
           />
@@ -16,12 +16,12 @@ function Card(probs) {
       </div>
 
       <div className="my-name">
-        <span>{probs.name}</span>
+        <span>{props.name}</span>
       </div>
 
       <div className="my-description">
         <span>
-         {probs.description}
+         {props.description}
         </span>
       </div>
     </div>
