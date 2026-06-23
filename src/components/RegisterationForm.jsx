@@ -10,7 +10,7 @@ function RegisterationForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-     
+     course:"",
     gpa: "",
   });
 
@@ -41,7 +41,7 @@ function RegisterationForm() {
     //add them to regStudents
     setRegStudents([
       ...regStudents,
-      { name: formData.username, email: formData.email, gpa: formData.gpa },
+      { name: formData.username, email: formData.email, course:formData.course,gpa: formData.gpa },
     ]);
     toast.success("New student has been registered succesfully!", {
       style: {
@@ -58,6 +58,7 @@ function RegisterationForm() {
     setFormData({
       email: "",
       username: "",
+      course:"",
       gpa: "",
     });
   }
@@ -66,8 +67,26 @@ function RegisterationForm() {
     if (validateUsername() === false) return false;
     if (validateEmail() === false) return false;
     if (validateGpa() === false) return false;
+    if(validateCourse()===false) return false;
     return true;
   }
+
+
+  function validateCourse(){
+
+    if(/[^a-zA-Z]/.test(formData.course)===true){
+           toast.error("Sorry,the course must not contain any special characters!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+      return false;
+    }
+    return true;
+  }
+
 
   function validateGpa() {
     //check min
@@ -233,12 +252,24 @@ function RegisterationForm() {
             disabled={isBlocked}
           ></input>{" "}
           <br />
+            
+          <input
+            type="text"
+            name="course"
+            placeholder="Course"
+            value={formData.course}
+            onChange={(e) => handleChange(e)}
+            
+            disabled={isBlocked}
+          ></input>{" "}
+          <br />
           <button
             type="submit"
             disabled={
               !formData.username ||
               !formData.email ||
               !formData.gpa ||
+              !formData.course||
               isBlocked
             }
           >
@@ -253,6 +284,7 @@ function RegisterationForm() {
             <p>{formData.username}</p>
             <p>{formData.email}</p>
             <p>{formData.gpa === 0 ? "" : formData.gpa}</p>
+             <p>{formData.course}</p>
           </div>
         </div>
 

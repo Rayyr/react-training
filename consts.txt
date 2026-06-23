@@ -1,0 +1,24 @@
+validation reqs(constraints) for the following input feilds : 
+1- username: 
+-required (not empty)     done
+-no spaces   done
+-no special chars (-,_,#,...)     done
+
+
+
+2-email
+-required    done
+-follow this regex:example@gmail.com           done by built-in input faild validation
+-example must not be as same as username       done
+-first char must not be digit or special char
+
+
+
+3-Gpa
+-positive && greater than 0 and less than 4   done
+
+4-course
+-not contain special chars     done
+
+
+

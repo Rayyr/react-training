@@ -6,6 +6,7 @@ function ListItem({ content, id }) {
       <p>{content.name}</p>
       <p>{content.email}</p>
       <p>{content.gpa}</p>
+      <p>{content.course}</p>
     </div>
   );
 }
