@@ -1,7 +1,8 @@
 import { React, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import '../styles/UserCard.css';
 
-function StudentCard() {
+function UserCard() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -55,7 +56,7 @@ function StudentCard() {
   return (
     <>
       {blocked === true ? null : (
-        <>
+        <div className="card">
           {loading === true ? (
             <h1>Loading...</h1>
           ) : (
@@ -67,16 +68,16 @@ function StudentCard() {
                 <img
                   className="avatar"
                   src={avatar}
-                  alt="this is profile avatar"
+                  alt="profile avatar"
                 ></img>
                 <button onClick={handleClick}>Next user</button>
               </div>
             </>
           )}
-        </>
+        </div>
       )}
     </>
   );
 }
 
-export default StudentCard;
+export default UserCard;

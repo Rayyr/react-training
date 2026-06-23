@@ -1,4 +1,4 @@
-import StudentCard from "./components/StudentCard";
+import StudentCard from "./components/UserCard";
 import { ToastContainer ,Bounce} from "react-toastify";
 
 import "./App.css";
@@ -9,7 +9,7 @@ function App() {
       <StudentCard />
      <ToastContainer
 position="top-right"
-autoClose={1000}
+autoClose={600}
 hideProgressBar={true}
 newestOnTop={false}
 closeOnClick={true}
