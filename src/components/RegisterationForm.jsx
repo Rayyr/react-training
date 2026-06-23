@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
+import StudentList from "./StudentList";
+import ListItem from "./ListItem";
 
 //all input valiodation will be applied manually
 function RegisterationForm() {
@@ -8,6 +10,7 @@ function RegisterationForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
+     
     gpa: "",
   });
 
@@ -253,16 +256,13 @@ function RegisterationForm() {
           </div>
         </div>
 
-        <div className="registered-students">
-          {regStudents.map((e, ind) => (
-            <div className="student-card" key={ind}>
-              <p>{e.name}</p>
-              <p>{e.email}</p>
-              <p>{e.gpa}</p>
-            </div>
-          ))}
-        </div>
+
+
+        <StudentList   list={regStudents}/>
       </div>
+
+
+
       <ToastContainer
         position="top-center"
         autoClose={4000}
