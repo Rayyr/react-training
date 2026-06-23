@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import StudentList from "./StudentList";
-import ListItem from "./ListItem";
 
 //all input valiodation will be applied manually
 function RegisterationForm() {
@@ -26,7 +25,10 @@ function RegisterationForm() {
   //registered successfullr students array
   //s1:{name: email: gpa:}
   //s2:...
-  const [regStudents, setRegStudents] = useState([]);
+  const [regStudents, setRegStudents] = useState(() => {
+    const savedStudents = localStorage.getItem("students");
+    return savedStudents ? JSON.parse(savedStudents) : [];
+  });
 
   const handleSubmit = (e) => {
     //prevent page refresh
@@ -39,15 +41,18 @@ function RegisterationForm() {
     }
 
     //add them to regStudents
-    setRegStudents([
+    const newRegStudents = [
       ...regStudents,
       {
+        //new student obj
         name: formData.username,
         email: formData.email,
         course: formData.course,
         gpa: formData.gpa,
       },
-    ]);
+    ];
+    setRegStudents(newRegStudents);
+    localStorage.setItem("students", JSON.stringify(newRegStudents));
     toast.success("New student has been registered succesfully!", {
       style: {
         width: "500px",
