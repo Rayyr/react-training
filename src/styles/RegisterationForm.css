@@ -1,0 +1,62 @@
+.main-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.child1 {
+    text-align: center;       
+  margin-top:30px;
+}
+
+input{
+    height: 20px;
+    width:250px;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+}
+
+button{
+    margin-top: 30px;
+    padding: 10px 10px;
+}
+
+.child2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 🔥 First row (centered) */
+.preview-row {
+    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Fixed preview card */
+.preview-card {
+  width: 250px;
+  padding: 15px;
+  border: 2px dashed #999;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* 🔥 Students start from NEW row */
+.registered-students {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Same size cards */
+.student-card {
+  width: 250px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
