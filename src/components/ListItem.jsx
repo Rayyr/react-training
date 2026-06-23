@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modal.jsx";
 
-function ListItem({ content, id }) {
+function ListItem({ content,isBlocked }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClick = () => {
+    setShowModal(true);
+  };
+
   return (
-    <div className="student-card" key={id}>
-      <p>{content.name}</p>
-      <p>{content.email}</p>
-      <p>{content.gpa}</p>
-      <p>{content.course}</p>
-    </div>
+    <>
+      <div className="student-card">
+        <p>{content.name}</p>
+        <p>.....</p>
+
+        <button onClick={handleClick} disabled={isBlocked}>View Details</button>
+      </div>
+
+      {showModal && (
+        <Modal content={content} onClose={() => setShowModal(false)} />
+      )}
+    </>
   );
 }
 
