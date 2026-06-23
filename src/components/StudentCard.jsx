@@ -5,32 +5,36 @@ function StudentCard() {
   const [location, setLocation] = useState("");
   const [avatar, setAvatar] = useState("");
 
+  const fetchData = async () => {
+    const res = await fetch("https://randomuser.me/api/");
+    const data = await res.json();
+
+    //name extraction
+    const title = data.results[0].name.title;
+    const first = data.results[0].name.first;
+    const last = data.results[0].name.last;
+
+    //location extraction
+    const city = data.results[0].location.city;
+    const country = data.results[0].location.country;
+
+    //avatar extraction
+    const avatar = data.results[0].picture.medium;
+
+    //update states
+    setName(title + ". " + first + " " + last);
+    setLocation(country + "," + city);
+    setAvatar(avatar);
+  };
+
   useEffect(() => {
     //side effect code
-    const fetchData = async () => {
-      const res = await fetch("https://randomuser.me/api/");
-      const data = await res.json();
-
-      //name extraction
-      const title=data.results[0].name.title;
-      const first=data.results[0].name.first;
-      const last=data.results[0].name.last;
-
-      //location extraction
-      const city=data.results[0].location.city;
-      const country=data.results[0].location.country;
-
-      //avatar extraction
-      const avatar=data.results[0].picture.medium;
-
-      //update states
-      setName(title+". "+first+" "+last);
-      setLocation(country+","+city);
-      setAvatar(avatar);
-     };
     fetchData();
-
   }, []);
+
+  const handleClick = () => {
+    fetchData();
+  };
 
   return (
     <>
@@ -38,7 +42,8 @@ function StudentCard() {
       <p className="location">Location: {location}</p>
       <div>
         <span>Avatar: </span>
-      <img className="avatar" src={avatar} alt="this is profile avatar"></img>
+        <img className="avatar" src={avatar} alt="this is profile avatar"></img>
+        <button onClick={handleClick}>Next user</button>
       </div>
     </>
   );
