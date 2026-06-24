@@ -35,7 +35,7 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
 
     
     onAddStudent(formData);
-    console.log(formData);
+    
      toast.success("New student has been registered succesfully!", {
       style: {
         width: "500px",
