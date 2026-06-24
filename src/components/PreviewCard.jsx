@@ -1,65 +1,39 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { Card, CardContent, Typography } from "@mui/material";
 
-export default function PreviewCard({ content }) {
+function PreviewCard({ content }) {
   return (
-    <Box sx={{ minWidth: 275, width: 320 }}>
-      <Card
-        variant="outlined"
-        sx={{
-          border: "2px solid #4A148C",
-          borderRadius: "10px",
-          backgroundColor: "#FFFFFF",
-          boxShadow: "0 8px 20px rgba(74, 20, 140, 0.15)",
-        }}
-      >
-        <CardContent>
-          <Typography
-            gutterBottom
-            sx={{
-              color: "#4A148C",
-              fontSize: "20px",
-              fontWeight: "bold",
-              borderBottom: "2px solid #BB86FC",
-              paddingBottom: "8px",
-              marginBottom: "14px",
-            }}
-          >
-            Preview Card
-          </Typography>
+    <Card
+      sx={{
+        backgroundColor: "#4A148C",   // dark purple background
+        color: "#E0D7FF",             // light purple text
+        borderRadius: "16px",
+        boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
+        minWidth: 250,
+        transition: "0.3s",
+        "&:hover": {
+          transform: "scale(1.03)",
+        },
+      }}
+    >
+      <CardContent>
+        <Typography   sx={{  mb: 1 }}>
+          Username: {content.username}
+        </Typography>
 
-          <Typography
-            variant="body2"
-            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
-          >
-            Username: {content.username || "-"}
-          </Typography>
+        <Typography sx={{ mb: 1 }}>
+          Email: {content.email }
+        </Typography>
 
-          <Typography
-            variant="body2"
-            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
-          >
-            Email: {content.email || "-"}
-          </Typography>
+        <Typography sx={{ mb: 1 }}>
+          GPA: {content.gpa === 0 ? "" :  content.gpa}
+        </Typography>
 
-          <Typography
-            variant="body2"
-            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
-          >
-            GPA: {content.gpa || "-"}
-          </Typography>
-
-          <Typography
-            variant="body2"
-            sx={{ color: "#7B1FA2", fontSize: "16px" }}
-          >
-            Course: {content.course || "-"}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
+        <Typography>
+          Course: {content.course }
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
+
+export default PreviewCard;
