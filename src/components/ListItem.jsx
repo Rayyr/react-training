@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Modal from "./Modal.jsx";
+import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
+ 
 
 function ListItem({ content, isBlocked }) {
   const [showModal, setShowModal] = useState(false);
@@ -63,7 +64,7 @@ function ListItem({ content, isBlocked }) {
       </Card>
 
       {showModal && (
-        <Modal content={content} onClose={() => setShowModal(false)} />
+        <MyModal open={showModal} content={content} onClose={() => setShowModal(false)} />
       )}
     </>
   );
