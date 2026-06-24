@@ -3,6 +3,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import StudentList from "./StudentList";
 import { Input, Button, Box } from "@mui/material";
+import PreviewCard from "./PreviewCard";
 
 //all input valiodation will be applied manually
 function RegisterationForm() {
@@ -396,12 +397,9 @@ function RegisterationForm() {
 
         <div className="child2">
           <div className="preview-row">
-            <div className="preview-card">
-              <p>{formData.username}</p>
-              <p>{formData.email}</p>
-              <p>{formData.gpa === 0 ? "" : formData.gpa}</p>
-              <p>{formData.course}</p>
-            </div>
+            <PreviewCard content={formData}/>
+               
+            
           </div>
 
           <StudentList isBlocked={isBlocked} list={regStudents} />
