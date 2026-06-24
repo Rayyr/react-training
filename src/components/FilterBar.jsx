@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box, Typography } from "@mui/material";
 
-function FilterBar() {
+function FilterBar({filters,setFilters}) {
   const buttonStyle = {
     flex: 1,
     

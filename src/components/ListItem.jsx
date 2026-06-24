@@ -27,7 +27,7 @@ function ListItem({ onDeleteStudent,content, isBlocked }) {
       >
         <CardContent>
           <Typography variant="h6" sx={{ color: "#F3E5F5" }}>
-            {content.name}
+            {content.username}
           </Typography>
 
           <Typography variant="body2">{content.email}</Typography>

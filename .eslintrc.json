@@ -6,8 +6,8 @@
     ],
     "rules":{
         "no-unused-vars": "warn",
-        "getter-return":"warn",
-        "no-console":"error"
+        "getter-return":"warn"
+       
     }
   
 }

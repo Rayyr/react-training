@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
-import StudentList from "./StudentList";
 import { Input, Button, Box } from "@mui/material";
 import PreviewCard from "./PreviewCard";
-import FilterBar from "./FilterBar";
-
+ 
 //all input valiodation will be applied manually
-function RegisterationForm({regStudents,setRegStudents }) {
+function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
   //single state obj
   const [formData, setFormData] = useState({
     username: "",
@@ -16,8 +14,6 @@ function RegisterationForm({regStudents,setRegStudents }) {
     gpa: "",
   });
 
-  //form blocking state
-  const [isBlocked, setIsBlocked] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -37,20 +33,10 @@ function RegisterationForm({regStudents,setRegStudents }) {
       return;
     }
 
-    //add them to regStudents
-    const newRegStudents = [
-      ...regStudents,
-      {
-        //new student obj
-        name: formData.username,
-        email: formData.email,
-        course: formData.course,
-        gpa: formData.gpa,
-      },
-    ];
-    setRegStudents(newRegStudents);
-    localStorage.setItem("students", JSON.stringify(newRegStudents));
-    toast.success("New student has been registered succesfully!", {
+    
+    onAddStudent(formData);
+    console.log(formData);
+     toast.success("New student has been registered succesfully!", {
       style: {
         width: "500px",
       },
@@ -224,21 +210,7 @@ function RegisterationForm({regStudents,setRegStudents }) {
     return true;
   }
 
-  const dhandleDeleteStudent = (indToBeDeleted) => {
-    const newRegStudents = regStudents.filter(
-      (_, index) => index !== indToBeDeleted,
-    );
-    setRegStudents(newRegStudents);
-    localStorage.setItem("students", JSON.stringify(newRegStudents));
-    toast.success("Student has been deleted successfully!", {
-      style: {
-        width: "500px",
-      },
-      onOpen: () => setIsBlocked(true),
-      onClose: () => setIsBlocked(false),
-    });
-    return;
-  };
+  
 
   
   return (
@@ -419,11 +391,7 @@ function RegisterationForm({regStudents,setRegStudents }) {
             <PreviewCard content={formData} />
           </div>
 
-          <StudentList
-            onDeleteStudent={dhandleDeleteStudent}
-            isBlocked={isBlocked}
-            list={regStudents}
-          />
+    
         </div>
 
         <ToastContainer
