@@ -31,19 +31,31 @@ export default function PreviewCard({ content }) {
             Preview Card
           </Typography>
 
-          <Typography variant="body2" sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}>
+          <Typography
+            variant="body2"
+            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
+          >
             Username: {content.username || "-"}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}>
+          <Typography
+            variant="body2"
+            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
+          >
             Email: {content.email || "-"}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}>
+          <Typography
+            variant="body2"
+            sx={{ color: "#7B1FA2", fontSize: "16px", marginBottom: "8px" }}
+          >
             GPA: {content.gpa || "-"}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: "#7B1FA2", fontSize: "16px" }}>
+          <Typography
+            variant="body2"
+            sx={{ color: "#7B1FA2", fontSize: "16px" }}
+          >
             Course: {content.course || "-"}
           </Typography>
         </CardContent>

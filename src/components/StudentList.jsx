@@ -1,7 +1,7 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-function StudentList({ list, isBlocked }) {
+function StudentList({ onDeleteStudent,list, isBlocked }) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function StudentList({ list, isBlocked }) {
       }}
     >
       {list.map((e, ind) => (
-        <ListItem content={e} key={ind} isBlocked={isBlocked} />
+        <ListItem onDeleteStudent={()=>onDeleteStudent(ind)} content={e} key={ind} isBlocked={isBlocked} />
       ))}
     </div>
   );

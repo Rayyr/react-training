@@ -229,6 +229,21 @@ function RegisterationForm() {
     return true;
   }
 
+  const dhandleDeleteStudent=(indToBeDeleted)=>{
+    const newRegStudents=regStudents.filter((_,index)=>index!==indToBeDeleted);
+    setRegStudents(newRegStudents);
+    localStorage.setItem("students",JSON.stringify(newRegStudents));
+     toast.success("Student has been deleted successfully!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+    return;
+  };
+
+
   return (
     <Box
       sx={{
@@ -397,12 +412,10 @@ function RegisterationForm() {
 
         <div className="child2">
           <div className="preview-row">
-            <PreviewCard content={formData}/>
-               
-            
+            <PreviewCard content={formData} />
           </div>
 
-          <StudentList isBlocked={isBlocked} list={regStudents} />
+          <StudentList  onDeleteStudent={dhandleDeleteStudent} isBlocked={isBlocked} list={regStudents} />
         </div>
 
         <ToastContainer

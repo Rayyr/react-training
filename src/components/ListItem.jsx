@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
- 
 
-function ListItem({ content, isBlocked }) {
+function ListItem({ onDeleteStudent,content, isBlocked }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -33,38 +32,82 @@ function ListItem({ content, isBlocked }) {
 
           <Typography variant="body2">{content.email}</Typography>
 
-          <Button
-            onClick={() => setShowModal(true)}
-            disabled={isBlocked}
-            sx={{
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
               marginTop: "12px",
-              padding: "8px 16px",
-              borderRadius: "8px",
-              textTransform: "none",
-
-              background: "linear-gradient(45deg, #4A148C, #9C27B0)",
-              color: "#fff",
-
-              "&:hover": {
-                background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-              },
-
-              "&.Mui-disabled": {
-                background: "#2A1B3D",
-                color: "#FFFFFF",
-                pointerEvents: "auto",
-                cursor: "not-allowed",
-                opacity: 0.7,
-              },
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            View Details
-          </Button>
+            <Button
+              onClick={() => setShowModal(true)}
+              disabled={isBlocked}
+              sx={{
+                whiteSpace: "nowrap",
+                flex: 1,
+                padding: "8px 10px",
+                borderRadius: "8px",
+                textTransform: "none",
+                fontSize: "13px",
+                background: "linear-gradient(45deg, #4A148C, #9C27B0)",
+                color: "#fff",
+
+                "&:hover": {
+                  background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+                },
+
+                "&.Mui-disabled": {
+                  background: "#2A1B3D",
+                  color: "#FFFFFF",
+                  pointerEvents: "auto",
+                  cursor: "not-allowed",
+                  opacity: 0.7,
+                },
+              }}
+            >
+              View Details
+            </Button>
+
+            <Button
+            onClick={onDeleteStudent}
+              disabled={isBlocked}
+              sx={{
+                whiteSpace: "nowrap",
+                flex: 1,
+                padding: "8px 10px",
+                borderRadius: "8px",
+                textTransform: "none",
+                fontSize: "13px",
+                background: "linear-gradient(45deg, #4A148C, #9C27B0)",
+                color: "#fff",
+
+                "&:hover": {
+                  background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+                },
+
+                "&.Mui-disabled": {
+                  background: "#2A1B3D",
+                  color: "#FFFFFF",
+                  pointerEvents: "auto",
+                  cursor: "not-allowed",
+                  opacity: 0.7,
+                },
+              }}
+            >
+              Delete Student
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
       {showModal && (
-        <MyModal open={showModal} content={content} onClose={() => setShowModal(false)} />
+        <MyModal
+          open={showModal}
+          content={content}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </>
   );
