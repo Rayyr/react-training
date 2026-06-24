@@ -21,7 +21,7 @@ function MyModal({ open, onClose, content }) {
         }}
       >
         <Typography variant="h6" sx={{ mb: 2 }}>
-          {content?.name}
+          {content?.username}
         </Typography>
 
         <Typography>Email: {content?.email}</Typography>
