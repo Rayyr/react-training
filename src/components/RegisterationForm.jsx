@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import StudentList from "./StudentList";
-import { Input,Button,Box } from "@mui/material";
-  
+import { Input, Button, Box } from "@mui/material";
+
 //all input valiodation will be applied manually
 function RegisterationForm() {
   //single state obj
@@ -363,31 +363,31 @@ function RegisterationForm() {
                 isBlocked
               }
               sx={{
-    marginTop: "20px",
-    padding: "12px 24px",
-    fontSize: "18px",
-    borderRadius: "10px",
-    textTransform: "none",
+                marginTop: "20px",
+                padding: "12px 24px",
+                fontSize: "18px",
+                borderRadius: "10px",
+                textTransform: "none",
 
-    background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
-    color: "#F3E5F5",
+                background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
+                color: "#fff",
 
-    "&:hover": {
-      background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-    },
+                "&:hover": {
+                  background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+                },
 
-    "&:active": {
-      transform: "scale(0.98)",
-    },
+                "&:active": {
+                  transform: "scale(0.98)",
+                },
 
-    "&.Mui-disabled": {
-       background: "#2A1B3D",
-      color: "#FFFFFF",              // ✅ white text
-      opacity: 0.7,    
-        pointerEvents: "auto",   
-     cursor: "not-allowed",
-    },
-  }}
+                "&.Mui-disabled": {
+                  background: "#2A1B3D",
+                  color: "#FFFFFF",
+                  pointerEvents: "auto",
+                  cursor: "not-allowed",
+                  opacity: 0.7,
+                },
+              }}
             >
               Register student
             </Button>
