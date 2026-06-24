@@ -5,7 +5,7 @@ function FilterBar({ filters, setFilters, isBlocked }) {
   const [activeFilter, setActiveFilter] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
-  const handleClick = () => {
+  const handleFiltering = () => {
     if (activeFilter === "username")
       setFilters({ ...filters, username: filterValue }); //update the parent filter
     else if (activeFilter === "gpa")
@@ -15,6 +15,12 @@ function FilterBar({ filters, setFilters, isBlocked }) {
 
     setFilterValue("");
     setActiveFilter("");
+  };
+
+  const handleClear=()=>{
+    setActiveFilter("");
+     setFilterValue("");
+     setFilters({username:"",gpa:"",course:""});
   };
 
   const buttonStyle = {
@@ -157,14 +163,31 @@ function FilterBar({ filters, setFilters, isBlocked }) {
           </TextField>
         )}
       </Box>
+
+      <Box
+  sx={{
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: "10px",
+  }}
+>
+
+
       <Button 
         disabled={isBlocked || activeFilter === "" || filterValue === ""}
-        style={{ marginTop: "10px" }}
-        sx={buttonStyle}
-        onClick={handleClick}
+         sx={{...buttonStyle,flex:0,marginTop:"10px"}}
+        onClick={handleFiltering}
       >
         Filter
       </Button>
+
+        <Button 
+          sx={{...buttonStyle,flex:0,marginTop:"10px"}}
+        onClick={handleClear}
+      >
+        Clear
+      </Button>
+      </Box>
     </Box>
   );
 }
