@@ -4,9 +4,10 @@ import "../styles/RegisterationForm.css";
 import StudentList from "./StudentList";
 import { Input, Button, Box } from "@mui/material";
 import PreviewCard from "./PreviewCard";
+import FilterBar from "./FilterBar";
 
 //all input valiodation will be applied manually
-function RegisterationForm() {
+function RegisterationForm({regStudents,setRegStudents }) {
   //single state obj
   const [formData, setFormData] = useState({
     username: "",
@@ -15,7 +16,7 @@ function RegisterationForm() {
     gpa: "",
   });
 
-  //form clocking state
+  //form blocking state
   const [isBlocked, setIsBlocked] = useState(false);
 
   const handleChange = (e) => {
@@ -24,13 +25,7 @@ function RegisterationForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  //registered successfullr students array
-  //s1:{name: email: gpa:}
-  //s2:...
-  const [regStudents, setRegStudents] = useState(() => {
-    const savedStudents = localStorage.getItem("students");
-    return savedStudents ? JSON.parse(savedStudents) : [];
-  });
+  
 
   const handleSubmit = (e) => {
     //prevent page refresh
@@ -245,6 +240,7 @@ function RegisterationForm() {
     return;
   };
 
+  
   return (
     <Box
       sx={{
@@ -253,6 +249,7 @@ function RegisterationForm() {
         padding: 3,
       }}
     >
+     
       <div className="main-cont">
         <div className="child1">
           <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
