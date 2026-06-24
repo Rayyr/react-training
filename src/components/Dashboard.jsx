@@ -2,20 +2,24 @@ import React, { useState } from "react";
 import RegisterationForm from "./RegisterationForm.jsx";
 import FilterBar from "./FilterBar.jsx";
 import StudentList from "./StudentList.jsx";
+ import { Typography} from "@mui/material";
 
 function Dashboard() {
+  
+   
   //registered successfullr students array
   //s1:{name: email: gpa:}
   //s2:...
   const [regStudents, setRegStudents] = useState(() => {
     const savedStudents = localStorage.getItem("students");
-    return savedStudents ? JSON.parse(savedStudents) : [];
+    return savedStudents ?JSON.parse(savedStudents) :[];
   });
 
   function addStudent(student) {
     const newStudents = [...regStudents, student];
     setRegStudents(newStudents);
     localStorage.setItem("students", JSON.stringify(newStudents));
+    
   }
 
   function deleteStudent(indexToDelete) {
@@ -45,8 +49,13 @@ function Dashboard() {
     const matchesCourse =
       filters.course === "" || student.course === filters.course;
 
+      
     return matchesUsername && matchesGpa && matchesCourse;
+     
+    //empty here mean all filter
   });
+
+  const nothingFound = filteredStudents.length === 0;
 
   return (
     <>
@@ -58,11 +67,25 @@ function Dashboard() {
         onAddStudent={addStudent}
         regStudents={regStudents}
       />
+      {nothingFound===true?(
+  <Typography
+    variant="h5"
+    sx={{
+      marginTop: "30px",
+      textAlign: "center",
+      color: "#B39DDB",
+      fontWeight: "bold",
+    }}
+  >
+    No students found 😕
+  </Typography>
+):(
       <StudentList
         onDeleteStudent={deleteStudent}
         isBlocked={isBlocked}
         list={filteredStudents}
       />
+      )}
     </>
   );
 }
