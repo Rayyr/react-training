@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import StudentList from "./StudentList";
+import { Input } from "@mui/material";
+import { Box } from "@mui/material";
 
 //all input valiodation will be applied manually
 function RegisterationForm() {
@@ -228,28 +230,58 @@ function RegisterationForm() {
   }
 
   return (
+    <Box   sx={{
+    backgroundColor: "#eeeeee", // light grey
+    minHeight: "100vh",
+    padding: 3,
+  }}>
     <div className="main-cont">
       <div className="child1">
         <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
-          <input
+          <Input
             type="text"
             name="username"
             placeholder="Username"
             value={formData.username}
             onChange={(e) => handleChange(e)}
             disabled={isBlocked}
-          ></input>{" "}
+            autoFocus={true}
+            sx={{
+              color: "#E3D026",
+              "&::placeholder": {
+                color: "#E3D026",
+              },
+              "&:before": {
+                borderBottom: "1px solid #E3D026",
+              },
+              "&:after": {
+                borderBottom: "2px solid #E3D026",
+              },
+            }}
+          ></Input>{" "}
           <br />
-          <input
+          <Input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={(e) => handleChange(e)}
             disabled={isBlocked}
-          ></input>{" "}
+               sx={{
+              color: "#E3D026",
+              "&::placeholder": {
+                color: "#E3D026",
+              },
+              "&:before": {
+                borderBottom: "1px solid #E3D026",
+              },
+              "&:after": {
+                borderBottom: "2px solid #E3D026",
+              },
+            }}
+          ></Input>{" "}
           <br />
-          <input
+          <Input
             type="number"
             name="gpa"
             placeholder="GPA"
@@ -257,16 +289,40 @@ function RegisterationForm() {
             onChange={(e) => handleChange(e)}
             step="0.01"
             disabled={isBlocked}
-          ></input>{" "}
+               sx={{
+              color: "#E3D026",
+              "&::placeholder": {
+                color: "#E3D026",
+              },
+              "&:before": {
+                borderBottom: "1px solid #E3D026",
+              },
+              "&:after": {
+                borderBottom: "2px solid #E3D026",
+              },
+            }}
+          ></Input>{" "}
           <br />
-          <input
+          <Input
             type="text"
             name="course"
             placeholder="Course"
             value={formData.course}
             onChange={(e) => handleChange(e)}
             disabled={isBlocked}
-          ></input>{" "}
+               sx={{
+              color: "#E3D026",
+              "&::placeholder": {
+                color: "#E3D026",
+              },
+              "&:before": {
+                borderBottom: "1px solid #E3D026",
+              },
+              "&:after": {
+                borderBottom: "2px solid #E3D026",
+              },
+            }}
+          ></Input>{" "}
           <br />
           <button
             type="submit"
@@ -310,6 +366,7 @@ function RegisterationForm() {
         transition={Bounce}
       />
     </div>
+    </Box>
   );
 }
 
