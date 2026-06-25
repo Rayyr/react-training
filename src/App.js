@@ -8,7 +8,8 @@ import RegisterationForm from "./pages/RegisterationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from './components/NavBar.jsx';
- 
+import Error from './pages/Error.jsx';
+
 function App() {
   //registered successfullr students array
   //s1:{name: email: gpa:}
@@ -50,7 +51,6 @@ function App() {
             onDeleteStudent={deleteStudent}
             isBlocked={isBlocked}
             list={regStudents}
-           
           />
         }
       />
@@ -67,6 +67,7 @@ function App() {
       />
       <Route path="/students/:email" element={<StudentDetails students={regStudents}/>} />
       <Route path="/about" element={<About />} />
+      <Route path="*" element={<Error/>}/>
      </Routes>
      </>
   );

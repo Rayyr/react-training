@@ -31,7 +31,8 @@ function NavBar() {
       <div style={styles.links}>
         <NavLink
           style={(e) => {
-            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            if (e.isActive === true)
+              return { ...styles.link, color: "#9C27B0" };
             else return styles.link;
           }}
           to="/"
@@ -40,7 +41,8 @@ function NavBar() {
         </NavLink>
         <NavLink
           style={(e) => {
-            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            if (e.isActive === true)
+              return { ...styles.link, color: "#9C27B0" };
             else return styles.link;
           }}
           to="/about"
@@ -49,7 +51,8 @@ function NavBar() {
         </NavLink>
         <NavLink
           style={(e) => {
-            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            if (e.isActive === true)
+              return { ...styles.link, color: "#9C27B0" };
             else return styles.link;
           }}
           to="/students"
@@ -58,7 +61,8 @@ function NavBar() {
         </NavLink>
         <NavLink
           style={(e) => {
-            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            if (e.isActive === true)
+              return { ...styles.link, color: "#9C27B0" };
             else return styles.link;
           }}
           to="/register"
