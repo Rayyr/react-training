@@ -1,7 +1,7 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-function StudentList({ onDeleteStudent, list, isBlocked }) {
+function StudentsList({ onDeleteStudent, list, isBlocked }) {
   return (
     <div
       style={{
@@ -24,4 +24,4 @@ function StudentList({ onDeleteStudent, list, isBlocked }) {
   );
 }
 
-export default StudentList;
+export default StudentsList;

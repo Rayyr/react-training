@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RegisterationForm from "./RegisterationForm.jsx";
 import FilterBar from "./FilterBar.jsx";
-import StudentList from "./StudentList.jsx";
+import StudentsList from "./StudentsList.jsx";
  import { Typography} from "@mui/material";
 
 function Dashboard() {
@@ -80,7 +80,7 @@ function Dashboard() {
     No students found 😕
   </Typography>
 ):(
-      <StudentList
+      <StudentsList
         onDeleteStudent={deleteStudent}
         isBlocked={isBlocked}
         list={filteredStudents}
