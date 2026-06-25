@@ -11,7 +11,7 @@ validation reqs(constraints) for the following input feilds :
 -follow this regex:example@gmail.com           done by built-in input faild validation
 -example must not be as same as username       done
 -first char must not be digit or special char
-
+-unique     done
 
 
 3-Gpa

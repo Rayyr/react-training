@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ListItem from "../components/ListItem";
+import StudentItem from "../components/StudentItem";
 import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
 
@@ -56,7 +56,7 @@ function StudentsList({ onDeleteStudent, list, isBlocked }) {
   }}
 >
           {filteredStudents.map((e, ind) => (
-            <ListItem
+            <StudentItem
               onDeleteStudent={() => onDeleteStudent(ind)}
               content={e}
               key={ind}

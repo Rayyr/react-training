@@ -6,6 +6,7 @@ import StudentsList from "./pages/StudentsList.jsx";
 import About from "./pages/About.jsx";
 import RegisterationForm from "./pages/RegisterationForm.jsx";
 import { useState } from "react";
+import StudentDetails from "./pages/StudentDetails.jsx";
  
 function App() {
   //registered successfullr students array
@@ -60,10 +61,9 @@ function App() {
           />
         }
       />
-      <Route path="/students/:id" element="StudentDetails.jsx" />
+      <Route path="/students/:email" element={<StudentDetails students={regStudents}/>} />
       <Route path="/about" element={<About />} />
-      <Route path="/d" element={<Dashboard />} />
-    </Routes>
+     </Routes>
   );
 }
 
