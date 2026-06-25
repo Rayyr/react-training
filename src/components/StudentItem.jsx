@@ -5,7 +5,7 @@ import { Card, CardContent, Typography, Button } from "@mui/material";
 function StudentItem({ onlyDetails, onDeleteStudent, content, isBlocked }) {
   const [showModal, setShowModal] = useState(false);
 
-  
+  //only details=in case we are in studentDetails page there must not have a btns (view,delete)
   return (
     <>
       <Card
