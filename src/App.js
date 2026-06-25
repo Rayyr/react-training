@@ -7,6 +7,7 @@ import About from "./pages/About.jsx";
 import RegisterationForm from "./pages/RegisterationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
+import NavBar from './components/NavBar.jsx';
  
 function App() {
   //registered successfullr students array
@@ -37,6 +38,9 @@ function App() {
 
 
   return (
+
+    <>
+    <NavBar/>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route
@@ -64,6 +68,7 @@ function App() {
       <Route path="/students/:email" element={<StudentDetails students={regStudents}/>} />
       <Route path="/about" element={<About />} />
      </Routes>
+     </>
   );
 }
 
