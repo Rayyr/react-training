@@ -1,6 +1,5 @@
 import "./App.css";
-import Dashboard from "./components/Dashboard.jsx";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import StudentsList from "./pages/StudentsList.jsx";
 import About from "./pages/About.jsx";

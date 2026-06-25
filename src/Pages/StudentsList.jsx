@@ -46,15 +46,15 @@ function StudentsList({ onDeleteStudent, list, isBlocked }) {
           No students found 😕
         </Typography>
       ) : (
-<div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px",
-    padding: "20px",
-    justifyContent:"center"
-  }}
->
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "100px",
+            padding: "20px",
+            justifyContent: "flex-start",
+          }}
+        >
           {filteredStudents.map((e, ind) => (
             <StudentItem
               onDeleteStudent={() => onDeleteStudent(ind)}
