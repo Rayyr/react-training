@@ -5,24 +5,29 @@ import { Card, CardContent, Typography, Button } from "@mui/material";
 function StudentItem({ onlyDetails, onDeleteStudent, content, isBlocked }) {
   const [showModal, setShowModal] = useState(false);
 
-  //only details=in case we are in studentDetails page there must not have a btns (view,delete)
+  //onlyDetails=in case we are in studentDetails page there must not have a btns (view,delete)
   return (
     <>
       <Card
         sx={{
           backgroundColor: "#4A148C",
           border: "2px solid #4A148C",
-          borderRadius: "12px",
+          borderRadius: "16px",
           color: "#E1BEE7",
           transition: "0.3s",
 
-          minWidth: "260px",
-          maxWidth: "260px",
+          width: "100%",
+          maxWidth: onlyDetails ? "420px" : "260px",
+
+          padding: onlyDetails ? "24px" : "16px",
+          margin: onlyDetails ? "40px auto" : "0",
+
+          boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
 
           "&:hover": {
-            transform: "translateY(-5px)",
+            transform: "translateY(-6px)",
             borderColor: "#BB86FC",
-            boxShadow: "0 0 15px #BB86FC",
+            boxShadow: "0 0 20px #BB86FC",
           },
         }}
       >
