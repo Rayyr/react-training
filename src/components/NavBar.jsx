@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function NavBar() {
+function NavBar({ isBlocked }) {
   const styles = {
     nav: {
       display: "flex",
@@ -30,6 +30,7 @@ function NavBar() {
       <h2 style={styles.logo}>🎓 Student System</h2>
       <div style={styles.links}>
         <NavLink
+          onClick={(e) => isBlocked && e.preventDefault()}
           style={(e) => {
             if (e.isActive === true)
               return { ...styles.link, color: "#9C27B0" };
@@ -40,6 +41,7 @@ function NavBar() {
           Home
         </NavLink>
         <NavLink
+          onClick={(e) => isBlocked && e.preventDefault()}
           style={(e) => {
             if (e.isActive === true)
               return { ...styles.link, color: "#9C27B0" };
@@ -50,6 +52,7 @@ function NavBar() {
           About
         </NavLink>
         <NavLink
+          onClick={(e) => isBlocked && e.preventDefault()}
           style={(e) => {
             if (e.isActive === true)
               return { ...styles.link, color: "#9C27B0" };
@@ -60,6 +63,7 @@ function NavBar() {
           Students
         </NavLink>
         <NavLink
+          onClick={(e) => isBlocked && e.preventDefault()}
           style={(e) => {
             if (e.isActive === true)
               return { ...styles.link, color: "#9C27B0" };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Box, Typography, TextField, MenuItem } from "@mui/material";
 
-function FilterBar({ filters, setFilters, isBlocked }) {
+function FilterBar({ filters, setFilters }) {
   const [activeFilter, setActiveFilter] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
@@ -101,7 +101,7 @@ function FilterBar({ filters, setFilters, isBlocked }) {
         }}
       >
         <Button
-          disabled={isBlocked}
+          
           sx={buttonStyle}
           onClick={() => setActiveFilter("username")}
         >
@@ -109,7 +109,7 @@ function FilterBar({ filters, setFilters, isBlocked }) {
         </Button>
 
         <Button
-          disabled={isBlocked}
+          
           sx={buttonStyle}
           onClick={() => setActiveFilter("gpa")}
         >
@@ -117,7 +117,7 @@ function FilterBar({ filters, setFilters, isBlocked }) {
         </Button>
 
         <Button
-          disabled={isBlocked}
+         
           sx={buttonStyle}
           onClick={() => setActiveFilter("course")}
         >
@@ -174,7 +174,7 @@ function FilterBar({ filters, setFilters, isBlocked }) {
 
 
       <Button 
-        disabled={isBlocked || activeFilter === "" || filterValue === ""}
+        disabled={  activeFilter === "" || filterValue === ""}
          sx={{...buttonStyle,flex:0,marginTop:"10px"}}
         onClick={handleFiltering}
       >

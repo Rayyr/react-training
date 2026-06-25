@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import StudentItem from "../components/StudentItem";
 import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
+import { StudentContext } from "../context/StudentContext.js";
 
-function StudentsList({ onDeleteStudent, list, isBlocked }) {
+function StudentsList( ) {
+  const { removeStudent, students } = useContext(StudentContext);
+
   const [filters, setFilters] = useState({
     course: "",
     gpa: "",
     username: "",
   });
 
-  const filteredStudents = list.filter((student) => {
+  const filteredStudents = students.filter((student) => {
     const matchesUsername =
       filters.username === "" ||
       student.username.toLowerCase().includes(filters.username.toLowerCase());
@@ -30,7 +33,7 @@ function StudentsList({ onDeleteStudent, list, isBlocked }) {
       <FilterBar
         filters={filters}
         setFilters={setFilters}
-        isBlocked={isBlocked}
+       
       />
 
       {filteredStudents.length === 0 ? (
@@ -57,10 +60,10 @@ function StudentsList({ onDeleteStudent, list, isBlocked }) {
         >
           {filteredStudents.map((e, ind) => (
             <StudentItem
-              onDeleteStudent={() => onDeleteStudent(ind)}
+              onDeleteStudent={() => removeStudent(ind)}
               content={e}
               key={ind}
-              isBlocked={isBlocked}
+              
             />
           ))}
         </div>

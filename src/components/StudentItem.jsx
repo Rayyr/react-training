@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 
-function StudentItem({ onlyDetails, onDeleteStudent, content, isBlocked }) {
+function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
   const [showModal, setShowModal] = useState(false);
 
   //onlyDetails=in case we are in studentDetails page there must not have a btns (view,delete)
@@ -56,7 +56,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content, isBlocked }) {
             >
               <Button
                 onClick={() => setShowModal(true)}
-                disabled={isBlocked}
+                 
                 sx={{
                   whiteSpace: "nowrap",
                   flex: 1,
@@ -85,7 +85,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content, isBlocked }) {
 
               <Button
                 onClick={onDeleteStudent}
-                disabled={isBlocked}
+                
                 sx={{
                   whiteSpace: "nowrap",
                   flex: 1,

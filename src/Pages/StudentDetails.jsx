@@ -1,7 +1,12 @@
 import { useParams } from "react-router-dom";
 import StudentItem from "../components/StudentItem.jsx";
+import {StudentContext} from '../context/StudentContext.js';
+import {useContext} from 'react';
 
-function StudentDetails({ students }) {
+function StudentDetails() {
+  
+  const {students}=useContext(StudentContext);
+  
   const { email } = useParams();
 
   const student = students.find((student) => student.email === email);

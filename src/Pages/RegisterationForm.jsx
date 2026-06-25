@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Button, Box } from "@mui/material";
 import PreviewCard from "../components/PreviewCard";
- 
+import { StudentContext } from "../context/StudentContext.js";
+
 //all input valiodation will be applied manually
-function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
+function RegisterationForm({ isBlocked, setIsBlocked }) {
+  const { students, addStudent } = useContext(StudentContext);
   //single state obj
   const [formData, setFormData] = useState({
     username: "",
@@ -14,14 +16,11 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
     gpa: "",
   });
 
-
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.placeholder.toLowerCase(); //to match the formData pbj attribute or directlly use name attribute
     setFormData({ ...formData, [name]: value });
   };
-
-  
 
   const handleSubmit = (e) => {
     //prevent page refresh
@@ -33,10 +32,9 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
       return;
     }
 
-    
-    onAddStudent(formData);
-    
-     toast.success("New student has been registered succesfully!", {
+    addStudent(formData);
+
+    toast.success("New student has been registered succesfully!", {
       style: {
         width: "500px",
       },
@@ -149,7 +147,7 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
 
     //check email uniqness
     if (
-      regStudents.find((e) => {
+      students.find((e) => {
         return e.email === formData.email;
       })
     ) {
@@ -210,9 +208,6 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
     return true;
   }
 
-  
-
-  
   return (
     <Box
       sx={{
@@ -221,7 +216,6 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
         padding: 3,
       }}
     >
-     
       <div className="main-cont">
         <div className="child1">
           <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
@@ -390,8 +384,6 @@ function RegisterationForm({isBlocked,setIsBlocked,onAddStudent,regStudents }) {
           >
             <PreviewCard content={formData} />
           </div>
-
-    
         </div>
 
         <ToastContainer
