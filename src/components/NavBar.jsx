@@ -27,18 +27,42 @@ function NavBar() {
 
   return (
     <nav style={styles.nav}>
-      <h2 style={styles.logo}>🎓 StudentSys</h2>
-      <div style={styles.link}>
-        <NavLink style={styles.link} to="/">
+      <h2 style={styles.logo}>🎓 Student System</h2>
+      <div style={styles.links}>
+        <NavLink
+          style={(e) => {
+            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            else return styles.link;
+          }}
+          to="/"
+        >
           Home
         </NavLink>
-        <NavLink style={styles.link} to="/about">
+        <NavLink
+          style={(e) => {
+            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            else return styles.link;
+          }}
+          to="/about"
+        >
           About
         </NavLink>
-        <NavLink style={styles.link} to="/students">
+        <NavLink
+          style={(e) => {
+            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            else return styles.link;
+          }}
+          to="/students"
+        >
           Students
         </NavLink>
-        <NavLink style={styles.link} to="/register">
+        <NavLink
+          style={(e) => {
+            if (e.isActive === true) return { ...styles.link, color: "#9C27B0" };
+            else return styles.link;
+          }}
+          to="/register"
+        >
           Register
         </NavLink>
       </div>
