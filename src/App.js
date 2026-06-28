@@ -1,9 +1,9 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import StudentsList from "./pages/StudentsList.jsx";
 import About from "./pages/About.jsx";
-import RegisterationForm from "./pages/RegisterationForm.jsx";
+import RegistrationForm from "./pages/RegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/NavBar.jsx";
@@ -24,7 +24,7 @@ function App() {
           <Route
             path="/register"
             element={
-              <RegisterationForm
+              <RegistrationForm
                 isBlocked={isBlocked}
                 setIsBlocked={setIsBlocked}
               />

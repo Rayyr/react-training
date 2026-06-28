@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Button, Box } from "@mui/material";
-import PreviewCard from "../components/PreviewCard";
+import PreviewCard from "../components/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 
 //all input valiodation will be applied manually
-function RegisterationForm({ isBlocked, setIsBlocked }) {
+function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { students, addStudent } = useContext(StudentContext);
   //single state obj
   const [formData, setFormData] = useState({
@@ -404,4 +404,4 @@ function RegisterationForm({ isBlocked, setIsBlocked }) {
   );
 }
 
-export default RegisterationForm;
+export default RegistrationForm;
