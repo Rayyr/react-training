@@ -6,14 +6,15 @@ import {useContext} from 'react';
 function StudentDetails() {
   
   const {students}=useContext(StudentContext);
-  
+
   const { email } = useParams();
 
+  //if not found in list undefined will be returned 
   const student = students.find((student) => student.email === email);
 
   return (
     <div>
-      {student === undefined ? (
+      {!student ? (
         <>
           {" "}
           <h1>Error 404</h1>
