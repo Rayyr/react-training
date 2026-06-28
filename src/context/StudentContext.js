@@ -16,9 +16,9 @@ export const StudentProvider = ({ children }) => {
     localStorage.setItem("students", JSON.stringify(newStudents));
   };
 
-  // ✅ Remove student
-  const removeStudent = (indexToBeDelted) => {
-    const newStudents = students.filter((_, i) => i !== indexToBeDelted);
+  // ✅ Remove student by its email
+  const removeStudent = (studentEmailToBeDelted) => {
+    const newStudents = students.filter((e, _) => e.email !== studentEmailToBeDelted);
     setStudents(newStudents);
     localStorage.setItem("students", JSON.stringify(newStudents));
   };

@@ -60,10 +60,9 @@ function StudentsList( ) {
         >
           {filteredStudents.map((e, ind) => (
             <StudentItem
-              onDeleteStudent={() => removeStudent(ind)}
+              onDeleteStudent={() => removeStudent(e.email)}
               content={e}
-              key={ind}
-              
+              key={e.email}
             />
           ))}
         </div>

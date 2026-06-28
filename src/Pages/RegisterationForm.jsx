@@ -11,7 +11,7 @@ function RegisterationForm({ isBlocked, setIsBlocked }) {
   //single state obj
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    email: "",//unique
     course: "",
     gpa: "",
   });

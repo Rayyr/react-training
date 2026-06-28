@@ -69,7 +69,7 @@ function FilterBar({ filters, setFilters }) {
         borderColor: "#B39DDB",
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#E1BEE7", // 👈 remove blue border
+        borderColor: "#E1BEE7",  
       },
     },
   };
