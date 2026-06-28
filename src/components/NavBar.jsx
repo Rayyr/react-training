@@ -1,5 +1,5 @@
 import React from "react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function NavBar({ isBlocked }) {
   const styles = {
@@ -31,44 +31,36 @@ function NavBar({ isBlocked }) {
       <div style={styles.links}>
         <NavLink
           onClick={(e) => isBlocked && e.preventDefault()}
-          style={(e) => {
-            if (e.isActive === true)
-              return { ...styles.link, color: "#9C27B0" };
-            else return styles.link;
-          }}
+          style={({ isActive }) =>
+            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
+          }
           to="/"
         >
           Home
         </NavLink>
         <NavLink
           onClick={(e) => isBlocked && e.preventDefault()}
-          style={(e) => {
-            if (e.isActive === true)
-              return { ...styles.link, color: "#9C27B0" };
-            else return styles.link;
-          }}
+          style={({ isActive }) =>
+            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
+          }
           to="/about"
         >
           About
         </NavLink>
         <NavLink
           onClick={(e) => isBlocked && e.preventDefault()}
-          style={(e) => {
-            if (e.isActive === true)
-              return { ...styles.link, color: "#9C27B0" };
-            else return styles.link;
-          }}
+          style={({ isActive }) =>
+            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
+          }
           to="/students"
         >
           Students
         </NavLink>
         <NavLink
           onClick={(e) => isBlocked && e.preventDefault()}
-          style={(e) => {
-            if (e.isActive === true)
-              return { ...styles.link, color: "#9C27B0" };
-            else return styles.link;
-          }}
+          style={({ isActive }) =>
+            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
+          }
           to="/register"
         >
           Register
