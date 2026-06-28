@@ -18,7 +18,7 @@ function RegisterationForm({ isBlocked, setIsBlocked }) {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    const name = e.target.placeholder.toLowerCase(); //to match the formData pbj attribute or directlly use name attribute
+    const name = e.target.name;
     setFormData({ ...formData, [name]: value });
   };
 
