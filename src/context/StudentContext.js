@@ -11,16 +11,18 @@ export const StudentProvider = ({ children }) => {
 
   // ✅ Add student
   const addStudent = (newStudent) => {
-    const newStudents = [...students, newStudent]; //since the setStsate does not make an immediate update on state
-    setStudents(newStudents);
-    localStorage.setItem("students", JSON.stringify(newStudents));
+    setStudents((prevStudents)=>{
+    const newStudents = [...prevStudents, newStudent]; 
+    localStorage.setItem("students", JSON.stringify(newStudents));//since the setStsate does not make an immediate update on state
+    });
   };
 
   // ✅ Remove student by its email
   const removeStudent = (studentEmailToBeDelted) => {
-    const newStudents = students.filter((e, _) => e.email !== studentEmailToBeDelted);
-    setStudents(newStudents);
+    setStudents((prevStudents)=>{
+    const newStudents = prevStudents.filter((e, _) => e.email !== studentEmailToBeDelted);
     localStorage.setItem("students", JSON.stringify(newStudents));
+    });
   };
 
   return (
