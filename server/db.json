@@ -1,0 +1,22 @@
+{
+  "students": [
+    {
+      "email": "raya2@gmail.com",
+      "course": "it",
+      "gpa": "2.1",
+      "username": "raya"
+    },
+    {
+      "email": "ola23@gmail.com",
+      "course": "it",
+      "gpa": "3.1",
+      "username": "ola"
+    },
+    {
+      "email": "abda@gmail.com",
+      "course": "math",
+      "gpa": "3.2",
+      "username": "abd"
+    }
+  ]
+}
