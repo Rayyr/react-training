@@ -1,22 +1,33 @@
 {
   "students": [
     {
-      "email": "raya2@gmail.com",
-      "course": "it",
-      "gpa": "2.1",
-      "username": "raya"
-    },
-    {
       "email": "ola23@gmail.com",
-      "course": "it",
+      "course": "new course",
       "gpa": "3.1",
-      "username": "ola"
+      "username": "ola",
+      "id": "ATFKujb6gG0"
     },
     {
-      "email": "abda@gmail.com",
-      "course": "math",
-      "gpa": "3.2",
-      "username": "abd"
+      "username": "nada",
+      "email": "n3@gmail.com",
+      "gpa": "1.35",
+      "course": "new course",
+      "id": "Ac54SUV4w4g"
+    },
+    {
+      "username": "span",
+      "email": "span2@gmail.com",
+      "course": "new course",
+      "gpa": "2.3",
+      "id": "MlYMU5u7cxg"
+    },
+    {
+      "username": "bea",
+      "email": "bea2@gmail.com",
+      "course": "new course",
+      "gpa": "2",
+      "id": "IcJVqt_ETzQ"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

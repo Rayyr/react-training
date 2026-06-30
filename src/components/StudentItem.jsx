@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
+import {StudentContext} from '../context/StudentContext.js';
 
 function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
   const [showModal, setShowModal] = useState(false);
+
+  const {updateStudentDetails}=useContext(StudentContext);
 
   //onlyDetails=in case we are in studentDetails page there must not have a btns (view,delete)
   return (
@@ -54,11 +57,43 @@ function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
                 alignItems: "center",
               }}
             >
+
+               <Button
+                
+                 onClick={()=>updateStudentDetails(content.email)}
+                sx={{
+                  whiteSpace: "wrap",
+                  flex: 1,
+                  padding: "8px 10px",
+                  borderRadius: "8px",
+                  textTransform: "none",
+                  fontSize: "13px",
+                  background: "linear-gradient(45deg, #4A148C, #9C27B0)",
+                  color: "#fff",
+
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+                  },
+
+                  "&.Mui-disabled": {
+                    background: "#2A1B3D",
+                    color: "#FFFFFF",
+                    pointerEvents: "auto",
+                    cursor: "not-allowed",
+                    opacity: 0.7,
+                  },
+                }}
+              >
+                Update
+              </Button>
+
+
+
               <Button
                 onClick={() => setShowModal(true)}
                  
                 sx={{
-                  whiteSpace: "nowrap",
+                  whiteSpace: "wrap",
                   flex: 1,
                   padding: "8px 10px",
                   borderRadius: "8px",
@@ -87,7 +122,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
                 onClick={onDeleteStudent}
                 
                 sx={{
-                  whiteSpace: "nowrap",
+                  whiteSpace: "wrap",
                   flex: 1,
                   padding: "8px 10px",
                   borderRadius: "8px",
