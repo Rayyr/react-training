@@ -1,30 +1,31 @@
 import { createContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
- 
-     //shared props , json format
+  //shared props , json format
   const [students, setStudents] = useState([]);
+
   //GET students
-    const getStudents = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/students");
+  const getStudents = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/students");
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch students");
-        }
-
-        const data = await res.json();
-        setStudents(data);
-      } catch (error) {
-        console.error(error);
+      if (!res.ok) {
+        throw new Error("Failed to get students");
       }
-    };
- 
 
-  useEffect(()=>{getStudents()},[]);
+      const data = await res.json(); //students
+      setStudents(data);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
+  useEffect(() => {
+    getStudents();
+  }, []);
 
   //POST student
   const addStudent = async (student) => {
@@ -40,7 +41,7 @@ export const StudentProvider = ({ children }) => {
 
       setStudents((prevStudents) => [...prevStudents, student]);
     } catch (error) {
-      console.error("error");
+      throw new Error(error);
     }
   };
 
@@ -57,12 +58,13 @@ export const StudentProvider = ({ children }) => {
           method: "DELETE",
         },
       );
+      if (!res.ok) throw new Error("Failed to delete student");
 
       setStudents((prevStudents) =>
         prevStudents.filter((e) => e.email !== studentEmailToBeDeleted),
       );
     } catch (error) {
-      console.error(error + "hi");
+      throw new Error(error);
     }
   };
 
@@ -70,9 +72,8 @@ export const StudentProvider = ({ children }) => {
   const updateStudentDetails = async (oldEmail, updatedData) => {
     const studentToBeUpdate = students.find((s) => s.email === oldEmail);
 
-    if (!studentToBeUpdate) return;
+    if (!studentToBeUpdate) return; //add error msg
 
- 
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToBeUpdate.id}`,
@@ -89,16 +90,19 @@ export const StudentProvider = ({ children }) => {
 
       const data = await res.json();
       setStudents((prevStudents) =>
-        prevStudents.map((s) => (s.email === studentToBeUpdate.email ? data : s)),
+        prevStudents.map((s) =>
+          s.email === studentToBeUpdate.email ? data : s,
+        ),
       );
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     }
   };
 
+  
   return (
     <StudentContext.Provider
-      value={{ students,addStudent, removeStudent, updateStudentDetails }}
+      value={{ students, addStudent, removeStudent, updateStudentDetails }}
     >
       {children}
     </StudentContext.Provider>

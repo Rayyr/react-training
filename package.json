@@ -25,7 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-    "server":"json-server --watch ./server/db.json --port 5000" 
+    "server":"json-server --watch ./server/studentsDB.json --port 5000" 
   },
   "eslintConfig": {
     "extends": [
