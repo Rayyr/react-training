@@ -1,8 +1,17 @@
 //all input valiodation will be applied manually
 
-export default function validateForm( formData, students, toast, setIsBlocked ) {
+export default function validateForm(
+  formData,
+  students,
+  toast,
+  setIsBlocked,
+  isUpdateOp = false,
+) {
+  console.log(formData);
   if (validateUsername(formData, toast, setIsBlocked) === false) return false;
-  if (validateEmail(formData, toast, setIsBlocked, students) === false)
+  if (
+    validateEmail(formData, toast, setIsBlocked, students, isUpdateOp) === false
+  )
     return false;
   if (validateGpa(formData, toast, setIsBlocked) === false) return false;
   if (validateCourse(formData, toast, setIsBlocked) === false) return false;
@@ -51,7 +60,7 @@ function validateGpa(formData, toast, setIsBlocked) {
   return true;
 }
 
-function validateEmail(formData, toast, setIsBlocked, students) {
+function validateEmail(formData, toast, setIsBlocked, students, isUpdateOp) {
   //example@gmail.com
   //check requirness
   if (formData.email.length === 0) {
@@ -93,7 +102,26 @@ function validateEmail(formData, toast, setIsBlocked, students) {
   }
 
   //check email uniqness
-  if (
+  if (isUpdateOp === true) {
+    if (
+      students.find((e) => {
+        return e.email === formData.email && e.id !== formData.id;
+      })
+    ) {
+      toast.error(
+        "Sorry,the email is assioated with other regeisterted user!",
+        {
+          style: {
+            width: "500px",
+          },
+          onOpen: () => setIsBlocked(true),
+          onClose: () => setIsBlocked(false),
+        },
+      );
+      return false;
+    }
+  } else if (
+    //add operaion
     students.find((e) => {
       return e.email === formData.email;
     })

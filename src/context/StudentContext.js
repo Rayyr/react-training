@@ -85,7 +85,7 @@ export const StudentProvider = ({ children }) => {
           body: JSON.stringify(updatedData),
         },
       );
-
+console.log(studentToBeUpdate);
       if (!res.ok) throw new Error("Failed to update student");
 
       const data = await res.json();

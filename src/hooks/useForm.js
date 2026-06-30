@@ -28,5 +28,7 @@ export default function useForm(initialFormValues, validateForm, onSubmit) {
     formData,
     handleChange,
     handleSubmit,
+    reset,
+    setFormData,
   };
 }

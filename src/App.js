@@ -9,6 +9,8 @@ import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/NavBar.jsx";
 import Error from "./pages/Error.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
+import { ToastContainer, Bounce } from "react-toastify";
+
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -35,6 +37,19 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </StudentProvider>
+            <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable={false}
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
     </>
   );
 }
