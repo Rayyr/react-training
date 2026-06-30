@@ -67,20 +67,33 @@ export const StudentProvider = ({ children }) => {
   };
 
   // UPDATE student details
-  const updateStudentDetails = async (email) => {
-    const studentToBeUpdate = students.find((s) => s.email === email);
-    const updatedStudent = { ...studentToBeUpdate, course: "new course" };
+  const updateStudentDetails = async (oldEmail, updatedData) => {
+    const studentToBeUpdate = students.find((s) => s.email === oldEmail);
+
+    if (!studentToBeUpdate) return;
+
+ 
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToBeUpdate.id}`,
-        { method: "PUT", body: JSON.stringify(updatedStudent) },
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        },
       );
 
-      const data = await res.json();//returned updated student
+      if (!res.ok) throw new Error("Failed to update student");
+
+      const data = await res.json();
       setStudents((prevStudents) =>
-        prevStudents.map((s) => (s.id === studentToBeUpdate.id ? data : s)),
+        prevStudents.map((s) => (s.email === studentToBeUpdate.email ? data : s)),
       );
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

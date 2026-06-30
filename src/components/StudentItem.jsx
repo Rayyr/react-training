@@ -1,12 +1,11 @@
-import React, { useState,useContext } from "react";
+import React, { useState } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
-import {StudentContext} from '../context/StudentContext.js';
+import UpdateForm from "./UpdateForm.jsx";
 
-function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
+function StudentItem({ onlyDetails, onDeleteStudent, content }) {
   const [showModal, setShowModal] = useState(false);
-
-  const {updateStudentDetails}=useContext(StudentContext);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   //onlyDetails=in case we are in studentDetails page there must not have a btns (view,delete)
   return (
@@ -58,9 +57,8 @@ function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
               }}
             >
 
-               <Button
-                
-                 onClick={()=>updateStudentDetails(content.email)}
+              <Button
+                onClick={() => setShowUpdateModal(true)}
                 sx={{
                   whiteSpace: "wrap",
                   flex: 1,
@@ -151,15 +149,21 @@ function StudentItem({ onlyDetails, onDeleteStudent, content} ) {
         </CardContent>
       </Card>
 
-      {onlyDetails === true
-        ? null
-        : showModal && (
-            <MyModal
-              open={showModal}
-              content={content}
-              onClose={() => setShowModal(false)}
-            />
-          )}
+      {onlyDetails === true ? null : showModal && (
+        <MyModal
+          open={showModal}
+          content={content}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+
+      {showUpdateModal && (
+        <UpdateForm
+          open={showUpdateModal}
+          onClose={() => setShowUpdateModal(false)}
+          content={content}
+        />
+      )}
     </>
   );
 }

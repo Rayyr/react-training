@@ -16,7 +16,7 @@ function StudentsList( ) {
   const filteredStudents = students.filter((student) => {
     const matchesUsername =
       filters.username === "" ||
-      student.username.toLowerCase().includes(filters.username.toLowerCase());
+      student.username.toLowerCase()===(filters.username.toLowerCase());
 
     const matchesGpa = filters.gpa === "" || student.gpa === filters.gpa;
 
