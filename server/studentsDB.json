@@ -6,6 +6,13 @@
       "course": "math",
       "gpa": "2",
       "id": "HfLH_sKgcBQ"
+    },
+    {
+      "username": "asma",
+      "email": "asma2@gmail.com",
+      "course": "math",
+      "gpa": "2.4",
+      "id": "DyUJI3HOKZA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
