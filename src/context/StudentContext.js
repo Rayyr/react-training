@@ -39,7 +39,8 @@ export const StudentProvider = ({ children }) => {
       });
       if (!res.ok) throw new Error("Failed to post the new student");
 
-      setStudents((prevStudents) => [...prevStudents, student]);
+      const createdStudent = await res.json();
+      setStudents((prevStudents) => [...prevStudents, createdStudent]);
     } catch (error) {
       throw new Error(error);
     }
@@ -70,7 +71,9 @@ export const StudentProvider = ({ children }) => {
 
   // UPDATE student details
   const updateStudentDetails = async (oldEmail, updatedData) => {
+   
     const studentToBeUpdate = students.find((s) => s.email === oldEmail);
+console.log(studentToBeUpdate.id);
 
     if (!studentToBeUpdate) return; //add error msg
 
@@ -85,7 +88,6 @@ export const StudentProvider = ({ children }) => {
           body: JSON.stringify(updatedData),
         },
       );
-console.log(studentToBeUpdate);
       if (!res.ok) throw new Error("Failed to update student");
 
       const data = await res.json();

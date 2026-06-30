@@ -8,11 +8,46 @@
       "id": "HfLH_sKgcBQ"
     },
     {
-      "username": "hayaasam",
+      "username": "hayaasamn",
       "email": "jiasnnmaj2@gmail.com",
       "course": "ara",
       "gpa": "2.46",
       "id": "DyUJI3HOKZA"
+    },
+    {
+      "username": "fayab",
+      "email": "faya2@gmail.com",
+      "course": "mth",
+      "gpa": "1.3",
+      "id": "xx-PlhtAyXk"
+    },
+    {
+      "username": "vv",
+      "email": "aa@gmail.com",
+      "course": "hhm",
+      "gpa": "3",
+      "id": "71_B4qz9G7M"
+    },
+    {
+      "username": "a",
+      "email": "bea2@gmail.com",
+      "course": "e",
+      "gpa": "2",
+      "id": "9jCG9dWeIds"
+    },
+    {
+      "username": "k",
+      "email": "kw@gmail.com",
+      "course": "kjh",
+      "gpa": "2",
+      "id": "30YplGdge_8"
+    },
+    {
+      "username": "dsam",
+      "email": "d2@gmail.com",
+      "course": "oi",
+      "gpa": "3",
+      "id": "wKmKujxPuxs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
