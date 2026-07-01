@@ -26,18 +26,20 @@ export default function UpdateForm({ open, onClose, content }) {
       //3rd param of hook onSubmit here the submission means updateStudent info
     
       updateStudentDetails(content.email, formData);
-
+  
       toast.success("Student details has been updated succesfully!", {
         style: {
           width: "500px",
         },
-        onOpen: () => setIsBlocked(true),
+        onOpen: () => {setIsBlocked(true)},
         onClose: () => {setIsBlocked(false);onClose()},
       });
      
     },
+    true
   );
-
+ 
+   
   return (
     <Modal open={open} onClose={onClose}>
       <form onSubmit={handleSubmit}>

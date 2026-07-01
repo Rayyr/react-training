@@ -88,7 +88,7 @@ console.log(studentToBeUpdate.id);
           body: JSON.stringify(updatedData),
         },
       );
-      if (!res.ok) throw new Error("Failed to update student");
+      if (!res.ok) throw new Error("Failed to update student details");
 
       const data = await res.json();
       setStudents((prevStudents) =>

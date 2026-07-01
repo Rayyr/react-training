@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useForm(initialFormValues, validateForm, onSubmit) {
+export default function useForm(initialFormValues, validateForm, onSubmit,isUpdateOp=false) {
   const [formData, setFormData] = useState(initialFormValues);
 
   const handleChange = (e) => {
@@ -9,7 +9,8 @@ export default function useForm(initialFormValues, validateForm, onSubmit) {
   };
 
   const reset = () => {
-    setFormData(initialFormValues);
+    if(isUpdateOp===true) setFormData(formData);//in case of updateStudentDetails then it will reset to new values
+    else setFormData(initialFormValues);//in case of register student then it will reset to empty values(initial ones="")
   };
 
   const handleSubmit = (e) => {

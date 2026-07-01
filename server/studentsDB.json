@@ -15,39 +15,53 @@
       "id": "DyUJI3HOKZA"
     },
     {
-      "username": "fayab",
+      "username": "fayabs",
       "email": "faya2@gmail.com",
-      "course": "mth",
+      "course": "mthds",
       "gpa": "1.3",
       "id": "xx-PlhtAyXk"
     },
     {
-      "username": "vv",
+      "username": "ruba",
       "email": "aa@gmail.com",
       "course": "hhm",
       "gpa": "3",
       "id": "71_B4qz9G7M"
     },
     {
-      "username": "a",
+      "username": "asmaa",
       "email": "bea2@gmail.com",
-      "course": "e",
+      "course": "english",
       "gpa": "2",
       "id": "9jCG9dWeIds"
     },
     {
-      "username": "k",
+      "username": "misk",
       "email": "kw@gmail.com",
       "course": "kjh",
       "gpa": "2",
       "id": "30YplGdge_8"
     },
     {
-      "username": "dsam",
+      "username": "ibraheem",
       "email": "d2@gmail.com",
       "course": "oi",
       "gpa": "3",
       "id": "wKmKujxPuxs"
+    },
+    {
+      "username": "nada",
+      "email": "n2@gmail.com",
+      "course": "arabic",
+      "gpa": "3",
+      "id": "r5JFkU4d61o"
+    },
+    {
+      "username": "jihad",
+      "email": "jj2@gmail.com",
+      "course": "math",
+      "gpa": "1",
+      "id": "IFIc3yiV5vA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
