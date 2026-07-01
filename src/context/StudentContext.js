@@ -27,7 +27,7 @@ export const StudentProvider = ({ children }) => {
         ...prev,
         GET: error.message,//as same as Failed to get students from database (thrown one)
       }));
-      throw error.message;
+      
        
     } finally {
       setIsLoading(false);

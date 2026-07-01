@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import StudentItem from "../components/StudentItem.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 import { useContext } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function StudentDetails() {
   const { students, isLoading, errors } = useContext(StudentContext);
@@ -30,7 +32,9 @@ function StudentDetails() {
             </>
           )
         ) : (
-          <h1>Loading...</h1>
+             <Box sx={{ color:"#4A148C",display: 'flex' }}>
+      <CircularProgress aria-label="Loading…" />
+    </Box>
         )
       ) : (
         <h1>{errors.GET}</h1>

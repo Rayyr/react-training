@@ -4,6 +4,8 @@ import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
 import { toast } from "react-toastify";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function StudentsList({ isBlocked, setIsBlocked }) {
   const { removeStudent, students, isLoading, errors } =
@@ -89,7 +91,9 @@ function StudentsList({ isBlocked, setIsBlocked }) {
             </div>
           )
         ) : (
-          <h1>Loading</h1>
+             <Box sx={{ color:"#4A148C",display: 'flex' }}>
+      <CircularProgress aria-label="Loading…" />
+    </Box>
         )
       ) : (
         <h1>{errors.GET}</h1>

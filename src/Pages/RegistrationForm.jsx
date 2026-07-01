@@ -32,7 +32,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           });
         })
         .catch((err) => {
-          toast.error(errors.POST, {
+          toast.error(err || errors.POST ||"Failed to add new student", {
             style: {
               width: "500px",
             },
@@ -63,8 +63,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     },
   };
   return (
-    <>
-      {!errors.GET ? (
+    
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
@@ -171,10 +170,8 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
             </div>
           </div>
         </Box>
-      ) : (
-        <h1>{errors.GET}</h1>
-      )}
-    </>
+      
+     
   );
 }
 
