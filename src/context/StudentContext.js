@@ -7,6 +7,7 @@ export const StudentProvider = ({ children }) => {
   //shared props , json format
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   //GET students
   const getStudents = async () => {
@@ -15,13 +16,18 @@ export const StudentProvider = ({ children }) => {
       const res = await fetch("http://localhost:5000/students");
 
       if (!res.ok) {
+    
         throw new Error("Failed to get students");
       }
 
       const data = await res.json(); //students
       setStudents(data);
     } catch (error) {
-      throw new Error(error);
+      setErrors((prev) => ({
+        ...prev,
+        GET: "Failed to get students from database!",
+      }));
+       
     } finally {
       setIsLoading(false);
     }
@@ -33,7 +39,6 @@ export const StudentProvider = ({ children }) => {
 
   //POST student
   const addStudent = async (student) => {
-    
     try {
       const res = await fetch("http://localhost:5000/students", {
         method: "POST",
@@ -42,12 +47,19 @@ export const StudentProvider = ({ children }) => {
         },
         body: JSON.stringify(student),
       });
-      if (!res.ok) throw new Error("Failed to post the new student");
+      if (!res.ok) {
+     
+         throw new Error("Failed to add the new student");
+      }
       const createdStudent = await res.json();
       setStudents((prevStudents) => [...prevStudents, createdStudent]);
     } catch (error) {
-      throw new Error(error);
-    } 
+      setErrors((prev) => ({
+        ...prev,
+        POST: "Failed to add the new student",
+      }));
+       
+    }
   };
 
   // DELETE student by its email
@@ -56,7 +68,6 @@ export const StudentProvider = ({ children }) => {
       (e) => e.email === studentEmailToBeDeleted,
     );
 
-   
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToDelete.id}`,
@@ -64,13 +75,23 @@ export const StudentProvider = ({ children }) => {
           method: "DELETE",
         },
       );
-      if (!res.ok) throw new Error("Failed to delete student");
+      if (!res.ok) {
+        setErrors((prev) => ({
+          ...prev,
+          DELETE: "Failed to delete student",
+        }));
+        // throw new Error("Failed to delete student");
+      }
       setStudents((prevStudents) =>
         prevStudents.filter((e) => e.email !== studentEmailToBeDeleted),
       );
     } catch (error) {
-      throw new Error(error);
-    } 
+      setErrors((prev) => ({
+        ...prev,
+        DELETE: "Failed to delete student",
+      }));
+      //throw new Error(error);
+    }
   };
 
   // UPDATE student details
@@ -79,7 +100,6 @@ export const StudentProvider = ({ children }) => {
 
     if (!studentToBeUpdate) return; //add error msg
 
-     
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToBeUpdate.id}`,
@@ -91,7 +111,13 @@ export const StudentProvider = ({ children }) => {
           body: JSON.stringify(updatedData),
         },
       );
-      if (!res.ok) throw new Error("Failed to update student details");
+      if (!res.ok) {
+        setErrors((prev) => ({
+          ...prev,
+          PUT: "Failed to update student details",
+        }));
+        // throw new Error("Failed to update student details");
+      }
       const data = await res.json();
       setStudents((prevStudents) =>
         prevStudents.map((s) =>
@@ -99,13 +125,24 @@ export const StudentProvider = ({ children }) => {
         ),
       );
     } catch (error) {
-      throw new Error(error);
-    }  
+      setErrors((prev) => ({
+        ...prev,
+        PUT: "Failed to update student details",
+      }));
+      // throw new Error(error);
+    }
   };
 
   return (
     <StudentContext.Provider
-      value={{ students, addStudent, removeStudent, updateStudentDetails, isLoading }}
+      value={{
+        students,
+        addStudent,
+        removeStudent,
+        updateStudentDetails,
+        isLoading,
+        errors,
+      }}
     >
       {children}
     </StudentContext.Provider>

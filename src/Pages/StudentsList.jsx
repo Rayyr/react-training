@@ -4,8 +4,9 @@ import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
 
-function StudentsList( ) {
-  const { removeStudent, students ,isLoading} = useContext(StudentContext);
+function StudentsList() {
+  const { removeStudent, students, isLoading, errors } =
+    useContext(StudentContext);
 
   const [filters, setFilters] = useState({
     course: "",
@@ -16,7 +17,7 @@ function StudentsList( ) {
   const filteredStudents = students.filter((student) => {
     const matchesUsername =
       filters.username === "" ||
-      student.username.toLowerCase()===(filters.username.toLowerCase());
+      student.username.toLowerCase() === filters.username.toLowerCase();
 
     const matchesGpa = filters.gpa === "" || student.gpa === filters.gpa;
 
@@ -30,44 +31,47 @@ function StudentsList( ) {
 
   return (
     <>
-      <FilterBar
-        filters={filters}
-        setFilters={setFilters}
-       
-      />
+      <FilterBar filters={filters} setFilters={setFilters} />
 
-{isLoading===false?(
-      filteredStudents.length === 0 ? (
-        <Typography
-          variant="h5"
-          sx={{
-            marginTop: "30px",
-            textAlign: "center",
-            color: "#B39DDB",
-            fontWeight: "bold",
-          }}
-        >
-          No students found 😕
-        </Typography>
+      {!errors.GET ? (
+        isLoading === false ? (
+          filteredStudents.length === 0 ? (
+            <Typography
+              variant="h5"
+              sx={{
+                marginTop: "30px",
+                textAlign: "center",
+                color: "#B39DDB",
+                fontWeight: "bold",
+              }}
+            >
+              No students found 😕
+            </Typography>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "100px",
+                padding: "20px",
+                justifyContent: "flex-start",
+              }}
+            >
+              {filteredStudents.map((e, ind) => (
+                <StudentItem
+                  onDeleteStudent={() => removeStudent(e.email)}
+                  content={e}
+                  key={e.email}
+                />
+              ))}
+            </div>
+          )
+        ) : (
+          <h1>Loading</h1>
+        )
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "100px",
-            padding: "20px",
-            justifyContent: "flex-start",
-          }}
-        >
-          {filteredStudents.map((e, ind) => (
-            <StudentItem
-              onDeleteStudent={() => removeStudent(e.email)}
-              content={e}
-              key={e.email}
-            />
-          ))}
-        </div>
-      )):<h1>Loading</h1>} 
+        <h1>{errors.GET}</h1>
+      )}
     </>
   );
 }

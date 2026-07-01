@@ -8,7 +8,7 @@ import useForm from "../hooks/useForm.js";
 import validateForm from "../Utils/validateForm.js";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
-  const { students, addStudent } = useContext(StudentContext);
+  const { errors, students, addStudent } = useContext(StudentContext);
 
   const { formData, handleChange, handleSubmit } = useForm(
     {
@@ -21,15 +21,25 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     (formData) => validateForm(formData, students, toast, setIsBlocked), //2nd param of hook validateForm
     (formData) => {
       //3rd param of hook onSubmit
-      addStudent(formData);
-
-      toast.success("New student has been registered succesfully!", {
-        style: {
-          width: "500px",
-        },
-        onOpen: () => setIsBlocked(true),
-        onClose: () => setIsBlocked(false),
-      });
+      addStudent(formData)
+        .then(() => {
+          toast.success("New student has been registerd successfully!", {
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        })
+        .catch((err) => {
+          toast.error(errors.POST, {
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        });
     },
   );
 
@@ -53,114 +63,118 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     },
   };
   return (
-    <Box
-      sx={{
-        backgroundColor: "#FFFFFF",
-        minHeight: "100vh",
-        padding: 3,
-      }}
-    >
-      <div className="main-cont">
-        <div className="child1">
-          <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
-            
-            <Input
-              type="text"
-              name="username"
-              placeholder="Username*"
-              value={formData.username}
-              onChange={(e) => handleChange(e)}
-              disabled={isBlocked}
-              autoFocus={true}
-              sx={inputStyle}
-            ></Input>{" "}
-            <br />
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email*"
-              value={formData.email}
-              onChange={(e) => handleChange(e)}
-              disabled={isBlocked}
-              sx={inputStyle}
-            ></Input>{" "}
-            <br />
-            <Input
-              type="number"
-              name="gpa"
-              placeholder="GPA*"
-              value={formData.gpa}
-              onChange={(e) => handleChange(e)}
-              step="0.01"
-              disabled={isBlocked}
-              sx={inputStyle}
-            ></Input>{" "}
-            <br />
-            <Input
-              type="text"
-              name="course"
-              placeholder="Course*"
-              value={formData.course}
-              onChange={(e) => handleChange(e)}
-              disabled={isBlocked}
-               
-              sx={inputStyle}
-            ></Input>{" "}
-            <br />
-            <Button
-              type="submit"
-              disabled={
-                !formData.username ||
-                !formData.email ||
-                !formData.gpa ||
-                !formData.course ||
-                isBlocked
-              }
-              sx={{
-                marginTop: "20px",
-                padding: "12px 24px",
-                fontSize: "18px",
-                borderRadius: "10px",
-                textTransform: "none",
+    <>
+      {!errors.GET ? (
+        <Box
+          sx={{
+            backgroundColor: "#FFFFFF",
+            minHeight: "100vh",
+            padding: 3,
+          }}
+        >
+          <div className="main-cont">
+            <div className="child1">
+              <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
+                <Input
+                  type="text"
+                  name="username"
+                  placeholder="Username*"
+                  value={formData.username}
+                  onChange={(e) => handleChange(e)}
+                  disabled={isBlocked}
+                  autoFocus={true}
+                  sx={inputStyle}
+                ></Input>{" "}
+                <br />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email*"
+                  value={formData.email}
+                  onChange={(e) => handleChange(e)}
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                ></Input>{" "}
+                <br />
+                <Input
+                  type="number"
+                  name="gpa"
+                  placeholder="GPA*"
+                  value={formData.gpa}
+                  onChange={(e) => handleChange(e)}
+                  step="0.01"
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                ></Input>{" "}
+                <br />
+                <Input
+                  type="text"
+                  name="course"
+                  placeholder="Course*"
+                  value={formData.course}
+                  onChange={(e) => handleChange(e)}
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                ></Input>{" "}
+                <br />
+                <Button
+                  type="submit"
+                  disabled={
+                    !formData.username ||
+                    !formData.email ||
+                    !formData.gpa ||
+                    !formData.course ||
+                    isBlocked
+                  }
+                  sx={{
+                    marginTop: "20px",
+                    padding: "12px 24px",
+                    fontSize: "18px",
+                    borderRadius: "10px",
+                    textTransform: "none",
 
-                background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
-                color: "#fff",
+                    background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
+                    color: "#fff",
 
-                "&:hover": {
-                  background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-                },
+                    "&:hover": {
+                      background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+                    },
 
-                "&:active": {
-                  transform: "scale(0.98)",
-                },
+                    "&:active": {
+                      transform: "scale(0.98)",
+                    },
 
-                "&.Mui-disabled": {
-                  background: "#2A1B3D",
-                  color: "#FFFFFF",
-                  pointerEvents: "auto",
-                  cursor: "not-allowed",
-                  opacity: 0.7,
-                },
-              }}
-            >
-              Register student
-            </Button>
-          </form>
-        </div>
+                    "&.Mui-disabled": {
+                      background: "#2A1B3D",
+                      color: "#FFFFFF",
+                      pointerEvents: "auto",
+                      cursor: "not-allowed",
+                      opacity: 0.7,
+                    },
+                  }}
+                >
+                  Register student
+                </Button>
+              </form>
+            </div>
 
-        <div className="child2">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "20px",
-            }}
-          >
-            <PreviewCard content={formData} />
+            <div className="child2">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <PreviewCard content={formData} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </Box>
+        </Box>
+      ) : (
+        <h1>{errors.GET}</h1>
+      )}
+    </>
   );
 }
 
