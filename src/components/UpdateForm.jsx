@@ -56,7 +56,13 @@ export default function UpdateForm({ open, onClose, content }) {
   );
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal
+      open={open}
+      onClose={() => {
+        if (!isBlocked) onClose();
+      }}
+      disableEscapeKeyDown={isBlocked}
+    >
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
@@ -120,7 +126,14 @@ export default function UpdateForm({ open, onClose, content }) {
           <Box
             sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mt: 2 }}
           >
-            <Button onClick={onClose} variant="contained" color="primary">
+            <Button
+              onClick={() => {
+                if (!isBlocked) onClose();
+              }}
+              variant="contained"
+              color="primary"
+              disabled={isBlocked}
+            >
               Close
             </Button>
 

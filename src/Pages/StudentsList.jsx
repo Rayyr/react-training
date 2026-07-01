@@ -60,6 +60,8 @@ function StudentsList({ isBlocked, setIsBlocked }) {
             >
               {filteredStudents.map((e, ind) => (
                 <StudentItem
+                
+               
                   onDeleteStudent={async () => {
                     try {
                       await removeStudent(e.email);

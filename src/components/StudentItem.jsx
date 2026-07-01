@@ -3,7 +3,7 @@ import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import UpdateForm from "./UpdateForm.jsx";
 
-function StudentItem({ onlyDetails, onDeleteStudent, content }) {
+function StudentItem({   onlyDetails, onDeleteStudent, content }) {
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -59,6 +59,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content }) {
 
               <Button
                 onClick={() => setShowUpdateModal(true)}
+                 
                 sx={{
                   whiteSpace: "wrap",
                   flex: 1,
@@ -118,7 +119,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content }) {
 
               <Button
                 onClick={onDeleteStudent}
-                
+               
                 sx={{
                   whiteSpace: "wrap",
                   flex: 1,
