@@ -6,9 +6,11 @@ export const StudentContext = createContext();
 export const StudentProvider = ({ children }) => {
   //shared props , json format
   const [students, setStudents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   //GET students
   const getStudents = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch("http://localhost:5000/students");
 
@@ -20,6 +22,8 @@ export const StudentProvider = ({ children }) => {
       setStudents(data);
     } catch (error) {
       throw new Error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -29,6 +33,7 @@ export const StudentProvider = ({ children }) => {
 
   //POST student
   const addStudent = async (student) => {
+    
     try {
       const res = await fetch("http://localhost:5000/students", {
         method: "POST",
@@ -38,12 +43,11 @@ export const StudentProvider = ({ children }) => {
         body: JSON.stringify(student),
       });
       if (!res.ok) throw new Error("Failed to post the new student");
-
       const createdStudent = await res.json();
       setStudents((prevStudents) => [...prevStudents, createdStudent]);
     } catch (error) {
       throw new Error(error);
-    }
+    } 
   };
 
   // DELETE student by its email
@@ -52,6 +56,7 @@ export const StudentProvider = ({ children }) => {
       (e) => e.email === studentEmailToBeDeleted,
     );
 
+   
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToDelete.id}`,
@@ -60,23 +65,21 @@ export const StudentProvider = ({ children }) => {
         },
       );
       if (!res.ok) throw new Error("Failed to delete student");
-
       setStudents((prevStudents) =>
         prevStudents.filter((e) => e.email !== studentEmailToBeDeleted),
       );
     } catch (error) {
       throw new Error(error);
-    }
+    } 
   };
 
   // UPDATE student details
   const updateStudentDetails = async (oldEmail, updatedData) => {
-   
     const studentToBeUpdate = students.find((s) => s.email === oldEmail);
-console.log(studentToBeUpdate.id);
 
     if (!studentToBeUpdate) return; //add error msg
 
+     
     try {
       const res = await fetch(
         `http://localhost:5000/students/${studentToBeUpdate.id}`,
@@ -89,7 +92,6 @@ console.log(studentToBeUpdate.id);
         },
       );
       if (!res.ok) throw new Error("Failed to update student details");
-
       const data = await res.json();
       setStudents((prevStudents) =>
         prevStudents.map((s) =>
@@ -98,13 +100,12 @@ console.log(studentToBeUpdate.id);
       );
     } catch (error) {
       throw new Error(error);
-    }
+    }  
   };
 
-  
   return (
     <StudentContext.Provider
-      value={{ students, addStudent, removeStudent, updateStudentDetails }}
+      value={{ students, addStudent, removeStudent, updateStudentDetails, isLoading }}
     >
       {children}
     </StudentContext.Provider>

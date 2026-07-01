@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
 
 function StudentsList( ) {
-  const { removeStudent, students } = useContext(StudentContext);
+  const { removeStudent, students ,isLoading} = useContext(StudentContext);
 
   const [filters, setFilters] = useState({
     course: "",
@@ -36,7 +36,8 @@ function StudentsList( ) {
        
       />
 
-      {filteredStudents.length === 0 ? (
+{isLoading===false?(
+      filteredStudents.length === 0 ? (
         <Typography
           variant="h5"
           sx={{
@@ -66,7 +67,7 @@ function StudentsList( ) {
             />
           ))}
         </div>
-      )}
+      )):<h1>Loading</h1>} 
     </>
   );
 }

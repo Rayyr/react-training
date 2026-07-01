@@ -5,7 +5,7 @@ import {useContext} from 'react';
 
 function StudentDetails() {
   
-  const {students}=useContext(StudentContext);
+  const {students,isLoading}=useContext(StudentContext);
 
   const { email } = useParams();
 
@@ -14,7 +14,8 @@ function StudentDetails() {
 
   return (
     <div>
-      {!student ? (
+    {isLoading===false?(
+      !student ? (
         <>
           {" "}
           <h1>Error 404</h1>
@@ -27,7 +28,7 @@ function StudentDetails() {
           <h2>Student Details</h2>
           <StudentItem onlyDetails={true} content={student} />
         </>
-      )}
+      )):<h1>Loading...</h1>}
     </div>
   );
 }
