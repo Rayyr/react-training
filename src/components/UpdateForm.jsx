@@ -10,7 +10,7 @@ export default function UpdateForm({ open, onClose, content }) {
 
   const [isBlocked, setIsBlocked] = useState(false);
 
-  const student=students.find((s)=>s.email===content.email);
+  const student = students.find((s) => s.email === content.email);
 
   const { formData, handleChange, handleSubmit } = useForm(
     //initial values 1st param
@@ -20,26 +20,36 @@ export default function UpdateForm({ open, onClose, content }) {
       course: content.course,
       gpa: content.gpa,
     },
-//i set isUpdateOp param in validateForm=true then i can access the id otherwise(add operation) then there is no passed id 
-    (formData) => validateForm({...formData,"id":student.id}, students, toast, setIsBlocked,true), //2nd param validatForm()
+    //i set isUpdateOp param in validateForm=true then i can access the id otherwise(add operation) then there is no passed id
+    (formData) =>
+      validateForm(
+        { ...formData, id: student.id },
+        students,
+        toast,
+        setIsBlocked,
+        true,
+      ), //2nd param validatForm()
     (formData) => {
       //3rd param of hook onSubmit here the submission means updateStudent info
-    
+
       updateStudentDetails(content.email, formData);
-  
+
       toast.success("Student details has been updated succesfully!", {
         style: {
           width: "500px",
         },
-        onOpen: () => {setIsBlocked(true)},
-        onClose: () => {setIsBlocked(false);onClose()},
+        onOpen: () => {
+          setIsBlocked(true);
+        },
+        onClose: () => {
+          setIsBlocked(false);
+          onClose();
+        },
       });
-     
     },
-    true
+    true,
   );
- 
-   
+
   return (
     <Modal open={open} onClose={onClose}>
       <form onSubmit={handleSubmit}>

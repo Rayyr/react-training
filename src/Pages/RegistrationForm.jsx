@@ -1,42 +1,61 @@
-import React, {  useContext } from "react";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Button, Box } from "@mui/material";
 import PreviewCard from "../components/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
-import useForm from '../hooks/useForm.js';
-import validateForm from '../Utils/validateForm.js';
-
+import useForm from "../hooks/useForm.js";
+import validateForm from "../Utils/validateForm.js";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { students, addStudent } = useContext(StudentContext);
-   
+
   const { formData, handleChange, handleSubmit } = useForm(
-    {//1st param of hook formData
+    {
+      //1st param of hook formData
       username: "",
       email: "",
       course: "",
       gpa: "",
     },
-    (formData) => validateForm(formData, students, toast, setIsBlocked),//2nd param of hook validateForm
-    (formData) => {//3rd param of hook onSubmit
+    (formData) => validateForm(formData, students, toast, setIsBlocked), //2nd param of hook validateForm
+    (formData) => {
+      //3rd param of hook onSubmit
       addStudent(formData);
 
-    toast.success("New student has been registered succesfully!", {
-      style: {
-        width: "500px",
-      },
-      onOpen: () => setIsBlocked(true),
-      onClose: () => setIsBlocked(false),
-    });
-    }
+      toast.success("New student has been registered succesfully!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+    },
   );
- 
-  
+
+  const inputStyle = {
+    color: "#7B1FA2", // 🔥 darker purple (typed text)
+    fontSize: "22px",
+    padding: "16px 0",
+    width: "100%",
+
+    "&::placeholder": {
+      color: "#B39DDB", // keep placeholder lighter
+      opacity: 0.7,
+    },
+
+    "&:before": {
+      borderBottom: "2px solid #4A148C",
+    },
+
+    "&:after": {
+      borderBottom: "3px solid #4A148C",
+    },
+  };
   return (
     <Box
       sx={{
-        backgroundColor: "#eeeeee", // light grey
+        backgroundColor: "#FFFFFF",
         minHeight: "100vh",
         padding: 3,
       }}
@@ -44,118 +63,48 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
       <div className="main-cont">
         <div className="child1">
           <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
+            
             <Input
               type="text"
               name="username"
-              placeholder="Username"
+              placeholder="Username*"
               value={formData.username}
               onChange={(e) => handleChange(e)}
               disabled={isBlocked}
               autoFocus={true}
-              sx={{
-                color: "#7B1FA2", // 🔥 darker purple (typed text)
-                fontSize: "22px",
-                padding: "16px 0",
-                width: "100%",
-
-                "&::placeholder": {
-                  color: "#B39DDB", // keep placeholder lighter
-                  opacity: 0.7,
-                },
-
-                "&:before": {
-                  borderBottom: "2px solid #4A148C",
-                },
-
-                "&:after": {
-                  borderBottom: "3px solid #BB86FC",
-                },
-              }}
+              sx={inputStyle}
             ></Input>{" "}
             <br />
             <Input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Email*"
               value={formData.email}
               onChange={(e) => handleChange(e)}
               disabled={isBlocked}
-              sx={{
-                color: "#7B1FA2", // 🔥 darker purple (typed text)
-                fontSize: "22px",
-                padding: "16px 0",
-                width: "100%",
-
-                "&::placeholder": {
-                  color: "#B39DDB", // keep placeholder lighter
-                  opacity: 0.7,
-                },
-
-                "&:before": {
-                  borderBottom: "2px solid #4A148C",
-                },
-
-                "&:after": {
-                  borderBottom: "3px solid #BB86FC",
-                },
-              }}
+              sx={inputStyle}
             ></Input>{" "}
             <br />
             <Input
               type="number"
               name="gpa"
-              placeholder="GPA"
+              placeholder="GPA*"
               value={formData.gpa}
               onChange={(e) => handleChange(e)}
               step="0.01"
               disabled={isBlocked}
-              sx={{
-                color: "#7B1FA2", // 🔥 darker purple (typed text)
-                fontSize: "22px",
-                padding: "16px 0",
-                width: "100%",
-
-                "&::placeholder": {
-                  color: "#B39DDB", // keep placeholder lighter
-                  opacity: 0.7,
-                },
-
-                "&:before": {
-                  borderBottom: "2px solid #4A148C",
-                },
-
-                "&:after": {
-                  borderBottom: "3px solid #BB86FC",
-                },
-              }}
+              sx={inputStyle}
             ></Input>{" "}
             <br />
             <Input
               type="text"
               name="course"
-              placeholder="Course"
+              placeholder="Course*"
               value={formData.course}
               onChange={(e) => handleChange(e)}
               disabled={isBlocked}
-              sx={{
-                color: "#7B1FA2", // 🔥 darker purple (typed text)
-                fontSize: "22px",
-                padding: "16px 0",
-                width: "100%",
-
-                "&::placeholder": {
-                  color: "#B39DDB", // keep placeholder lighter
-                  opacity: 0.7,
-                },
-
-                "&:before": {
-                  borderBottom: "2px solid #4A148C",
-                },
-
-                "&:after": {
-                  borderBottom: "3px solid #BB86FC",
-                },
-              }}
+               
+              sx={inputStyle}
             ></Input>{" "}
             <br />
             <Button
@@ -210,8 +159,6 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
             <PreviewCard content={formData} />
           </div>
         </div>
-
-  
       </div>
     </Box>
   );
