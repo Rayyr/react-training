@@ -5,7 +5,7 @@ import { Input, Button, Box } from "@mui/material";
 import PreviewCard from "../components/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 import useForm from "../hooks/useForm.js";
-import validateForm from "../Utils/validateForm.js";
+import validateForm from "../utils/validateForm.js";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);

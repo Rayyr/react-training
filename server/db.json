@@ -1,0 +1,19 @@
+{
+  "students": [
+    {
+      "email": "ola23@gmail.com",
+      "username": "olaspan",
+      "course": "new course",
+      "gpa": "3.1",
+      "id": "ATFKujb6gG0"
+    },
+    {
+      "username": "raya",
+      "email": "khasaatirayaa@gmail.com",
+      "course": "math",
+      "gpa": "2",
+      "id": "HfLH_sKgcBQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

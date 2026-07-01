@@ -2,11 +2,11 @@ import { Input, Modal, Button, Box, Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
 import { useContext, useState } from "react";
 import useForm from "../hooks/useForm.js";
-import validateForm from "../Utils/validateForm.js";
+import validateForm from "../utils/validateForm.js";
 import { toast } from "react-toastify";
 
 export default function UpdateForm({ open, onClose, content }) {
-  const { students, updateStudentDetails } = useContext(StudentContext);
+  const { students, updateStudentDetails, errors } = useContext(StudentContext);
 
   const [isBlocked, setIsBlocked] = useState(false);
 
@@ -32,20 +32,25 @@ export default function UpdateForm({ open, onClose, content }) {
     (formData) => {
       //3rd param of hook onSubmit here the submission means updateStudent info
 
-      updateStudentDetails(content.email, formData);
-
-      toast.success("Student details has been updated succesfully!", {
-        style: {
-          width: "500px",
-        },
-        onOpen: () => {
-          setIsBlocked(true);
-        },
-        onClose: () => {
-          setIsBlocked(false);
-          onClose();
-        },
-      });
+      updateStudentDetails(content.email, formData)
+        .then(() => {
+          toast.success("Student details has been updated successfully!", {
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        })
+        .catch((err) => {
+          toast.error(err || errors.PUT || "Failed to update student details", {
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        });
     },
     true,
   );

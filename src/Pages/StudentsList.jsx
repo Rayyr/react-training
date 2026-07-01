@@ -3,8 +3,9 @@ import StudentItem from "../components/StudentItem";
 import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
+import { toast } from "react-toastify";
 
-function StudentsList() {
+function StudentsList({ isBlocked, setIsBlocked }) {
   const { removeStudent, students, isLoading, errors } =
     useContext(StudentContext);
 
@@ -59,7 +60,26 @@ function StudentsList() {
             >
               {filteredStudents.map((e, ind) => (
                 <StudentItem
-                  onDeleteStudent={() => removeStudent(e.email)}
+                  onDeleteStudent={async () => {
+                    try {
+                      await removeStudent(e.email);
+                      toast.success("Student has been deleted successfully!", {
+                        style: {
+                          width: "500px",
+                        },
+                        onOpen: () => setIsBlocked(true),
+                        onClose: () => setIsBlocked(false),
+                      });
+                    } catch (err) {
+                      toast.error(err || errors.DELETE || "Failed to delete student", {
+                        style: {
+                          width: "500px",
+                        },
+                        onOpen: () => setIsBlocked(true),
+                        onClose: () => setIsBlocked(false),
+                      });
+                    }
+                  }}
                   content={e}
                   key={e.email}
                 />

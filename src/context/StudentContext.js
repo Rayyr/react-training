@@ -17,7 +17,7 @@ export const StudentProvider = ({ children }) => {
 
       if (!res.ok) {
     
-        throw new Error("Failed to get students");
+        throw new Error("Failed to get students from database");
       }
 
       const data = await res.json(); //students
@@ -25,8 +25,9 @@ export const StudentProvider = ({ children }) => {
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
-        GET: "Failed to get students from database!",
+        GET: error.message,//as same as Failed to get students from database (thrown one)
       }));
+      throw error.message;
        
     } finally {
       setIsLoading(false);
@@ -56,9 +57,9 @@ export const StudentProvider = ({ children }) => {
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
-        POST: "Failed to add the new student",
+        POST: error.message,
       }));
-       
+       throw error.message;
     }
   };
 
@@ -76,11 +77,8 @@ export const StudentProvider = ({ children }) => {
         },
       );
       if (!res.ok) {
-        setErrors((prev) => ({
-          ...prev,
-          DELETE: "Failed to delete student",
-        }));
-        // throw new Error("Failed to delete student");
+      
+         throw new Error("Failed to delete student");
       }
       setStudents((prevStudents) =>
         prevStudents.filter((e) => e.email !== studentEmailToBeDeleted),
@@ -88,9 +86,9 @@ export const StudentProvider = ({ children }) => {
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
-        DELETE: "Failed to delete student",
+        DELETE: error.message,
       }));
-      //throw new Error(error);
+      throw error.message;
     }
   };
 
@@ -112,11 +110,8 @@ export const StudentProvider = ({ children }) => {
         },
       );
       if (!res.ok) {
-        setErrors((prev) => ({
-          ...prev,
-          PUT: "Failed to update student details",
-        }));
-        // throw new Error("Failed to update student details");
+      
+        throw new Error("Failed to update student details");
       }
       const data = await res.json();
       setStudents((prevStudents) =>
@@ -127,9 +122,9 @@ export const StudentProvider = ({ children }) => {
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
-        PUT: "Failed to update student details",
+        PUT: error.message,
       }));
-      // throw new Error(error);
+       throw error.message;
     }
   };
 
