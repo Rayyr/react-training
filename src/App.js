@@ -32,7 +32,7 @@ function App() {
               />
             }
           />
-          <Route path="/students/:email" element={<StudentDetails />} />
+          <Route path="/students/:email" element={<StudentDetails  />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Error />} />
         </Routes>

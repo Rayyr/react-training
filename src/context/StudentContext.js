@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { toast } from "react-toastify";
 
 export const StudentContext = createContext();
 

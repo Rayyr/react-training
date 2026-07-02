@@ -1,8 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import {useLocation} from 'react-router-dom';
 
 function NavBar({ isBlocked }) {
-  const styles = {
+ const currentLocation=useLocation();
+
+ //const isStudentDetailsPage=;/^\/students\//
+ const studentDetailsPage="/students/:email";
+
+    const styles = {
     nav: {
       display: "flex",
       justifyContent: "space-between",
@@ -32,8 +38,9 @@ function NavBar({ isBlocked }) {
         <NavLink
           onClick={(e) => isBlocked && e.preventDefault()}
           style={({ isActive }) =>
-            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
-          }
+            isActive? { ...styles.link, color: "#9C27B0" } : styles.link
+        
+           }
           to="/"
         >
           Home

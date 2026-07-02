@@ -101,6 +101,18 @@ function validateEmail(formData, toast, setIsBlocked, students, isUpdateOp) {
     return false;
   }
 
+  //check if email not have special chars
+  if(/[^0-9a-zA-Z@.]/.test(formData.email)===true){
+       toast.error("Sorry,the email must not have special chars!", {
+      style: {
+        width: "500px",
+      },
+      onOpen: () => setIsBlocked(true),
+      onClose: () => setIsBlocked(false),
+    });
+    return false;
+  }
+
   //check email uniqness
   if (isUpdateOp === true) {
     if (
