@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo,useCallback } from "react";
 import StudentItem from "../components/StudentItem";
 import FilterBar from "../components/FilterBar";
 import { Typography } from "@mui/material";
@@ -17,20 +17,43 @@ function StudentsList({ isBlocked, setIsBlocked }) {
     username: "",
   });
 
-  const filteredStudents = students.filter((student) => {
-    const matchesUsername =
-      filters.username === "" ||
-      student.username.toLowerCase() === filters.username.toLowerCase();
+  const filteredStudents = useMemo(() => {
+    return students.filter((student) => {
+      const matchesUsername =
+        filters.username === "" ||
+        student.username.toLowerCase() === filters.username.toLowerCase();
 
-    const matchesGpa = filters.gpa === "" || student.gpa === filters.gpa;
+      const matchesGpa = filters.gpa === "" || student.gpa === filters.gpa;
 
-    const matchesCourse =
-      filters.course === "" || student.course === filters.course;
+      const matchesCourse =
+        filters.course === "" || student.course === filters.course;
 
-    return matchesUsername && matchesGpa && matchesCourse;
+      return matchesUsername && matchesGpa && matchesCourse;
 
-    //empty here mean all filter
-  });
+      //empty here mean all filter
+    });
+  }, [students, filters]);
+
+  const handleDelete = useCallback(async (e) => {
+    try {
+      await removeStudent(e.email);
+      toast.success("Student has been deleted successfully!", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+    } catch (err) {
+      toast.error(err || errors.DELETE || "Failed to delete student", {
+        style: {
+          width: "500px",
+        },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+    }
+  },[errors.DELETE,setIsBlocked,removeStudent]);
 
   return (
     <>
@@ -63,29 +86,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
               {filteredStudents.map((e, ind) => (
                 <StudentItem
                   isBlocked={isBlocked}
-                  onDeleteStudent={async () => {
-                    try {
-                      await removeStudent(e.email);
-                      toast.success("Student has been deleted successfully!", {
-                        style: {
-                          width: "500px",
-                        },
-                        onOpen: () => setIsBlocked(true),
-                        onClose: () => setIsBlocked(false),
-                      });
-                    } catch (err) {
-                      toast.error(
-                        err || errors.DELETE || "Failed to delete student",
-                        {
-                          style: {
-                            width: "500px",
-                          },
-                          onOpen: () => setIsBlocked(true),
-                          onClose: () => setIsBlocked(false),
-                        },
-                      );
-                    }
-                  }}
+                  onDeleteStudent={handleDelete}
                   content={e}
                   key={e.email}
                 />

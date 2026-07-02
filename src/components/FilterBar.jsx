@@ -192,4 +192,4 @@ function FilterBar({ filters, setFilters }) {
   );
 }
 
-export default FilterBar;
+export default React.memo(FilterBar);

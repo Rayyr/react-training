@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 export const StudentContext = createContext();
-
+//or simplly function StudentProvider ( functional component )
 export const StudentProvider = ({ children }) => {
   //shared props , json format
   const [students, setStudents] = useState([]);

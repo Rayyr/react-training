@@ -1,11 +1,11 @@
 {
   "students": [
     {
-      "username": "ola",
-      "email": "o2@gmail.com",
+      "username": "ndas",
+      "email": "nn2@gmail.com",
       "course": "arabic",
-      "gpa": "2",
-      "id": "jBrhg8jrjOk"
+      "gpa": "3",
+      "id": "IEXNU4LaNOc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

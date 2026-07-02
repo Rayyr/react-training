@@ -4,8 +4,7 @@ import { StudentContext } from "../context/StudentContext.js";
 import { useContext } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { useEffect } from "react";
-
+ 
 function StudentDetails( ) {
   const { students, isLoading, errors } = useContext(StudentContext);
 

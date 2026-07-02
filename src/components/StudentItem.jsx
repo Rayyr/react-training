@@ -96,7 +96,7 @@ function StudentItem({ isBlocked,onlyDetails, onDeleteStudent, content }) {
 
               <Button
               disabled={isBlocked}
-                onClick={onDeleteStudent}
+                onClick={()=>onDeleteStudent(content)}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
                 Delete
