@@ -12,7 +12,7 @@ validation reqs(constraints) for the following input feilds :
 -example must not be as same as username       done
 -first char must not be digit or special char
 -unique     done
--must not have special chars
+-must not have special chars      done
 
 
 3-Gpa

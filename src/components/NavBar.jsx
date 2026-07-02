@@ -1,14 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 function NavBar({ isBlocked }) {
- const currentLocation=useLocation();
+  const currentLocation = useLocation();
 
- //const isStudentDetailsPage=;/^\/students\//
- const studentDetailsPage="/students/:email";
+  const isStudentDetailsPage = /^\/students\/[^/]+$/.test(
+    currentLocation.pathname,
+  );
 
-    const styles = {
+  const styles = {
     nav: {
       display: "flex",
       justifyContent: "space-between",
@@ -31,45 +32,34 @@ function NavBar({ isBlocked }) {
     },
   };
 
+  const avtiveLinkStyle = ({ isActive }) => {
+    if (isStudentDetailsPage) {
+      return styles.link;
+    } else {
+      return isActive ? { ...styles.link, color: "#9C27B0" } : styles.link;
+    }
+  };
+
+  const handleClick = (e) => {
+    if (isBlocked ) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <nav style={styles.nav}>
       <h2 style={styles.logo}>🎓 Student System</h2>
       <div style={styles.links}>
-        <NavLink
-          onClick={(e) => isBlocked && e.preventDefault()}
-          style={({ isActive }) =>
-            isActive? { ...styles.link, color: "#9C27B0" } : styles.link
-        
-           }
-          to="/"
-        >
+        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/">
           Home
         </NavLink>
-        <NavLink
-          onClick={(e) => isBlocked && e.preventDefault()}
-          style={({ isActive }) =>
-            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
-          }
-          to="/about"
-        >
+        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/about">
           About
         </NavLink>
-        <NavLink
-          onClick={(e) => isBlocked && e.preventDefault()}
-          style={({ isActive }) =>
-            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
-          }
-          to="/students"
-        >
+        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/students">
           Students
         </NavLink>
-        <NavLink
-          onClick={(e) => isBlocked && e.preventDefault()}
-          style={({ isActive }) =>
-            isActive ? { ...styles.link, color: "#9C27B0" } : styles.link
-          }
-          to="/register"
-        >
+        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/register">
           Register
         </NavLink>
       </div>
