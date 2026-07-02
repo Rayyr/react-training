@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import '../styles/UserCard.css';
 
 function UserCard() {
+
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -13,6 +14,7 @@ function UserCard() {
     try {
       setLoading(true);
       const res = await fetch("https://randomuser.me/api/");
+    if(!res.ok) throw new Error("API error");
       const data = await res.json();
       //name extraction
       const title = data.results[0].name.title;
