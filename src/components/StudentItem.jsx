@@ -3,7 +3,7 @@ import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import UpdateForm from "./UpdateForm.jsx";
 
-function StudentItem({ onlyDetails, onDeleteStudent, content }) {
+function StudentItem({ isBlocked,onlyDetails, onDeleteStudent, content }) {
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -79,6 +79,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content }) {
               }}
             >
               <Button
+                disabled={isBlocked}
                 onClick={() => setShowUpdateModal(true)}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
@@ -86,6 +87,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content }) {
               </Button>
 
               <Button
+              disabled={isBlocked}
                 onClick={() => setShowModal(true)}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
@@ -93,6 +95,7 @@ function StudentItem({ onlyDetails, onDeleteStudent, content }) {
               </Button>
 
               <Button
+              disabled={isBlocked}
                 onClick={onDeleteStudent}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
