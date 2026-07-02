@@ -3,10 +3,32 @@ import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import UpdateForm from "./UpdateForm.jsx";
 
-function StudentItem({   onlyDetails, onDeleteStudent, content }) {
+function StudentItem({ onlyDetails, onDeleteStudent, content }) {
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
+  const buttonStyle = {
+    whiteSpace: "nowrap",
+    flex: "unset",
+    padding: "8px 15px",
+    borderRadius: "8px",
+    textTransform: "none",
+    fontSize: "13px",
+    background: "linear-gradient(45deg, #4A148C, #9C27B0)",
+    color: "#fff",
+
+    "&:hover": {
+      background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+    },
+
+    "&.Mui-disabled": {
+      background: "#2A1B3D",
+      color: "#FFFFFF",
+      pointerEvents: "auto",
+      cursor: "not-allowed",
+      opacity: 0.7,
+    },
+  };
   //onlyDetails=in case we are in studentDetails page there must not have a btns (view,delete)
   return (
     <>
@@ -19,10 +41,9 @@ function StudentItem({   onlyDetails, onDeleteStudent, content }) {
           transition: "0.3s",
 
           width: "100%",
-          maxWidth: onlyDetails ? "420px" : "260px",
-
-          padding: onlyDetails ? "24px" : "16px",
-          margin: onlyDetails ? "40px auto" : "0",
+          maxWidth: onlyDetails ? "420px" : "320px",
+          padding: onlyDetails ? "24px" : "15px",
+          margin: onlyDetails ? "40px auto" : "5px 30px",
 
           boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
 
@@ -50,113 +71,47 @@ function StudentItem({   onlyDetails, onDeleteStudent, content }) {
             <div
               style={{
                 display: "flex",
-                gap: "10px",
+                gap: "12px",
                 marginTop: "12px",
-                justifyContent: "space-between",
                 alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%",
               }}
             >
-
               <Button
                 onClick={() => setShowUpdateModal(true)}
-                 
-                sx={{
-                  whiteSpace: "wrap",
-                  flex: 1,
-                  padding: "8px 10px",
-                  borderRadius: "8px",
-                  textTransform: "none",
-                  fontSize: "13px",
-                  background: "linear-gradient(45deg, #4A148C, #9C27B0)",
-                  color: "#fff",
-
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-                  },
-
-                  "&.Mui-disabled": {
-                    background: "#2A1B3D",
-                    color: "#FFFFFF",
-                    pointerEvents: "auto",
-                    cursor: "not-allowed",
-                    opacity: 0.7,
-                  },
-                }}
+                sx={{ ...buttonStyle, flex: 1 }}
               >
                 Update
               </Button>
 
-
-
               <Button
                 onClick={() => setShowModal(true)}
-                 
-                sx={{
-                  whiteSpace: "wrap",
-                  flex: 1,
-                  padding: "8px 10px",
-                  borderRadius: "8px",
-                  textTransform: "none",
-                  fontSize: "13px",
-                  background: "linear-gradient(45deg, #4A148C, #9C27B0)",
-                  color: "#fff",
-
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-                  },
-
-                  "&.Mui-disabled": {
-                    background: "#2A1B3D",
-                    color: "#FFFFFF",
-                    pointerEvents: "auto",
-                    cursor: "not-allowed",
-                    opacity: 0.7,
-                  },
-                }}
+                sx={{ ...buttonStyle, flex: 1 }}
               >
                 View Details
               </Button>
 
               <Button
                 onClick={onDeleteStudent}
-               
-                sx={{
-                  whiteSpace: "wrap",
-                  flex: 1,
-                  padding: "8px 10px",
-                  borderRadius: "8px",
-                  textTransform: "none",
-                  fontSize: "13px",
-                  background: "linear-gradient(45deg, #4A148C, #9C27B0)",
-                  color: "#fff",
-
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-                  },
-
-                  "&.Mui-disabled": {
-                    background: "#2A1B3D",
-                    color: "#FFFFFF",
-                    pointerEvents: "auto",
-                    cursor: "not-allowed",
-                    opacity: 0.7,
-                  },
-                }}
+                sx={{ ...buttonStyle, flex: 1 }}
               >
-                Delete Student
+                Delete
               </Button>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {onlyDetails === true ? null : showModal && (
-        <MyModal
-          open={showModal}
-          content={content}
-          onClose={() => setShowModal(false)}
-        />
-      )}
+      {onlyDetails === true
+        ? null
+        : showModal && (
+            <MyModal
+              open={showModal}
+              content={content}
+              onClose={() => setShowModal(false)}
+            />
+          )}
 
       {showUpdateModal && (
         <UpdateForm
