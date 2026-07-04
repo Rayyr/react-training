@@ -7,6 +7,7 @@ import { StudentContext } from "../context/StudentContext.js";
 import useForm from "../hooks/useForm.js";
 import validateForm from "../utils/validateForm.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
+import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);
@@ -66,7 +67,8 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   return (
   
     <>
-    <h1>Student Registeration Form</h1>
+    
+    <BubbleText>Student Registeration Form</BubbleText> 
       <Box
         sx={{
           backgroundColor: "#FFFFFF",
