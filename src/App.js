@@ -19,13 +19,12 @@ function App() {
 
   return (
     <>
-  
-
     
       <StudentProvider>
         <NavBar isBlocked={isBlocked}/>
         <Routes>
            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
           <Route path="/students" element={<StudentsList isBlocked={isBlocked} setIsBlocked={setIsBlocked}/>} />
           <Route
             path="/register"

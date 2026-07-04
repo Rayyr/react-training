@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function NavBar({ isBlocked }) {
   const currentLocation = useLocation();
 
-  const isStudentDetailsPage = /^\/students\/[^/]+$/.test(
-    currentLocation.pathname,
-  );
+  const [isOtherLink, setIsOtherLink] = useState(false);
+
+  useEffect(() => {
+    const isHomePage1 = /^\/home\/?$/.test(currentLocation.pathname);
+    const isHomePage2 = /^\/$/.test(currentLocation.pathname);
+    const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
+    const isStudentsPage = /^\/students\/?$/.test(currentLocation.pathname);
+    const isRegisterPage = /^\/register\/?$/.test(currentLocation.pathname);
+
+    if (
+      !isHomePage1 &&
+      !isHomePage2 &&
+      !isAboutPage &&
+      !isRegisterPage &&
+      !isStudentsPage
+    )
+      setIsOtherLink(true);
+  }, [currentLocation]);
 
   const styles = {
     nav: {
@@ -33,7 +48,7 @@ function NavBar({ isBlocked }) {
   };
 
   const avtiveLinkStyle = ({ isActive }) => {
-    if (isStudentDetailsPage) {
+    if (isOtherLink) {
       return styles.link;
     } else {
       return isActive ? { ...styles.link, color: "#9C27B0" } : styles.link;
@@ -41,7 +56,7 @@ function NavBar({ isBlocked }) {
   };
 
   const handleClick = (e) => {
-    if (isBlocked ) {
+    if (isBlocked) {
       e.preventDefault();
     }
   };
