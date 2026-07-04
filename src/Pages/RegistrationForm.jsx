@@ -6,7 +6,7 @@ import PreviewCard from "../components/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 import useForm from "../hooks/useForm.js";
 import validateForm from "../utils/validateForm.js";
-
+import RegisterBtn from "../components/RegisterBtn.jsx";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);
@@ -117,7 +117,9 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 sx={inputStyle}
               ></Input>{" "}
               <br />
-              <Button
+
+             
+               <RegisterBtn
                 type="submit"
                 disabled={
                   !formData.username ||
@@ -126,35 +128,15 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                   !formData.course ||
                   isBlocked
                 }
-                sx={{
-                  marginTop: "20px",
-                  padding: "12px 24px",
-                  fontSize: "18px",
-                  borderRadius: "10px",
-                  textTransform: "none",
-
+                style={{
+                  
                   background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
-                  color: "#fff",
-
-                  "&:hover": {
-                    background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
-                  },
-
-                  "&:active": {
-                    transform: "scale(0.98)",
-                  },
-
-                  "&.Mui-disabled": {
-                    background: "#2A1B3D",
-                    color: "#FFFFFF",
-                    pointerEvents: "auto",
-                    cursor: "not-allowed",
-                    opacity: 0.7,
-                  },
+                  color: "#9527A9",
+                  fontWeight:"bold"
                 }}
               >
-                Register student
-              </Button>
+                Register 
+              </RegisterBtn> 
             </form>
           </div>
 
