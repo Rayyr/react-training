@@ -6,7 +6,7 @@ import About from "./pages/About.jsx";
 import RegistrationForm from "./pages/RegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
-import NavBar from "./components/NavBar.jsx";
+import NavBar from "./components/UserDefined UI/NavBar.jsx";
 import Error from "./pages/Error.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
 import { ToastContainer, Bounce } from "react-toastify";

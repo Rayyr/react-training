@@ -1,8 +1,8 @@
 import { Input, Modal, Button, Box, Typography } from "@mui/material";
-import { StudentContext } from "../context/StudentContext.js";
+import { StudentContext } from "../../context/StudentContext.js";
 import { useContext, useState } from "react";
-import useForm from "../hooks/useForm.js";
-import validateForm from "../utils/validateForm.js";
+import useForm from "../../hooks/useForm.js";
+import validateForm from "../../utils/validateForm.js";
 import { toast } from "react-toastify";
 
 export default function UpdateForm({ open, onClose, content }) {

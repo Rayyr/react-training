@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import "../styles/RegisterationForm.css";
-import { Input, Button, Box } from "@mui/material";
-import PreviewCard from "../components/PreviewCard.jsx";
+import { Input, Box } from "@mui/material";
+import PreviewCard from "../components/UserDefined UI/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 import useForm from "../hooks/useForm.js";
 import validateForm from "../utils/validateForm.js";
-import RegisterBtn from "../components/RegisterBtn.jsx";
+import Button from "../components/BuiltIn UI/Button.jsx";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);
@@ -65,6 +65,8 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   };
   return (
   
+    <>
+    <h1>Student Registeration Form</h1>
       <Box
         sx={{
           backgroundColor: "#FFFFFF",
@@ -119,7 +121,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
               <br />
 
              
-               <RegisterBtn
+               <Button
                 type="submit"
                 disabled={
                   !formData.username ||
@@ -136,7 +138,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 }}
               >
                 Register 
-              </RegisterBtn> 
+              </Button> 
             </form>
           </div>
 
@@ -145,7 +147,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "20px",
+                marginTop: "40px",
               }}
             >
               <PreviewCard content={formData} />
@@ -153,6 +155,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           </div>
         </div>
       </Box>
+      </>
    
   );
 }

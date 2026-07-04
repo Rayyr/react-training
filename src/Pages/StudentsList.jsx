@@ -1,6 +1,6 @@
 import React, { useState, useContext, useMemo,useCallback } from "react";
-import StudentItem from "../components/StudentItem";
-import FilterBar from "../components/FilterBar";
+import StudentItem from "../components/UserDefined UI/StudentItem.jsx";
+import FilterBar from "../components/UserDefined UI/FilterBar.jsx";
 import { Typography } from "@mui/material";
 import { StudentContext } from "../context/StudentContext.js";
 import { toast } from "react-toastify";

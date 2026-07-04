@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import StudentItem from "../components/StudentItem.jsx";
+import StudentItem from "../components/UserDefined UI/StudentItem.jsx";
 import { StudentContext } from "../context/StudentContext.js";
 import { useContext } from "react";
 import CircularProgress from '@mui/material/CircularProgress';

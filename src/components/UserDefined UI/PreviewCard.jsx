@@ -1,19 +1,10 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import {  CardContent, Typography } from "@mui/material";
+import GlowingCard from "../BuiltIn UI/GlowingCard";
 
 function PreviewCard({ content }) {
   return (
-    <Card
-      sx={{
-        backgroundColor: "#4A148C",   // dark purple background
-        color: "#E0D7FF",             // light purple text
-        borderRadius: "16px",
-        boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
-        minWidth: 250,
-        transition: "0.3s",
-        "&:hover": {
-          transform: "scale(1.03)",
-        },
-      }}
+    <GlowingCard
+      title="Preview Card"
     >
       <CardContent>
         <Typography   sx={{  mb: 1 }}>
@@ -32,7 +23,7 @@ function PreviewCard({ content }) {
           Course: {content.course }
         </Typography>
       </CardContent>
-    </Card>
+    </GlowingCard>
   );
 }
 

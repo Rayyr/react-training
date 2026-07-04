@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 
-const RegisterBtn = ({ children , disabled, style, ...props }) => {
+const Button = ({ children , disabled, style, ...props }) => {
   const btnRef = useRef(null);
   const spanRef = useRef(null);
 
@@ -70,4 +70,4 @@ const RegisterBtn = ({ children , disabled, style, ...props }) => {
   );
 };
 
-export default RegisterBtn;
+export default Button;

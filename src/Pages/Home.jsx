@@ -1,11 +1,13 @@
 import React from 'react';
-import RegisterBtn  from "../components/RegisterBtn.jsx";
+import GlowingCard  from "../components/BuiltIn UI/GlowingCard.jsx";
 
 function Home(){
 
     return (
     <><h1>Wellcome to home page!</h1>
-       <RegisterBtn />
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center"  }}>
+      <GlowingCard />
+    </div>
    
          </>
      );
