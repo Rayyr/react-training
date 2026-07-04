@@ -56,7 +56,7 @@ export default function GlowingCard({
             display: "flex",
             flexDirection: "column",
             gap: "0.5rem",
-            background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
+    background: "linear-gradient(45deg, #4A148C, #9C27B0)",
             padding: "1rem",
           }}
         >

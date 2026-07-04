@@ -6,6 +6,13 @@
       "course": "arabic",
       "gpa": "3",
       "id": "IEXNU4LaNOc"
+    },
+    {
+      "username": "raya",
+      "email": "khasaatirayaa@gmail.com",
+      "course": "phy",
+      "gpa": "3",
+      "id": "63rgNQanQbM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

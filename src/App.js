@@ -7,7 +7,7 @@ import RegistrationForm from "./pages/RegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/UserDefined UI/NavBar.jsx";
-import Error from "./pages/Error.jsx";
+import NotFoundError from "./pages/404NotFound.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
  
@@ -38,7 +38,7 @@ function App() {
           />
           <Route path="/students/:email" element={<StudentDetails  />} />
           <Route path="/about" element={<About />} />
-          <Route path="*" element={<Error />} />
+          <Route path="*" element={<NotFoundError />} />
         </Routes>
       </StudentProvider>
             <ToastContainer
