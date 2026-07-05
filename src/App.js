@@ -25,7 +25,7 @@ function App() {
       <StudentProvider>
         <NavBar isBlocked={isBlocked}/>
         <ErrorBoundary>
-          <Bug></Bug> {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
+        {/*  <Bug></Bug>*/} {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
         <Routes>
            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />

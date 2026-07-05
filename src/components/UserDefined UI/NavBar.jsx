@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 function NavBar({ isBlocked }) {
   const currentLocation = useLocation();
+  const navigate = useNavigate();
 
   const [isOtherLink, setIsOtherLink] = useState(false);
 
-  //////////////////////////////////
   useEffect(() => {
     //found routes
     const isHomePage1 = /^\/home\/?$/.test(currentLocation.pathname);
@@ -15,9 +14,6 @@ function NavBar({ isBlocked }) {
     const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
     const isStudentsPage = /^\/students\/?$/.test(currentLocation.pathname);
     const isRegisterPage = /^\/register\/?$/.test(currentLocation.pathname);
-
-    // console.log(isHomePage1);
-    //console.log(currentLocation.pathname);
 
     if (
       !isHomePage1 &&
@@ -28,6 +24,8 @@ function NavBar({ isBlocked }) {
     )
       setIsOtherLink(() => true);
     else setIsOtherLink(() => false);
+
+    if (currentLocation.pathname === "/") navigate("/home");
   }, [currentLocation]);
 
   const styles = {
@@ -71,7 +69,7 @@ function NavBar({ isBlocked }) {
     <nav style={styles.nav}>
       <h2 style={styles.logo}>🎓 Student System</h2>
       <div style={styles.links}>
-        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/">
+        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/home">
           Home
         </NavLink>
         <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/about">
