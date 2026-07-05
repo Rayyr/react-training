@@ -1,14 +1,14 @@
 import { NoDataSvg } from "../assets/images/no-data-svg.tsx";
 import { Link } from "react-router-dom";
 
-const NotFoundError = () => (
+const NotFoundError = ({title="Sorry, we didn't find any match!"}) => (
   <div className="flex min-h-screen items-center justify-center bg-white px-4">
     <div className="max-w-md text-center">
       <div className="w-full">
         <NoDataSvg />
       </div>
       <h4 className="mt-9 mb-9 text-2xl leading-snug font-medium text-gray-900">
-        Sorry, we didn't find any match!
+        {title}
       </h4>
       <Link
         to="/"

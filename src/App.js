@@ -10,7 +10,9 @@ import NavBar from "./components/UserDefined UI/NavBar.jsx";
 import NotFoundError from "./pages/404NotFound.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
- 
+import ErrorBoundary from './components/UserDefined UI/ErrorBoundary.jsx';
+import { Bug } from "./components/UserDefined UI/Bug.jsx";
+
 function App() {
 
    
@@ -22,6 +24,8 @@ function App() {
     
       <StudentProvider>
         <NavBar isBlocked={isBlocked}/>
+        <ErrorBoundary>
+          <Bug></Bug> {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
         <Routes>
            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -39,6 +43,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFoundError />} />
         </Routes>
+        </ErrorBoundary>
       </StudentProvider>
             <ToastContainer
           position="top-center"
