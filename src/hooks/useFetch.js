@@ -6,6 +6,7 @@ export default function useFetch(url, method = "GET", options = {}) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    
     const fetchData = async () => {
       setIsLoading(true);
       setError(null);

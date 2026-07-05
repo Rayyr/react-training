@@ -8,23 +8,23 @@ export const StudentProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
   const [errors, setErrors] = useState({});
 
-  const {data, isLoading, error}= useFetch("http://localhost:5000/students");
+  const {data, isLoading, error}= useFetch(`${process.env.REACT_APP_BASE_API_URL}`);
 
   useEffect(() => {
-    if (data ) setStudents(( ) => data);
+     if (data ) setStudents(( ) => data);
   }, [data]);
 
   useEffect(() => {
     
     if (error) {
-      setErrors((prevState) => ({ ...prevState, GET: error.message+"k" }));
+      setErrors((prevState) => ({ ...prevState, GET: error.message }));
     }  
   }, [ error]);
 
   //POST student
   const addStudent = async (student) => {
     try {
-      const res = await fetch("http://localhost:5000/students", {
+      const res = await fetch(`${process.env.REACT_APP_BASE_API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export const StudentProvider = ({ children }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/students/${studentToDelete.id}`,
+        `${process.env.REACT_APP_BASE_API_URL}/${studentToDelete.id}`,
         {
           method: "DELETE",
         },
@@ -81,7 +81,7 @@ export const StudentProvider = ({ children }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/students/${studentToBeUpdate.id}`,
+        `${process.env.REACT_APP_BASE_API_URL}/${studentToBeUpdate.id}`,
         {
           method: "PUT",
           headers: {

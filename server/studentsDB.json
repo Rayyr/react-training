@@ -1,4 +1,12 @@
 {
-  "students": [],
+  "students": [
+    {
+      "username": "raya",
+      "email": "khasaatirayaa@gmail.com",
+      "course": "it",
+      "gpa": "2",
+      "id": "frKOCwPmfko"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

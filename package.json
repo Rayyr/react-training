@@ -26,12 +26,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-    "server": "json-server --watch ./server/studentsDB.json --port 5000"
+"server": "  json-server --watch ./server/studentsDB.json --port 5000"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.5.2",
+    "cross-env": "^10.1.0",
     "postcss": "^8.5.16",
     "tailwindcss": "^3.4.19"
   }
