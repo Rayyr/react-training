@@ -45,7 +45,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
         onClose: () => setIsBlocked(false),
       });
     } catch (err) {
-      toast.error(err || errors.DELETE || "Failed to delete student", {
+      toast.error(err || errors.DELETE , {
         style: {
           width: "500px",
         },

@@ -34,7 +34,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           });
         })
         .catch((err) => {
-          toast.error(err || errors.POST || "Failed to add new student", {
+          toast.error(err || errors.POST  , {
             style: {
               width: "500px",
             },

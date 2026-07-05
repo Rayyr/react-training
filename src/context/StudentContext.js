@@ -1,41 +1,25 @@
 import { createContext, useState, useEffect } from "react";
+import  useFetch  from "../hooks/useFetch.js";
 
 export const StudentContext = createContext();
 //or simplly function StudentProvider ( functional component )
 export const StudentProvider = ({ children }) => {
   //shared props , json format
   const [students, setStudents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  //GET students
-  const getStudents = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("http://localhost:5000/students");
-
-      if (!res.ok) {
-    
-        throw new Error("Failed to get students from database");
-      }
-
-      const data = await res.json(); //students
-      setStudents(data);
-    } catch (error) {
-      setErrors((prev) => ({
-        ...prev,
-        GET: error.message,//as same as Failed to get students from database (thrown one)
-      }));
-      
-       
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const {data, isLoading, error}= useFetch("http://localhost:5000/students");
 
   useEffect(() => {
-    getStudents();
-  }, []);
+    if (data ) setStudents(( ) => data);
+  }, [data]);
+
+  useEffect(() => {
+    
+    if (error) {
+      setErrors((prevState) => ({ ...prevState, GET: error.message+"k" }));
+    }  
+  }, [ error]);
 
   //POST student
   const addStudent = async (student) => {
@@ -48,8 +32,7 @@ export const StudentProvider = ({ children }) => {
         body: JSON.stringify(student),
       });
       if (!res.ok) {
-     
-         throw new Error("Failed to add the new student");
+        throw new Error("Failed to add the new student");
       }
       const createdStudent = await res.json();
       setStudents((prevStudents) => [...prevStudents, createdStudent]);
@@ -76,8 +59,7 @@ export const StudentProvider = ({ children }) => {
         },
       );
       if (!res.ok) {
-      
-         throw new Error("Failed to delete student");
+        throw new Error("Failed to delete student");
       }
       setStudents((prevStudents) =>
         prevStudents.filter((e) => e.email !== studentEmailToBeDeleted),
@@ -87,7 +69,7 @@ export const StudentProvider = ({ children }) => {
         ...prev,
         DELETE: error.message,
       }));
-      throw error.message;
+        throw error.message;
     }
   };
 
@@ -109,7 +91,6 @@ export const StudentProvider = ({ children }) => {
         },
       );
       if (!res.ok) {
-      
         throw new Error("Failed to update student details");
       }
       const data = await res.json();

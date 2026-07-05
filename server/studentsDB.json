@@ -1,19 +1,4 @@
 {
-  "students": [
-    {
-      "username": "ndas",
-      "email": "nn2@gmail.com",
-      "course": "arabic",
-      "gpa": "3",
-      "id": "IEXNU4LaNOc"
-    },
-    {
-      "username": "raya",
-      "email": "khasaatirayaa@gmail.com",
-      "course": "phy",
-      "gpa": "3",
-      "id": "63rgNQanQbM"
-    }
-  ],
+  "students": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

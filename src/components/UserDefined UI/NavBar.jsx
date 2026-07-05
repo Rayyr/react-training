@@ -7,12 +7,17 @@ function NavBar({ isBlocked }) {
 
   const [isOtherLink, setIsOtherLink] = useState(false);
 
+  //////////////////////////////////
   useEffect(() => {
+    //found routes
     const isHomePage1 = /^\/home\/?$/.test(currentLocation.pathname);
-    const isHomePage2 = /^\/$/.test(currentLocation.pathname);
+    const isHomePage2 = /^\/?$/.test(currentLocation.pathname);
     const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
     const isStudentsPage = /^\/students\/?$/.test(currentLocation.pathname);
     const isRegisterPage = /^\/register\/?$/.test(currentLocation.pathname);
+
+    // console.log(isHomePage1);
+    //console.log(currentLocation.pathname);
 
     if (
       !isHomePage1 &&
@@ -21,7 +26,8 @@ function NavBar({ isBlocked }) {
       !isRegisterPage &&
       !isStudentsPage
     )
-      setIsOtherLink(true);
+      setIsOtherLink(() => true);
+    else setIsOtherLink(() => false);
   }, [currentLocation]);
 
   const styles = {
