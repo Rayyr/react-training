@@ -1,24 +1,18 @@
-import React, { Suspense } from "react";
+import React from "react";
 import NotFoundError from "../../pages/404NotFound";
 
 export default class ErrorBoundary extends React.Component {
-  state = {
-    error: "",
-    errorInfo: "",
-    haserror: false,
-  };
   constructor(props) {
     super(props);
+    this.state = { hasError: false, error: "", errorInfo: "" };
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
-
+ 
     this.setState({
       hasError: true,
       error: error,
@@ -28,8 +22,7 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-
+ 
       return (
         <>
           <NotFoundError

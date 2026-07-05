@@ -4,7 +4,6 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 function NavBar({ isBlocked }) {
   const currentLocation = useLocation();
   const navigate = useNavigate();
-
   const [isOtherLink, setIsOtherLink] = useState(false);
 
   useEffect(() => {
