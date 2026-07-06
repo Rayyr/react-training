@@ -5,6 +5,7 @@ import {useContext} from 'react';
 const ProtectedRoute = ({ children }) => {
  
    const {user}=useContext(AuthContext);
+  //Redirect unauthorized users away from private routes.
    if(!user){
      return <Navigate to="/login"/>
    }

@@ -29,9 +29,10 @@ function App() {
             {/*  <Bug></Bug>*/}{" "}
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
+             
+              <Route path="/login" element={<Login />} /> {/*accessable from anyone*/}
+              <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
+              <Route path="/home" element={ <ProtectedRoute><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
               <Route
                 path="/students"
                 element={
@@ -42,8 +43,8 @@ function App() {
                     />
                   </ProtectedRoute>
                 }
-              />
-              <Route
+              />{/*accessable only for authorized users*/}
+              <Route 
                 path="/register"
                 element={
                   <RegistrationForm
@@ -51,17 +52,16 @@ function App() {
                     setIsBlocked={setIsBlocked}
                   />
                 }
-              />
+              /> {/*accessable from anyone*/}
               <Route
                 path="/students/:email"
                 element={
                   <ProtectedRoute>
-                    
                     <StudentDetails />
                   </ProtectedRoute>
                 }
-              />
-              <Route path="/about" element={<About />} />
+              />{/*accessable only for authorized users*/}
+              <Route path="/about" element={<About />} /> {/*accessable from anyone*/}
               <Route path="*" element={<NotFoundError />} />
             </Routes>
           </ErrorBoundary>

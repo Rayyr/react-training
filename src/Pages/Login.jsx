@@ -13,8 +13,8 @@ function Login() {
     const {username,email}=e.target;
      console.log(user);
     const isValid = await login(username.value, email.value);
-    if (isValid) navigate("/");
-    else navigate("/invalidRoute");
+    if (isValid) navigate("/home");//send authrized users to Home Page
+    else navigate("/invalidRoute");//send unauthrized users to Error Page
   };
 
  
