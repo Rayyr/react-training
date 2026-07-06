@@ -26,7 +26,7 @@ function App() {
         <StudentProvider>
           <NavBar isBlocked={isBlocked} />
           <ErrorBoundary>
-            {/*  <Bug></Bug>*/}{" "}
+            {/*  <Bug></Bug>*/} 
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
              
@@ -52,7 +52,7 @@ function App() {
                     setIsBlocked={setIsBlocked}
                   />
                 }
-              /> {/*accessable from anyone*/}
+              /> {/* === signup page accessable from anyone*/}
               <Route
                 path="/students/:email"
                 element={

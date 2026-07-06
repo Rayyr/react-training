@@ -6,6 +6,7 @@
       "course": "it",
       "gpa": "2",
       "id": "frKOCwPmfko"
+       
     },
     {
       "username": "faya",
@@ -13,6 +14,14 @@
       "course": "dd",
       "gpa": "2",
       "id": "D1E5QX3u5DA"
+       
+    }
+  ],
+
+  "admins":[
+    {
+      "username":"manager",
+      "email":"manager2@gmail.com"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

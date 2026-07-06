@@ -10,6 +10,7 @@ const ProtectedRoute = ({ children }) => {
      return <Navigate to="/login"/>
    }
 
+   //authorized users 
    return children;//anything inside ProtectedRoute component as we said previoslly
 };
 

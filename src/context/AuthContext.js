@@ -1,4 +1,4 @@
-import { createContext, useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
@@ -6,27 +6,31 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-
-  //restore logged user session
-  useEffect(()=>{
-const storedUser=localStorage.getItem("user");
-if(storedUser) setUser(JSON.parse(storedUser));
-  },[]);
-
-
+  //restore logged user session from local storage
+  // ✅ restore session
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
 
   //login function
-  const login = async (username, email) => {
+  const login = async (username, email, role) => {
+    let endpoint = "";
+    if (role === "admin") endpoint = "/admins";
+    else if (role === "student") endpoint = "/students";
     try {
-      const res = await fetch(`${process.env.REACT_APP_BASE_API_URL}`);
-      if (!res.ok) throw new Error("failed to fetch students from DB!");
-      const students = await res.json();
-      const foundUser = checkIfValidUser(students, username, email);
+      const res = await fetch(
+        `${process.env.REACT_APP_BASE_API_URL}${endpoint}`,
+      );
+      if (!res.ok) throw new Error(`failed to fetch ${role}s from DB!`);
+      const users = await res.json();
+      const foundUser = checkIfValidUser(users, username, email);
 
       if (foundUser) {
+        const unifiedUser = { ...foundUser, role: role };
         //save session
-        localStorage.setItem("user", JSON.stringify(foundUser));
-        setUser(foundUser);
+        localStorage.setItem("user", JSON.stringify(unifiedUser));
+        setUser(unifiedUser);
         return true;
       } else return false;
     } catch (error) {
@@ -34,11 +38,10 @@ if(storedUser) setUser(JSON.parse(storedUser));
     }
   };
 
-  const checkIfValidUser = (students, username, email) => {
+  //for both students and admins
+  const checkIfValidUser = (users, username, email) => {
     //key:username    value:email
-    return students.find(
-      (student) => student.username === username && student.email === email,
-    );
+    return users.find((u) => u.username === username && u.email === email);
   };
 
   //logout
@@ -48,6 +51,8 @@ if(storedUser) setUser(JSON.parse(storedUser));
   };
 
   return (
-    <AuthContext.Provider value={{ user,login }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, login }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
