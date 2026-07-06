@@ -9,7 +9,9 @@ function Login() {
   const handleSubmit =async (e) => {
     e.preventDefault();
 
+   
     const {username,email}=e.target;
+     console.log(username.value)
     const isValid = await login(username.value, email.value);
     if (isValid) navigate("/");
     else navigate("/invalidRoute");
