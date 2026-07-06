@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { roles } from "../constatnts/systemRoles";
 
 export const AuthContext = createContext();
 
@@ -17,8 +18,8 @@ export const AuthProvider = ({ children }) => {
   //login function
   const login = async (username, email, role) => {
     let endpoint = "";
-    if (role === "admin") endpoint = "/admins";
-    else if (role === "student") endpoint = "/students";
+    if (role === roles.admin) endpoint = "/admins";
+    else if (role === roles.student) endpoint = "/students";
     try {
       const res = await fetch(
         `${process.env.REACT_APP_BASE_API_URL}${endpoint}`,

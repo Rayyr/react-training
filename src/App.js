@@ -16,6 +16,8 @@ import { Bug } from "./components/UserDefined UI/Bug.jsx";
 import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
 import Wellcome from "./pages/Wellcome.jsx";
+import { roles } from "./constatnts/systemRoles.js";
+
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -31,22 +33,22 @@ function App() {
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
              
-              <Route path="/login" element={<Login />} /> {/*accessable from anyone*/}
-              <Route path="/wellcome" element={<Wellcome />} /> {/*accessable from anyone*/}
+              <Route path="/login" element={<Login />} /> {/*accessable from anyone(even if they are not authanticated)*/}
+              <Route path="/wellcome" element={<Wellcome />} /> {/*accessable from anyone(even if they are not authanticated)*/}
 
-              <Route path="/" element={<ProtectedRoute allowedRoles={["student","admin"]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
-              <Route path="/home" element={ <ProtectedRoute allowedRoles={["student","admin"]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
+              <Route path="/" element={<ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
+              <Route path="/home" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
               <Route
                 path="/students"
                 element={
-                  <ProtectedRoute allowedRoles={["admin"]}>
+                  <ProtectedRoute allowedRoles={[ roles.admin]}>
                     <StudentsList
                       isBlocked={isBlocked}
                       setIsBlocked={setIsBlocked}
                     />
                   </ProtectedRoute>
                 }
-              />{/*accessable only for authorized users*/}
+              />{/*accessable only for authorized users with these roles*/}
               <Route 
                 path="/register"
                 element={
@@ -55,16 +57,16 @@ function App() {
                     setIsBlocked={setIsBlocked}
                   />
                 }
-              /> {/* === signup page accessable from anyone*/}
+              /> {/*===sign up ,accessable from anyone(even if they are not authanticated)*/}
               <Route
                 path="/students/:email"
                 element={
-                  <ProtectedRoute allowedRoles={["student"]}>
+                  <ProtectedRoute allowedRoles={[roles.student]}>
                     <StudentDetails />
                   </ProtectedRoute>
                 }
-              />{/*accessable only for authorized users*/}
-              <Route path="/about" element={<About />} /> {/*accessable from anyone*/}
+              />{/*accessable only for authorized users with these roles*/}
+              <Route path="/about" element={<About />} /> {/*accessable from anyone(even if they are not authanticated)*/}
               <Route path="*" element={<NotFoundError />} />
             </Routes>
           </ErrorBoundary>
