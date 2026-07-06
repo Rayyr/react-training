@@ -48,6 +48,6 @@ if(storedUser) setUser(JSON.parse(storedUser));
   };
 
   return (
-    <AuthContext.Provider value={{ login }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user,login }}>{children}</AuthContext.Provider>
   );
 };

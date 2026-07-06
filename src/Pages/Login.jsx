@@ -4,14 +4,14 @@ import {useNavigate} from 'react-router-dom';
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { user,login } = useContext(AuthContext);
 
   const handleSubmit =async (e) => {
     e.preventDefault();
 
    
     const {username,email}=e.target;
-     console.log(username.value)
+     console.log(user);
     const isValid = await login(username.value, email.value);
     if (isValid) navigate("/");
     else navigate("/invalidRoute");

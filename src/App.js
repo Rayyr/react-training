@@ -14,6 +14,7 @@ import { ToastContainer, Bounce } from "react-toastify";
 import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
 import Login from "./pages/Login.jsx";
+import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -34,10 +35,12 @@ function App() {
               <Route
                 path="/students"
                 element={
-                  <StudentsList
-                    isBlocked={isBlocked}
-                    setIsBlocked={setIsBlocked}
-                  />
+                  <ProtectedRoute>
+                    <StudentsList
+                      isBlocked={isBlocked}
+                      setIsBlocked={setIsBlocked}
+                    />
+                  </ProtectedRoute>
                 }
               />
               <Route
@@ -49,7 +52,15 @@ function App() {
                   />
                 }
               />
-              <Route path="/students/:email" element={<StudentDetails />} />
+              <Route
+                path="/students/:email"
+                element={
+                  <ProtectedRoute>
+                    
+                    <StudentDetails />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFoundError />} />
             </Routes>
