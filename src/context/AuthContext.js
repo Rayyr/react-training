@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 //provider
 export const AuthProvider = ({ children }) => {
+    //user : admin or student
   const [user, setUser] = useState(null);
 
   //restore logged user session from local storage
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login,logout }}>
       {children}
     </AuthContext.Provider>
   );

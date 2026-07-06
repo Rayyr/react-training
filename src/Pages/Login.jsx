@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const { user, login } = useContext(AuthContext);
+  const {   login } = useContext(AuthContext);
 
   const [role,setRole]=useState("student");
   

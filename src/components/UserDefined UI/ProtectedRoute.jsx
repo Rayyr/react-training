@@ -6,6 +6,7 @@ const ProtectedRoute = ({ children ,allowedRoles}) => {
  
    const {user}=useContext(AuthContext);
  
+   //this case is make a sense in case the user session has been expired after he logged in then he make a refresh for the page he is in but otherwise it is seemless
    //Redirect unauthorized (either students or admins) away from private routes.===not logged in successfully
    if(!user){
      return <Navigate to="/login"/>
