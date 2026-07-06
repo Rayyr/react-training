@@ -9,11 +9,11 @@ import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/UserDefined UI/NavBar.jsx";
 import NotFoundError from "./pages/404NotFound.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
+import { AuthProvider } from "./context/AuthContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
 import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
-import Login2 from "./pages/Login2";
- 
+import Login from "./pages/Login.jsx";
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -21,16 +21,14 @@ function App() {
 
   return (
     <>
-      
+      <AuthProvider>
         <StudentProvider>
           <NavBar isBlocked={isBlocked} />
           <ErrorBoundary>
             {/*  <Bug></Bug>*/}{" "}
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
-        
-
-              <Route path="/login" element={<Login2 />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route
@@ -57,7 +55,7 @@ function App() {
             </Routes>
           </ErrorBoundary>
         </StudentProvider>
-     
+      </AuthProvider>
       <ToastContainer
         position="top-center"
         autoClose={4000}

@@ -1,57 +1,33 @@
-import { useState } from "react";
-import { useAuth } from  "../context/AuthContext.js";
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.js";
+import { useContext } from "react";
+import {useNavigate} from 'react-router-dom';
 
-export default function Login() {
-  const { login } = useAuth();
+function Login() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  const [form, setForm] = useState({
-    username: "",
-    password: ""
-  });
-
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
 
-    const success = login(form.username, form.password);
-
-    if (success) {
-      navigate("/");
-    } else {
-      setError("Invalid credentials");
-    }
+    const {username,email}=e.target;
+    const isValid = await login(username.value, email.value);
+    if (isValid) navigate("/");
+    else navigate("/invalidRoute");
   };
 
+ 
+
   return (
-    <div>
-      <h2>Login</h2>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
+    <>
+      <h1>Login page</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={form.username}
-          onChange={(e) =>
-            setForm({ ...form, username: e.target.value })
-          }
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
-        />
-
+        <input name="username" type="text" placeholder="Username"></input>
+        <input name="email" type="email" placeholder="Email"></input>
         <button type="submit">Login</button>
       </form>
-    </div>
+      <button onClick={()=>navigate("/register")}>Register</button>
+    </>
   );
 }
+
+export default Login;
