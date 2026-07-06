@@ -15,6 +15,7 @@ import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
 import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
+import Wellcome from "./pages/Wellcome.jsx";
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -31,12 +32,14 @@ function App() {
             <Routes>
              
               <Route path="/login" element={<Login />} /> {/*accessable from anyone*/}
-              <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
-              <Route path="/home" element={ <ProtectedRoute><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
+              <Route path="/wellcome" element={<Wellcome />} /> {/*accessable from anyone*/}
+
+              <Route path="/" element={<ProtectedRoute allowedRoles={["student","admin"]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
+              <Route path="/home" element={ <ProtectedRoute allowedRoles={["student","admin"]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users*/}
               <Route
                 path="/students"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute allowedRoles={["admin"]}>
                     <StudentsList
                       isBlocked={isBlocked}
                       setIsBlocked={setIsBlocked}
@@ -56,7 +59,7 @@ function App() {
               <Route
                 path="/students/:email"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute allowedRoles={["student"]}>
                     <StudentDetails />
                   </ProtectedRoute>
                 }

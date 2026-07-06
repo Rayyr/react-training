@@ -6,22 +6,13 @@
       "course": "it",
       "gpa": "2",
       "id": "frKOCwPmfko"
-       
-    },
-    {
-      "username": "faya",
-      "email": "faya2@gmail.com",
-      "course": "dd",
-      "gpa": "2",
-      "id": "D1E5QX3u5DA"
-       
     }
-  ], 
-
-  "admins":[
+  ],
+  "admins": [
     {
-      "username":"manager",
-      "email":"manager2@gmail.com"
+      "username": "manager",
+      "email": "manager2@gmail.com",
+      "id": "41vbEeCYeAY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
