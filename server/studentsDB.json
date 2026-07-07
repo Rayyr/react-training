@@ -4,8 +4,16 @@
       "username": "raya",
       "email": "khasaatirayaa@gmail.com",
       "course": "dd",
-      "gpa": "2",
+      "gpa": 2,
       "id": "7A9ccAQ1mno"
+    },
+    
+    {
+      "course": "c",
+      "gpa": 2,
+      "email": "khasasaatirayaa@gmail.com",
+      "username": "ss",
+      "id": "ABJG4oLwuG4"
     }
   ],
   "admins": [

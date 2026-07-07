@@ -21,6 +21,7 @@ validation reqs(constraints) for the following input feilds :
 4-course
 -not contain special chars     done
 -require   done
+-no matter if has spaces    done (only in schema validation )
 
 
 

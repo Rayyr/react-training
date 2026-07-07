@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Box } from "@mui/material";
@@ -14,17 +14,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
  
 function RegistrationForm({ isBlocked, setIsBlocked }) {
-//  const { errors, students, addStudent } = useContext(StudentContext);
+  const {   students,addStudent } = useContext(StudentContext);
 
-  //blueprint for inputs validation
+
+const formData={
+  username:"",
+  email:"",
+  course:"",
+  gpa:""
+};
+
+  //blueprint for inputs validation : client side validation : no dependency on browser-level validation(tags themselves)
   const formSchema = yup.object({
     username: yup
       .string()
       .required("Username is required!")
       .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
 
-    //  if (formData.email.substring(0, atIndex) === formData.username) {
-
+ 
     email: yup
       .string()
       .required("Email is required!") //requirness const
@@ -48,7 +55,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           return namePart !== username;
         },
       )
-     , //add unique email const
+     , 
 
     gpa: yup
       .number()
@@ -58,16 +65,19 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
         "decimal-precision",
         "GPA must have max 2 decimal places",
         (value) =>
-          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
+          value === undefined || /^(\d+(\.\d{1,2})?)$/.test(value.toString()),
       )
-      .required(),
+      .required("GPA is required!"),//handles not nullable
 
     course: yup
       .string()
-      .matches(/^[a-zA-Z]+$/, "Course must not contain any special characters!")
+      .matches(/^[a-zA-Z\s]+$/, "Course must not contain any special characters!")
       .required("Course is required!"),
   });
-  const { register, handleSubmit ,formState:{errors,isValid,isSubmitting}} = useForm( {resolver: yupResolver(formSchema),mode: "onChange"});
+  const { register, handleSubmit ,watch,reset,clearErrors,formState:{errors,isValid,isSubmitting}} = useForm( {defaultValues:formData,resolver: yupResolver(formSchema),mode: "onChange"});
+
+     
+  //useEffect(()=>console.log(getValues()),[])
 
   /*  const { formData, handleChange, handleSubmit } = useForm(
     {
@@ -124,9 +134,51 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   };
 
 
-  const makeSubmission=(e)=>{
-    console.log(e);
+  const makeSubmission=(data)=>{
+   //once reached here so of course the inouts are being validated succesfully so the issues that may appear will be from DB not inouts themselves ( logically)
+
+   console.log(data);
+   // unique email const : server side validation(DB level)
+  const student=students.find((st)=>st.email===data.email);
+  if(student) {
+     toast.error(
+        "Sorry,the email is assioated with other regeisterted user!",
+        {
+          style: {
+            width: "500px",
+          },
+          onOpen: () => setIsBlocked(true),
+          onClose: () => setIsBlocked(false),
+        },
+      );
   }
+  else  {
+     addStudent(data)
+        .then(() => {
+          toast.success("New student has been registerd successfully!", {
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        })
+        .catch((err) => {
+          toast.error(err.message||err.POST, { //err:in case of DB itself failre (connection ..) , err.post in case of specefically in POST op
+            style: {
+              width: "500px",
+            },
+            onOpen: () => setIsBlocked(true),
+            onClose: () => setIsBlocked(false),
+          });
+        });
+    
+    reset();
+  }
+   clearErrors();
+
+  }
+
   return (
     <>
       <BubbleText>Student Registeration Form</BubbleText>
@@ -139,7 +191,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
       >
         <div className="main-cont">
           <div className="child1">
-            <form id="stu-form" onSubmit={handleSubmit(makeSubmission)}>
+            <form noValidate id="stu-form" onSubmit={handleSubmit(makeSubmission)}>
               <Input
                 type="text"
                 name="username"
@@ -188,7 +240,6 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
               <Button
                 type="submit"
                 disabled={ Object.keys(errors).length > 0  || isBlocked}
-
                 style={{
                   background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
                   color: "#9527A9",
@@ -208,7 +259,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 marginTop: "40px",
               }}
             >
-              <PreviewCard content={"j"} />
+              <PreviewCard content={watch()} />
             </div>
           </div>
         </div>

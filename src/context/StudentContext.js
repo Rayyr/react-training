@@ -41,7 +41,7 @@ export const StudentProvider = ({ children }) => {
         ...prev,
         POST: error.message,
       }));
-       throw error.message;
+       throw error;
     }
   };
 
