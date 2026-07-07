@@ -77,7 +77,8 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     watch,
     reset,
     clearErrors,
-    formState: { errors },
+
+    formState: { errors ,isValid},
   } = useForm({
     defaultValues: formData,
     resolver: yupResolver(formSchema),
@@ -214,7 +215,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
               <br />
               <Button
                 type="submit"
-                disabled={Object.keys(errors).length > 0 || isBlocked}
+                disabled={ isBlocked||!isValid}
                 style={{
                   background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
                   color: "#9527A9",
