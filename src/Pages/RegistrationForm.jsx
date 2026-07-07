@@ -8,12 +8,13 @@ import { StudentContext } from "../context/StudentContext.js";
 import validateForm from "../utils/validateForm.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
-import { useForm } from "raect-hook-form";
+import { useForm } from "react-hook-form"
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+ 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
-  const { errors, students, addStudent } = useContext(StudentContext);
+//  const { errors, students, addStudent } = useContext(StudentContext);
 
   //blueprint for inputs validation
   const formSchema = yup.object({
@@ -47,17 +48,18 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           return namePart !== username;
         },
       )
-      .test(
-        "decimal-precision",
-        "GPA must have max 2 decimal places",
-        (value) =>
-          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
-      ), //add unique email const
+     , //add unique email const
 
     gpa: yup
       .number()
       .min(0, "GPA must be >= 0!")
       .max(4, "GPA must be <= 4!")
+       .test(
+        "decimal-precision",
+        "GPA must have max 2 decimal places",
+        (value) =>
+          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
+      )
       .required(),
 
     course: yup
@@ -65,7 +67,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
       .matches(/^[a-zA-Z]+$/, "Course must not contain any special characters!")
       .required("Course is required!"),
   });
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit ,formState:{errors,isValid,isSubmitting}} = useForm( {resolver: yupResolver(formSchema),mode: "onChange"});
 
   /*  const { formData, handleChange, handleSubmit } = useForm(
     {
@@ -120,6 +122,11 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
       borderBottom: "3px solid #4A148C",
     },
   };
+
+
+  const makeSubmission=(e)=>{
+    console.log(e);
+  }
   return (
     <>
       <BubbleText>Student Registeration Form</BubbleText>
@@ -132,62 +139,56 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
       >
         <div className="main-cont">
           <div className="child1">
-            <form id="stu-form" onSubmit={(e) => handleSubmit(e)}>
+            <form id="stu-form" onSubmit={handleSubmit(makeSubmission)}>
               <Input
                 type="text"
                 name="username"
                 placeholder="Username*"
-                value={formData.username}
-                onChange={(e) => handleChange(e)}
                 disabled={isBlocked}
                 autoFocus={true}
                 sx={inputStyle}
                 {...register("username")}
               ></Input>{" "}
+{errors.username && <p>{errors.username.message}</p>}
               <br />
               <Input
                 type="email"
                 name="email"
                 placeholder="Email*"
-                value={formData.email}
-                onChange={(e) => handleChange(e)}
                 disabled={isBlocked}
                 sx={inputStyle}
                 {...register("email")}
               ></Input>{" "}
+              {errors.email && <p>{errors.email.message}</p>}
+
               <br />
               <Input
                 type="number"
                 name="gpa"
                 placeholder="GPA*"
-                value={formData.gpa}
-                onChange={(e) => handleChange(e)}
                 step="0.01"
                 disabled={isBlocked}
                 sx={inputStyle}
                 {...register("gpa")}
               ></Input>{" "}
+              {errors.gpa && <p>{errors.gpa.message}</p>}
+
               <br />
               <Input
                 type="text"
                 name="course"
                 placeholder="Course*"
-                value={formData.course}
-                onChange={(e) => handleChange(e)}
                 disabled={isBlocked}
                 sx={inputStyle}
                 {...register("course")}
               ></Input>{" "}
+              {errors.course && <p>{errors.course.message}</p>}
+
               <br />
               <Button
                 type="submit"
-                disabled={
-                  !formData.username ||
-                  !formData.email ||
-                  !formData.gpa ||
-                  !formData.course ||
-                  isBlocked
-                }
+                disabled={ Object.keys(errors).length > 0  || isBlocked}
+
                 style={{
                   background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
                   color: "#9527A9",
@@ -207,7 +208,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 marginTop: "40px",
               }}
             >
-              <PreviewCard content={formData} />
+              <PreviewCard content={"j"} />
             </div>
           </div>
         </div>
