@@ -8,14 +8,60 @@ import { StudentContext } from "../context/StudentContext.js";
 import validateForm from "../utils/validateForm.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
-import {useForm} from "raect-hook-form";
+import { useForm } from "raect-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);
 
-  const {register,handleSubmit}=useForm();
+  //blueprint for inputs validation
+  const formSchema = yup.object({
+    username: yup
+      .string()
+      .required("Username is required!")
+      .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
 
- /*  const { formData, handleChange, handleSubmit } = useForm(
+    //  if (formData.email.substring(0, atIndex) === formData.username) {
+
+    email: yup
+      .string()
+      .required("Email is required!") //requirness const
+      .matches(/@gmail\.com$/, "Email must end with @gmail.com") //domain const , already is done by built in validation related to email input feild type
+      .test(
+        //check if first char is a digit or special char
+        "first letter of email",
+        "Email must not start by digit or special char!",
+        (email) => (email ? /^[a-zA-Z]/.test(email) : true),
+      )
+      .test(
+        //check if example != username
+        "Not as same as username",
+        "Email name must not equal username",
+        function (email) {
+          const { username } = this.parent;
+
+          if (!email) return true;
+
+          const namePart = email.split("@")[0];
+          return namePart !== username;
+        },
+      ), //add unique email const
+
+    gpa: yup
+      .number()
+      .min(0, "GPA must be >= 0!")
+      .max(4, "GPA must be <= 4!")
+      .required(),
+
+    course: yup
+      .string()
+      .matches(/^[a-zA-Z]+$/, "Course must not contain any special characters!")
+      .required("Course is required!"),
+  });
+  const { register, handleSubmit } = useForm();
+
+  /*  const { formData, handleChange, handleSubmit } = useForm(
     {
       //1st param of hook formData
       username: "",
@@ -48,8 +94,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     },
   );
  */
-  
-  
+
   const inputStyle = {
     color: "#7B1FA2", // 🔥 darker purple (typed text)
     fontSize: "22px",
@@ -70,10 +115,8 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     },
   };
   return (
-  
     <>
-    
-    <BubbleText>Student Registeration Form</BubbleText> 
+      <BubbleText>Student Registeration Form</BubbleText>
       <Box
         sx={{
           backgroundColor: "#FFFFFF",
@@ -130,10 +173,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 {...register("course")}
               ></Input>{" "}
               <br />
-
-             
-               <Button
-                 
+              <Button
                 type="submit"
                 disabled={
                   !formData.username ||
@@ -143,14 +183,13 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                   isBlocked
                 }
                 style={{
-                  
                   background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
                   color: "#9527A9",
-                  fontWeight:"bold"
+                  fontWeight: "bold",
                 }}
               >
-                Register 
-              </Button> 
+                Register
+              </Button>
             </form>
           </div>
 
@@ -167,8 +206,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           </div>
         </div>
       </Box>
-      </>
-   
+    </>
   );
 }
 
