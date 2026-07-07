@@ -46,6 +46,12 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           const namePart = email.split("@")[0];
           return namePart !== username;
         },
+      )
+      .test(
+        "decimal-precision",
+        "GPA must have max 2 decimal places",
+        (value) =>
+          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
       ), //add unique email const
 
     gpa: yup
