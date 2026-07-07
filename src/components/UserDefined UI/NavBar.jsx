@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { roles } from "../../constatnts/systemRoles";
 
 function NavBar({ isBlocked }) {
   const currentLocation = useLocation();
   const navigate = useNavigate();
   const [isOtherLink, setIsOtherLink] = useState(false);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     //found routes
-    const isHomePage1 = /^\/home\/?$/.test(currentLocation.pathname);
-    const isHomePage2 = /^\/?$/.test(currentLocation.pathname);
-    const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
+    const isWellcomePage = /^\/wellcome\/?$/.test(currentLocation.pathname);
+     const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
     const isStudentsPage = /^\/students\/?$/.test(currentLocation.pathname);
-    const isRegisterPage = /^\/register\/?$/.test(currentLocation.pathname);
-
+  
     if (
-      !isHomePage1 &&
-      !isHomePage2 &&
-      !isAboutPage &&
-      !isRegisterPage &&
-      !isStudentsPage
+      !isWellcomePage &&
+       !isAboutPage &&
+      !isStudentsPage  
     )
       setIsOtherLink(() => true);
     else setIsOtherLink(() => false);
@@ -65,23 +64,34 @@ function NavBar({ isBlocked }) {
   };
 
   return (
+    <>
+    {user&&(
     <nav style={styles.nav}>
       <h2 style={styles.logo}>🎓 Student System</h2>
       <div style={styles.links}>
-        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/home">
-          Home
-        </NavLink>
+        {/* puplic accessability*/}
+        
+
         <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/about">
           About
         </NavLink>
-        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/students">
-          Students
-        </NavLink>
-        <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/register">
-          Register
-        </NavLink>
+
+       
+
+        {user.role === roles.admin && (
+          <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/students">
+            Students
+          </NavLink>
+        )}
+
+        {(user.role === roles.admin || user.role === roles.student) && (
+          <NavLink onClick={handleClick} style={avtiveLinkStyle} to="/wellcome">
+            Wellcome
+          </NavLink>
+        )}
       </div>
-    </nav>
+    </nav>)}
+    </>
   );
 }
 

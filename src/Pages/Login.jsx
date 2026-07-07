@@ -16,7 +16,7 @@ function Login() {
     // console.log(user);
     const isValid = await login(username.value, email.value, role.value);
     if (isValid)
-      navigate("/home"); //send authonticated users to Home Page
+      navigate("/wellcome"); //send authonticated users to Wellcome Page
     else navigate("/invalidRoute"); //send unauthonticated (different roles) to Error Page
   };
 
@@ -49,8 +49,7 @@ function Login() {
 
         <button type="submit">Login</button>
       </form>
-      <button onClick={() => navigate("/register")}>Student Register</button>{" "}
-      {/*only for students role registeration */}
+ 
     </>
   );
 }

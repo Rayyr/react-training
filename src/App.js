@@ -15,9 +15,8 @@ import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
 import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
-import Wellcome from "./pages/Wellcome.jsx";
 import { roles } from "./constatnts/systemRoles.js";
-
+import Wellcome from "./pages/Wellcome.jsx";
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -27,17 +26,17 @@ function App() {
     <>
       <AuthProvider>
         <StudentProvider>
-          <NavBar isBlocked={isBlocked} />
+            <NavBar isBlocked={isBlocked} />  
           <ErrorBoundary>
             {/*  <Bug></Bug>*/} 
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
              
               <Route path="/login" element={<Login />} /> {/*accessable from anyone(even if they are not authanticated)*/}
-              <Route path="/wellcome" element={<Wellcome />} /> {/*accessable from anyone(even if they are not authanticated)*/}
-
-              <Route path="/" element={<ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
-              <Route path="/home" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Home /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
+               <Route path="/home" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
+               <Route path="/" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
+         
+              <Route path="/wellcome" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Wellcome /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
               <Route
                 path="/students"
                 element={

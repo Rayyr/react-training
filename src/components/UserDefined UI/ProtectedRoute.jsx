@@ -12,9 +12,9 @@ const ProtectedRoute = ({ children ,allowedRoles}) => {
      return <Navigate to="/login"/>
    }
 
-    //Role not allowed
+    //Role not allowed,usefull in case there is a puplic navlink but in my case i customize the navbar based to roles
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/wellcome" replace />;
+    return <Navigate to="/home" replace />;
   }
 
    //authorized users + based to allowed roles

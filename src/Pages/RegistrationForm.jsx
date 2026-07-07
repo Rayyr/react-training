@@ -10,8 +10,11 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
+ const navigate=useNavigate();
+
   const { students, addStudent } = useContext(StudentContext);
 
   const formData = {
@@ -240,6 +243,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
           </div>
         </div>
       </Box>
+      <button disabled={isBlocked} onClick={()=>navigate("/home")}>Home</button>
     </>
   );
 }
