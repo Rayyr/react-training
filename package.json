@@ -20,6 +20,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-error-boundary": "^6.1.2",
+    "react-hook-form": "^7.81.0",
     "react-router-dom": "^7.18.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.1.0",
@@ -31,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js src/**/*.jsx",
-"server": "  json-server --watch ./server/studentsDB.json --port 5000"
+    "server": "  json-server --watch ./server/studentsDB.json --port 5000"
   },
   "eslintConfig": {
     "extends": [
