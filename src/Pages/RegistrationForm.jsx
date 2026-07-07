@@ -4,15 +4,18 @@ import "../styles/RegisterationForm.css";
 import { Input, Box } from "@mui/material";
 import PreviewCard from "../components/UserDefined UI/PreviewCard.jsx";
 import { StudentContext } from "../context/StudentContext.js";
-import useForm from "../hooks/useForm.js";
+//import useForm from "../hooks/useForm.js"; customized hook
 import validateForm from "../utils/validateForm.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
+import {useForm} from "raect-hook-form";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
   const { errors, students, addStudent } = useContext(StudentContext);
 
-  const { formData, handleChange, handleSubmit } = useForm(
+  const {register,handleSubmit}=useForm();
+
+ /*  const { formData, handleChange, handleSubmit } = useForm(
     {
       //1st param of hook formData
       username: "",
@@ -44,7 +47,9 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
         });
     },
   );
-
+ */
+  
+  
   const inputStyle = {
     color: "#7B1FA2", // 🔥 darker purple (typed text)
     fontSize: "22px",
@@ -88,6 +93,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 disabled={isBlocked}
                 autoFocus={true}
                 sx={inputStyle}
+                {...register("username")}
               ></Input>{" "}
               <br />
               <Input
@@ -98,6 +104,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 onChange={(e) => handleChange(e)}
                 disabled={isBlocked}
                 sx={inputStyle}
+                {...register("email")}
               ></Input>{" "}
               <br />
               <Input
@@ -109,6 +116,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 step="0.01"
                 disabled={isBlocked}
                 sx={inputStyle}
+                {...register("gpa")}
               ></Input>{" "}
               <br />
               <Input
@@ -119,11 +127,13 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 onChange={(e) => handleChange(e)}
                 disabled={isBlocked}
                 sx={inputStyle}
+                {...register("course")}
               ></Input>{" "}
               <br />
 
              
                <Button
+                 
                 type="submit"
                 disabled={
                   !formData.username ||
