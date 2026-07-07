@@ -174,7 +174,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 {...register("username")}
               ></Input>{" "}
               {errors.username && (
-                <ErrorMessage name="username" errors={errors} as="p" />
+                <ErrorMessage name="username" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
               )}
               <br />
               <Input
@@ -186,7 +186,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 {...register("email")}
               ></Input>{" "}
               {errors.email && (
-                <ErrorMessage name="email" errors={errors} as="p" />
+                <ErrorMessage name="email" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
               )}
               <br />
               <Input
@@ -198,7 +198,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 sx={inputStyle}
                 {...register("gpa")}
               ></Input>{" "}
-              {errors.gpa && <ErrorMessage name="gpa" errors={errors} as="p" />}
+              {errors.gpa && <ErrorMessage name="gpa" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>}
               <br />
               <Input
                 type="text"
@@ -209,7 +209,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 {...register("course")}
               ></Input>{" "}
               {errors.course && (
-                <ErrorMessage name="course" errors={errors} as="p" />
+                <ErrorMessage name="course" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
               )}{" "}
               <br />
               <Button
