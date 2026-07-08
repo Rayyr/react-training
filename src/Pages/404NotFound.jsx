@@ -1,4 +1,4 @@
-import { NoDataSvg } from "../assets/images/no-data-svg.tsx";
+import { NoDataSvg } from "../assets/images/ErrorPage/no-data-svg.tsx";
 import { Link } from "react-router-dom";
 
 const NotFoundError = ({title="Sorry, we didn't find any match!"}) => (

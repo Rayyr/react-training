@@ -6,6 +6,13 @@
       "course": "arabic",
       "gpa": 2,
       "id": "oJox4W9Zbx0"
+    },
+    {
+      "course": "ee",
+      "gpa": 2,
+      "email": "asm2@gmail.com",
+      "username": "asm",
+      "id": "4BpGkzhHjy8"
     }
   ],
   "admins": [
