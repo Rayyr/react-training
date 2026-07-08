@@ -61,7 +61,7 @@ function App() {
                 path="/students/:email"
                 element={
                   <ProtectedRoute allowedRoles={[roles.admin]}>
-                    <StudentDetails />
+                    <StudentDetails isBlocked={isBlocked} setIsBlocked={setIsBlocked}/>
                   </ProtectedRoute>
                 }
               />{/*accessable only for authorized users with these roles*/}

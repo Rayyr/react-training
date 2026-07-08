@@ -1,13 +1,5 @@
 {
-  "students": [
-    {
-      "username": "raya2",
-      "email": "khasaatirayaa@gmail.com",
-      "course": "dd",
-      "gpa": "2",
-      "id": "7A9ccAQ1mno"
-    }
-  ],
+  "students": [],
   "admins": [
     {
       "username": "manager",
