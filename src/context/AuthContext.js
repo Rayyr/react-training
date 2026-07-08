@@ -1,16 +1,32 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect,useContext } from "react";
 import { roles } from "../constatnts/systemRoles";
+import { StudentContext } from "./StudentContext";
 
 export const AuthContext = createContext();
 
 //provider
 export const AuthProvider = ({ children }) => {
     //user : admin or student
+      // Initialize state from localStorage to persist session on refresh
   const [user, setUser] = useState(() => {
   const stored = localStorage.getItem("user");
   return stored ? JSON.parse(stored) : null;
-});
+ });
 
+const {students}=useContext(StudentContext);
+ 
+useEffect(()=>{ 
+ let updatedUser=students.find((s)=>s.id===user?.id);
+ if(updatedUser){
+  updatedUser = { ...updatedUser, role: user.role };
+
+  localStorage.setItem("user",JSON.stringify(updatedUser));
+  setUser(updatedUser)
+ }
+},[students]);
+
+
+//local storage for user session mangmnet 
   //login function
   const login = async (username, email, role) => {
     let endpoint = "";

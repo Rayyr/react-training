@@ -50,6 +50,7 @@ function Login() {
         <button type="submit">Login</button>
       </form>
  
+ <button onClick={()=>navigate("/home")}>Home</button>
     </>
   );
 }

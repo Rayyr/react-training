@@ -5,6 +5,9 @@ import { roles } from "../constatnts/systemRoles";
 
 function Wellcome({isBlocked}) {
   const { user,logout } = useContext(AuthContext);
+  const getUserContentState=()=>{
+
+  };
   return (
     <>
     {user && user.role===roles.student&& <StudentItem isBlocked={isBlocked} onlyDetails={true} role={roles.student} content={user}/>}

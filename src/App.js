@@ -24,8 +24,9 @@ function App() {
 
   return (
     <>
+     <StudentProvider>
       <AuthProvider>
-        <StudentProvider>
+       
             <NavBar isBlocked={isBlocked} />  
           <ErrorBoundary>
             {/*  <Bug></Bug>*/} 
@@ -69,8 +70,9 @@ function App() {
               <Route path="*" element={<NotFoundError />} />
             </Routes>
           </ErrorBoundary>
-        </StudentProvider>
+       
       </AuthProvider>
+       </StudentProvider>
       <ToastContainer
         position="top-center"
         autoClose={4000}
