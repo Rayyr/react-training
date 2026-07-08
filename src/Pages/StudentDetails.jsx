@@ -4,7 +4,8 @@ import { StudentContext } from "../context/StudentContext.js";
 import { useContext } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
- 
+import { roles } from "../constatnts/systemRoles.js"; 
+
 function StudentDetails( ) {
   const { students, isLoading, errors } = useContext(StudentContext);
 
@@ -29,7 +30,7 @@ function StudentDetails( ) {
           ) : (
             <>
               <h2>Student Details</h2>
-              <StudentItem onlyDetails={true} content={student} />
+              <StudentItem role={roles.admin} onlyDetails={true} content={student} />
             </>
           )
         ) : (

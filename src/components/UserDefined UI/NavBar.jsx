@@ -14,7 +14,7 @@ function NavBar({ isBlocked }) {
     const isWellcomePage = /^\/wellcome\/?$/.test(currentLocation.pathname);
      const isAboutPage = /^\/about\/?$/.test(currentLocation.pathname);
     const isStudentsPage = /^\/students\/?$/.test(currentLocation.pathname);
-  
+  console.log(user);
     if (
       !isWellcomePage &&
        !isAboutPage &&

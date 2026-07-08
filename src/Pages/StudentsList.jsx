@@ -6,6 +6,7 @@ import { StudentContext } from "../context/StudentContext.js";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { roles } from "../constatnts/systemRoles.js";
 
 function StudentsList({ isBlocked, setIsBlocked }) {
   const { removeStudent, students, isLoading, errors } =
@@ -45,7 +46,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
         onClose: () => setIsBlocked(false),
       });
     } catch (err) {
-      toast.error(err || errors.DELETE , {
+      toast.error(err.message || errors.DELETE , {
         style: {
           width: "500px",
         },
@@ -89,6 +90,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
                   onDeleteStudent={handleDelete}
                   content={e}
                   key={e.email}
+                  role={roles.admin}
                 />
               ))}
             </div>

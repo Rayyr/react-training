@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import UpdateForm from "./UpdateForm.jsx";
-
-function StudentItem({ isBlocked,onlyDetails, onDeleteStudent, content }) {
+import { roles } from "../../constatnts/systemRoles.js";
+function StudentItem({
+  role,
+  isBlocked,
+  onlyDetails,
+  onDeleteStudent,
+  content,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -67,17 +73,17 @@ function StudentItem({ isBlocked,onlyDetails, onDeleteStudent, content }) {
             <Typography variant="body2">{content.course}</Typography>
           ) : null}
 
-          {onlyDetails === true ? null : (
-            <div
-              style={{
-                display: "flex",
-                gap: "12px",
-                marginTop: "12px",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              marginTop: "12px",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            {role === roles.student ? (
               <Button
                 disabled={isBlocked}
                 onClick={() => setShowUpdateModal(true)}
@@ -85,24 +91,27 @@ function StudentItem({ isBlocked,onlyDetails, onDeleteStudent, content }) {
               >
                 Update
               </Button>
+            ) : null}
 
+            {role === roles.admin && onlyDetails === false ? (
               <Button
-              disabled={isBlocked}
+                disabled={isBlocked}
                 onClick={() => setShowModal(true)}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
                 View Details
               </Button>
-
+            ) : null}
+            {role === roles.admin ? (
               <Button
-              disabled={isBlocked}
-                onClick={()=>onDeleteStudent(content)}
+                disabled={isBlocked}
+                onClick={() => onDeleteStudent(content)}
                 sx={{ ...buttonStyle, flex: 1 }}
               >
                 Delete
               </Button>
-            </div>
-          )}
+            ) : null}
+          </div>
         </CardContent>
       </Card>
 

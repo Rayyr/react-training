@@ -6,14 +6,10 @@ export const AuthContext = createContext();
 //provider
 export const AuthProvider = ({ children }) => {
     //user : admin or student
-  const [user, setUser] = useState(null);
-
-  //restore logged user session from local storage
-  // ✅ restore session
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) setUser(JSON.parse(storedUser));
-  }, []);
+  const [user, setUser] = useState(() => {
+  const stored = localStorage.getItem("user");
+  return stored ? JSON.parse(stored) : null;
+});
 
   //login function
   const login = async (username, email, role) => {
@@ -27,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       if (!res.ok) throw new Error(`failed to fetch ${role}s from DB!`);
       const users = await res.json();
       const foundUser = checkIfValidUser(users, username, email);
-
+ 
       if (foundUser) {
         const unifiedUser = { ...foundUser, role: role };
         //save session

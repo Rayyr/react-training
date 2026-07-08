@@ -36,7 +36,7 @@ function App() {
                <Route path="/home" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
                <Route path="/" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
          
-              <Route path="/wellcome" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Wellcome /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
+              <Route path="/wellcome" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Wellcome isBlocked={isBlocked} /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
               <Route
                 path="/students"
                 element={
@@ -60,7 +60,7 @@ function App() {
               <Route
                 path="/students/:email"
                 element={
-                  <ProtectedRoute allowedRoles={[roles.student]}>
+                  <ProtectedRoute allowedRoles={[roles.admin]}>
                     <StudentDetails />
                   </ProtectedRoute>
                 }

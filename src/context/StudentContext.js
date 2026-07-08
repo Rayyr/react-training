@@ -69,7 +69,7 @@ export const StudentProvider = ({ children }) => {
         ...prev,
         DELETE: error.message,
       }));
-        throw error.message;
+        throw error;
     }
   };
 
