@@ -11,9 +11,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import GravityStarsBackground from "../components/Animated Background/GravityStarsBackground.jsx";
 
 function RegistrationForm({ isBlocked, setIsBlocked }) {
- const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const { students, addStudent } = useContext(StudentContext);
 
@@ -81,7 +82,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
     reset,
     clearErrors,
 
-    formState: { errors ,isValid},
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: formData,
     resolver: yupResolver(formSchema),
@@ -153,97 +154,120 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
 
   return (
     <>
-      <BubbleText>Student Registeration Form</BubbleText>
-      <Box
-        sx={{
-          backgroundColor: "#FFFFFF",
-          minHeight: "100vh",
-          padding: 3,
-        }}
-      >
-        <div className="main-cont">
-          <div className="child1">
-            <form
-              noValidate
-              id="stu-form"
-              onSubmit={handleSubmit(makeSubmission)}
-            >
-              <Input
-                type="text"
-                name="username"
-                placeholder="Username*"
-                disabled={isBlocked}
-                autoFocus={true}
-                sx={inputStyle}
-                {...register("username")}
-              ></Input>{" "}
-              {errors.username && (
-                <ErrorMessage name="username" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
-              )}
-              <br />
-              <Input
-                type="email"
-                name="email"
-                placeholder="Email*"
-                disabled={isBlocked}
-                sx={inputStyle}
-                {...register("email")}
-              ></Input>{" "}
-              {errors.email && (
-                <ErrorMessage name="email" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
-              )}
-              <br />
-              <Input
-                type="number"
-                name="gpa"
-                placeholder="GPA*"
-                step="0.01"
-                disabled={isBlocked}
-                sx={inputStyle}
-                {...register("gpa")}
-              ></Input>{" "}
-              {errors.gpa && <ErrorMessage name="gpa" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>}
-              <br />
-              <Input
-                type="text"
-                name="course"
-                placeholder="Course*"
-                disabled={isBlocked}
-                sx={inputStyle}
-                {...register("course")}
-              ></Input>{" "}
-              {errors.course && (
-                <ErrorMessage name="course" errors={errors} render={({ message }) => <p className="error">{message}</p>}/>
-              )}{" "}
-              <br />
-              <Button
-                type="submit"
-                disabled={ isBlocked||!isValid}
+      <GravityStarsBackground>
+        <BubbleText>Student Registeration Form</BubbleText>
+        <Box
+          sx={{
+            backgroundColor: "transparent",
+            minHeight: "100vh",
+            padding: 3,
+          }}
+        >
+          <div className="main-cont">
+            <div className="child1">
+              <form
+                noValidate
+                id="stu-form"
+                onSubmit={handleSubmit(makeSubmission)}
+              >
+                <Input
+                  type="text"
+                  name="username"
+                  placeholder="Username*"
+                  disabled={isBlocked}
+                  autoFocus={true}
+                  sx={inputStyle}
+                  {...register("username")}
+                ></Input>{" "}
+                {errors.username && (
+                  <ErrorMessage
+                    name="username"
+                    errors={errors}
+                    render={({ message }) => <p className="error">{message}</p>}
+                  />
+                )}
+                <br />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email*"
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                  {...register("email")}
+                ></Input>{" "}
+                {errors.email && (
+                  <ErrorMessage
+                    name="email"
+                    errors={errors}
+                    render={({ message }) => <p className="error">{message}</p>}
+                  />
+                )}
+                <br />
+                <Input
+                  type="number"
+                  name="gpa"
+                  placeholder="GPA*"
+                  step="0.01"
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                  {...register("gpa")}
+                ></Input>{" "}
+                {errors.gpa && (
+                  <ErrorMessage
+                    name="gpa"
+                    errors={errors}
+                    render={({ message }) => <p className="error">{message}</p>}
+                  />
+                )}
+                <br />
+                <Input
+                  type="text"
+                  name="course"
+                  placeholder="Course*"
+                  disabled={isBlocked}
+                  sx={inputStyle}
+                  {...register("course")}
+                ></Input>{" "}
+                {errors.course && (
+                  <ErrorMessage
+                    name="course"
+                    errors={errors}
+                    render={({ message }) => <p className="error">{message}</p>}
+                  />
+                )}{" "}
+                <br />
+                <Button
+                  type="submit"
+                  disabled={isBlocked || !isValid}
+                  style={{
+                    background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
+                    color: "#9527A9",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Register
+                </Button>
+              </form>
+            </div>
+
+            <div className="child2">
+              <div
                 style={{
-                  background: "linear-gradient(45deg, #4A148C, #9C27B0)", // 💜 gradient
-                  color: "#9527A9",
-                  fontWeight: "bold",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "40px",
                 }}
               >
-                Register
-              </Button>
-            </form>
-          </div>
-
-          <div className="child2">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "40px",
-              }}
-            >
-              <PreviewCard content={watch()} />
+                <PreviewCard content={watch()} />
+              </div>
             </div>
+
+            <button disabled={isBlocked} onClick={() => navigate("/home")}>
+              Home
+            </button>
           </div>
-        </div>
-      </Box>
-      <button disabled={isBlocked} onClick={()=>navigate("/home")}>Home</button>
+        </Box>
+      </GravityStarsBackground>
     </>
   );
 }
