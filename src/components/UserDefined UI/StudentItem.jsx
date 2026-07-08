@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MyModal from "./Modal.jsx";
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import UpdateForm from "./UpdateForm.jsx";
-import { roles } from "../../constatnts/systemRoles.js";
+import { roles } from "../../constatnts/generalConstants.js";
 function StudentItem({
   role,
   isBlocked,

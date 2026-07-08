@@ -1,7 +1,7 @@
 import { AuthContext } from "../context/AuthContext.js";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { roles } from "../constatnts/systemRoles.js";
+import { roles } from "../constatnts/generalConstants.js";
 
 function Login() {
   const navigate = useNavigate();

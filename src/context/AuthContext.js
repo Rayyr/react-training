@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect,useContext } from "react";
-import { roles } from "../constatnts/systemRoles";
+import { roles } from "../constatnts/generalConstants";
 import { StudentContext } from "./StudentContext";
 
 export const AuthContext = createContext();
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
 const {students}=useContext(StudentContext);
  
+//make a sync in case i uodate the current user , so user state which is stored in local storage will contain the old content
 useEffect(()=>{ 
  let updatedUser=students.find((s)=>s.id===user?.id);
  if(updatedUser){

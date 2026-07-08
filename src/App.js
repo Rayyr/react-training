@@ -15,7 +15,7 @@ import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
 import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
-import { roles } from "./constatnts/systemRoles.js";
+import { roles } from "./constatnts/generalConstants.js";
 import Wellcome from "./pages/Wellcome.jsx";
 
 function App() {
@@ -24,32 +24,42 @@ function App() {
 
   return (
     <>
-     <StudentProvider>
-      <AuthProvider>
-       
-            <NavBar isBlocked={isBlocked} />  
+      {/*i make first studentprovider then authprovider since authprovier internally contani student context */}
+      <StudentProvider>
+        <AuthProvider>
+          <NavBar isBlocked={isBlocked} />
           <ErrorBoundary>
-            {/*  <Bug></Bug>*/} 
+            {/*  <Bug></Bug>*/}
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
-             
-              <Route path="/login" element={<Login />} /> {/*accessable from anyone(even if they are not authanticated)*/}
-               <Route path="/home" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
-               <Route path="/" element={<Home />} /> {/*accessable from anyone(even if they are not authanticated)*/}
-         
-              <Route path="/wellcome" element={ <ProtectedRoute allowedRoles={[roles.student,roles.admin]}><Wellcome isBlocked={isBlocked} /></ProtectedRoute>} /> {/*accessable only for authorized users with these roles*/}
+              <Route path="/login" element={<Login />} />{" "}
+              {/*accessable from anyone(even if they are not authanticated)*/}
+              <Route path="/home" element={<Home />} />{" "}
+              {/*accessable from anyone(even if they are not authanticated)*/}
+              <Route path="/" element={<Home />} />{" "}
+              {/*accessable from anyone(even if they are not authanticated)*/}
+              <Route
+                path="/wellcome"
+                element={
+                  <ProtectedRoute allowedRoles={[roles.student, roles.admin]}>
+                    <Wellcome isBlocked={isBlocked} />
+                  </ProtectedRoute>
+                }
+              />{" "}
+              {/*accessable only for authorized users with these roles*/}
               <Route
                 path="/students"
                 element={
-                  <ProtectedRoute allowedRoles={[ roles.admin]}>
+                  <ProtectedRoute allowedRoles={[roles.admin]}>
                     <StudentsList
                       isBlocked={isBlocked}
                       setIsBlocked={setIsBlocked}
                     />
                   </ProtectedRoute>
                 }
-              />{/*accessable only for authorized users with these roles*/}
-              <Route 
+              />
+              {/*accessable only for authorized users with these roles*/}
+              <Route
                 path="/register"
                 element={
                   <RegistrationForm
@@ -57,22 +67,27 @@ function App() {
                     setIsBlocked={setIsBlocked}
                   />
                 }
-              /> {/*===sign up ,accessable from anyone(even if they are not authanticated)*/}
+              />{" "}
+              {/*===sign up ,accessable from anyone(even if they are not authanticated)*/}
               <Route
                 path="/students/:email"
                 element={
                   <ProtectedRoute allowedRoles={[roles.admin]}>
-                    <StudentDetails isBlocked={isBlocked} setIsBlocked={setIsBlocked}/>
+                    <StudentDetails
+                      isBlocked={isBlocked}
+                      setIsBlocked={setIsBlocked}
+                    />
                   </ProtectedRoute>
                 }
-              />{/*accessable only for authorized users with these roles*/}
-              <Route path="/about" element={<About />} /> {/*accessable from anyone(even if they are not authanticated)*/}
+              />
+              {/*accessable only for authorized users with these roles*/}
+              <Route path="/about" element={<About />} />{" "}
+              {/*accessable from anyone(even if they are not authanticated)*/}
               <Route path="*" element={<NotFoundError />} />
             </Routes>
           </ErrorBoundary>
-       
-      </AuthProvider>
-       </StudentProvider>
+        </AuthProvider>
+      </StudentProvider>
       <ToastContainer
         position="top-center"
         autoClose={4000}

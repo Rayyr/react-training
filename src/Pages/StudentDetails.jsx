@@ -4,7 +4,7 @@ import { StudentContext } from "../context/StudentContext.js";
 import { useContext } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { roles } from "../constatnts/systemRoles.js"; 
+import { roles } from "../constatnts/generalConstants.js"; 
 import { toast } from "react-toastify";
 
 function StudentDetails({isBlocked,setIsBlocked} ) {

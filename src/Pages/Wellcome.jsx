@@ -1,13 +1,11 @@
 import StudentItem from "../components/UserDefined UI/StudentItem";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
-import { roles } from "../constatnts/systemRoles";
+import { roles } from "../constatnts/generalConstants";
 
 function Wellcome({isBlocked}) {
   const { user,logout } = useContext(AuthContext);
-  const getUserContentState=()=>{
-
-  };
+ 
   return (
     <>
     {user && user.role===roles.student&& <StudentItem isBlocked={isBlocked} onlyDetails={true} role={roles.student} content={user}/>}

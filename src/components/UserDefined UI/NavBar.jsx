@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { roles } from "../../constatnts/systemRoles";
+import { roles } from "../../constatnts/generalConstants";
 
 function NavBar({ isBlocked }) {
   const currentLocation = useLocation();

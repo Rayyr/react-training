@@ -6,7 +6,7 @@ import { StudentContext } from "../context/StudentContext.js";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { roles } from "../constatnts/systemRoles.js";
+import { roles } from "../constatnts/generalConstants.js";
 
 function StudentsList({ isBlocked, setIsBlocked }) {
   const { removeStudent, students, isLoading, errors } =
