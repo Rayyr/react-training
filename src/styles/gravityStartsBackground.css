@@ -1,0 +1,18 @@
+
+.gravity-stars-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 1px 16px 48px;
+
+  
+}
+
+
+@media (max-width: 600px) {
+  .gravity-stars-content {
+    padding-inline: 12px;
+  }
+
+   
+}

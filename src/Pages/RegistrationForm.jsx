@@ -12,6 +12,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
  import GravityStarsBackground from "../components/BuiltIn UI/Animated Backgrounds/GravityStarsBackground.jsx";
+import "../styles/gravityStartsBackground.css";
+
 
  function RegistrationForm({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
@@ -155,7 +157,7 @@ import { useNavigate } from "react-router-dom";
 
   return (
     <>
-      <GravityStarsBackground>
+      <GravityStarsBackground >
         <BubbleText color="#9C27B0" fontSize="70px">Student Registeration Form</BubbleText>
         <Box
           sx={{

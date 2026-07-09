@@ -7,6 +7,7 @@ import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 import { Input, Box } from "@mui/material";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
+import "../styles/gravityStartsBackground.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -47,7 +48,8 @@ function Login() {
 
   return (
     <>
-      <GravityStarsBackground>
+      <GravityStarsBackground overflow="hidden">
+        <div style={{marginTop:"100px" }}>
         <BubbleText color="#9C27B0" fontSize="70px">
           Login
         </BubbleText>
@@ -76,30 +78,7 @@ function Login() {
                   type="email"
                   placeholder="Email"
                 />
-                {/*    <div>
-                  <input
-                    id="student"
-                    name="role"
-                    type="radio"
-                    value={roles.student}
-                    checked={role === roles.student}
-                    onChange={(e) => setRole(e.target.value)}
-                  />
-                  <label htmlFor="student">Log in as student</label>
-                </div>
-
-                <div>
-                  <input
-                    id="admin"
-                    name="role"
-                    type="radio"
-                    value={roles.admin}
-                    checked={role === roles.admin}
-                    onChange={(e) => setRole(e.target.value)}
-                  />
-                  <label htmlFor="admin">Log in as admin</label>
-                </div>
- */}
+          
 
                 <RadioGroup
                   row
@@ -195,6 +174,7 @@ function Login() {
             </div>
           </div>
         </Box>
+        </div>
       </GravityStarsBackground>
     </>
   );

@@ -17,6 +17,7 @@ function GravityStarsBackground({
   starsInteractionType = "bounce",
   className,
   children,
+  overflow,
   ...props
 }) {
   const containerRef = useRef(null);
@@ -230,6 +231,12 @@ function GravityStarsBackground({
           zIndex: 1,
           minHeight: "100vh",
           padding: "1px 16px 48px",
+
+           
+    height: "100vh",
+  
+    overflow: overflow,
+         
         }}
       >
         {children}
