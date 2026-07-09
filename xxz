@@ -1,0 +1,42 @@
+ {/* Radio Buttons */}
+    <RadioGroup
+      row
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+      sx={{
+        justifyContent: "center",
+        gap: 2,
+      }}
+    >
+      <FormControlLabel
+        value={roles.student}
+        control={
+          <Radio
+            sx={{
+              color: "#9C27B0",
+              "&.Mui-checked": {
+                color: "#9C27B0",
+              },
+            }}
+          />
+        }
+        label="Student"
+        sx={{ color: "#E1BEE7" }}
+      />
+
+      <FormControlLabel
+        value={roles.admin}
+        control={
+          <Radio
+            sx={{
+              color: "#9C27B0",
+              "&.Mui-checked": {
+                color: "#9C27B0",
+              },
+            }}
+          />
+        }
+        label="Admin"
+        sx={{ color: "#E1BEE7" }}
+      />
+    </RadioGroup>

@@ -34,7 +34,7 @@ const Button = ({ children , disabled, style, ...props }) => {
       style={{
         position: "relative",
         width: "100%",
-        maxWidth: "20rem",
+        
         overflow: "hidden",
         borderRadius: "0.5rem",
         

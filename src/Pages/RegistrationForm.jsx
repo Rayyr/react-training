@@ -170,6 +170,7 @@ import { useNavigate } from "react-router-dom";
                 noValidate
                 id="stu-form"
                 onSubmit={handleSubmit(makeSubmission)}
+                   style={{ width: "100%" , margin: "0 auto" }}
               >
                 <Input
                   type="text"
@@ -271,11 +272,11 @@ import { useNavigate } from "react-router-dom";
                   width="48"
                   height="48"
                   fill="none"
-                  stroke="#C079CE"
+                  stroke="#9C27B0"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="group cursor-pointer transition-colors duration-200 hover:fill-[#C079CE]"
+                  className="group cursor-pointer transition-colors duration-200 hover:fill-[#9C27B0]"
                 >
                   {/* Main House Outline */}
                   <path d="M21 19v-6.733a4 4 0 0 0-1.245-2.9L13.378 3.31a2 2 0 0 0-2.755 0L4.245 9.367A4 4 0 0 0 3 12.267V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2" />
