@@ -1,6 +1,6 @@
 import React from "react"
- import { GooeyFilter } from "./Animated Backgrounds/GooeyFilter";
- import { PixelTrail } from "./Animated Backgrounds/pixel-trail";
+import { GooeyFilter } from "./Animated Background/GooeyFilter";
+import { PixelTrail } from "./Animated Background/pixel-trail";
  import { useScreenSize } from "../../hooks/use-screen-size";
 
 function GooeyDemo({children}) {

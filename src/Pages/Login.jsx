@@ -2,7 +2,7 @@ import { AuthContext } from "../context/AuthContext.js";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { roles } from "../constatnts/generalConstants.js";
-import GravityStarsBackground from "../components/BuiltIn UI/Animated Backgrounds/GravityStarsBackground.jsx";
+import GravityStarsBackground from "../components/BuiltIn UI/Animated Background/GravityStarsBackground.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 import { Input, Box } from "@mui/material";
 import Button from "../components/BuiltIn UI/Button.jsx";

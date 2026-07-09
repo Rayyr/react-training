@@ -11,7 +11,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
- import GravityStarsBackground from "../components/BuiltIn UI/Animated Backgrounds/GravityStarsBackground.jsx";
+import GravityStarsBackground from "../components/BuiltIn UI/Animated Background/GravityStarsBackground.jsx";
 import "../styles/gravityStartsBackground.css";
 
 
