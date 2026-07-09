@@ -1,0 +1,27 @@
+color of input feilds      done
+color when filter btn disabled       done
+error msg when ther is no matching in filtres    done
+enable/dis filter btn       done
+add clear btn    done
+make responsive ui for all components
+style studentDetail card         done
+lint project    done
+add 404 pages in app   done
+style navbar   done
+restyle the app using global var of colrs and themes in global.css ....
+add nessary notifications        done
+
+remove spaces from end and start of input feilds
+immediate response for changes in other routes 
+courses list in filter bar 
+path can taked other http verbs in route ? 
+can route be inside nav? ot only inside routes ? 
+make nested routes in students/id and students is ithis way better?
+but themeprovider is const var not component ?????
+promises in js  
+when i use this api students/email we should deactivate any navlink in navbar     done
+can we name custom hook any name ? 
+ask about project structure if good
+ask about w3-day1 what s the need of custom hook since it is a func?
+is it good to have separe front/back end folders in project structure ? 
+validate email param in route of student details

@@ -11,13 +11,12 @@ import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import GravityStarsBackground from "../components/Animated Background/GravityStarsBackground.jsx";
+ import GravityStarsBackground from "../components/BuiltIn UI/Animated Backgrounds/GravityStarsBackground.jsx";
 
-function RegistrationForm({ isBlocked, setIsBlocked }) {
+ function RegistrationForm({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
 
-  const homeIcon = "../assets/images/RegisterationformPage/homeIcon.svg";
-
+ 
   const { students, addStudent } = useContext(StudentContext);
 
   const formData = {
@@ -157,7 +156,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   return (
     <>
       <GravityStarsBackground>
-        <BubbleText>Student Registeration Form</BubbleText>
+        <BubbleText color="#9C27B0" fontSize="70px">Student Registeration Form</BubbleText>
         <Box
           sx={{
             backgroundColor: "transparent",
