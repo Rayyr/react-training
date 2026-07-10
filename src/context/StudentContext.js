@@ -55,7 +55,7 @@ export const StudentProvider = ({ children }) => {
       const res = await fetch(
         `${process.env.REACT_APP_BASE_API_URL}/students/${studentToDelete.id}`,
         {
-          method: "DELETE",
+          method: "DELETE", 
         },
       );
       if (!res.ok) {
