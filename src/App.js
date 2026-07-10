@@ -82,7 +82,7 @@ function App() {
               />
               {/*accessable only for authorized users with these roles*/}
               <Route path="/about" element={<About />} />{" "}
-              {/*accessable from anyone(even if they are not authanticated)*/}
+              {/*accessable from anyone(even if they are not authanticated)==for invalid routes*/}
               <Route path="*" element={<NotFoundError />} />
             </Routes>
           </ErrorBoundary>

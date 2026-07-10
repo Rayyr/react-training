@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo,useCallback } from "react";
+import React, { useState, useContext, useMemo, useCallback } from "react";
 import StudentItem from "../components/UserDefined UI/StudentItem.jsx";
 import FilterBar from "../components/UserDefined UI/FilterBar.jsx";
 import { Typography } from "@mui/material";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { roles } from "../constatnts/generalConstants.js";
+import { AlertDestructive } from "../components/BuiltIn UI/AlertDestructive.jsx";
 
 function StudentsList({ isBlocked, setIsBlocked }) {
   const { removeStudent, students, isLoading, errors } =
@@ -35,26 +36,29 @@ function StudentsList({ isBlocked, setIsBlocked }) {
     });
   }, [students, filters]);
 
-  const handleDelete = useCallback(async (e) => {
-    try {
-      await removeStudent(e.email);
-      toast.success("Student has been deleted successfully!", {
-        style: {
-          width: "500px",
-        },
-        onOpen: () => setIsBlocked(true),
-        onClose: () => setIsBlocked(false),
-      });
-    } catch (err) {
-      toast.error(err.message || errors.DELETE , {
-        style: {
-          width: "500px",
-        },
-        onOpen: () => setIsBlocked(true),
-        onClose: () => setIsBlocked(false),
-      });
-    }
-  },[errors.DELETE,setIsBlocked,removeStudent]);
+  const handleDelete = useCallback(
+    async (e) => {
+      try {
+        await removeStudent(e.email);
+        toast.success("Student has been deleted successfully!", {
+          style: {
+            width: "500px",
+          },
+          onOpen: () => setIsBlocked(true),
+          onClose: () => setIsBlocked(false),
+        });
+      } catch (err) {
+        toast.error(err.message || errors.DELETE, {
+          style: {
+            width: "500px",
+          },
+          onOpen: () => setIsBlocked(true),
+          onClose: () => setIsBlocked(false),
+        });
+      }
+    },
+    [errors.DELETE, setIsBlocked, removeStudent],
+  );
 
   return (
     <>
@@ -68,7 +72,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
               sx={{
                 marginTop: "30px",
                 textAlign: "center",
-                color: "#B39DDB",
+                color: "#9F1239",
                 fontWeight: "bold",
               }}
             >
@@ -102,7 +106,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
           </Box>
         )
       ) : (
-        <h1>{errors.GET}</h1>
+        <AlertDestructive message={errors.GET} />
       )}
     </>
   );
