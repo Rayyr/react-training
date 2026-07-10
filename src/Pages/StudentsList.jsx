@@ -91,6 +91,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
                   content={e}
                   key={e.email}
                   role={roles.admin}
+                  onlyDetails={false}
                 />
               ))}
             </div>

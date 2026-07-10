@@ -93,7 +93,7 @@ function StudentItem({
               </Button>
             ) : null}
 
-            {role === roles.admin && onlyDetails === false ? (
+            {(role === roles.admin && onlyDetails === false) ? (
               <Button
                 disabled={isBlocked}
                 onClick={() => setShowModal(true)}

@@ -12,6 +12,29 @@ export default function UpdateForm({ open, onClose, content }) {
 
   const student = students.find((s) => s.email === content.email);
 
+  const buttonStyle = {
+    whiteSpace: "nowrap",
+    flex: "unset",
+    padding: "8px 15px",
+    borderRadius: "8px",
+    textTransform: "none",
+    fontSize: "13px",
+    background: "linear-gradient(45deg, #4A148C, #9C27B0)",
+    color: "#fff",
+
+    "&:hover": {
+      background: "linear-gradient(45deg, #6A1B9A, #BB86FC)",
+    },
+
+    "&.Mui-disabled": {
+      background: "#2A1B3D",
+      color: "#FFFFFF",
+      pointerEvents: "auto",
+      cursor: "not-allowed",
+      opacity: 0.7,
+    },
+  };
+
   const { formData, handleChange, handleSubmit } = useForm(
     //initial values 1st param
     {
@@ -133,6 +156,7 @@ export default function UpdateForm({ open, onClose, content }) {
               variant="contained"
               color="primary"
               disabled={isBlocked}
+               sx={buttonStyle}
             >
               Close
             </Button>
@@ -148,6 +172,7 @@ export default function UpdateForm({ open, onClose, content }) {
               type="submit"
               variant="contained"
               color="primary"
+              sx={buttonStyle}
             >
               Update
             </Button>
