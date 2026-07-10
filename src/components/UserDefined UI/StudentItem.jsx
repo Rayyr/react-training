@@ -12,6 +12,7 @@ function StudentItem({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+ 
 
   const buttonStyle = {
     whiteSpace: "nowrap",

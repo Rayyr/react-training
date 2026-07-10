@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { roles } from "../constatnts/generalConstants.js"; 
 import { toast } from "react-toastify";
+import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 
 function StudentDetails({isBlocked,setIsBlocked} ) {
   const { removeStudent,students, isLoading, errors } = useContext(StudentContext);
@@ -52,7 +53,8 @@ function StudentDetails({isBlocked,setIsBlocked} ) {
             </>
           ) : (
             <>
-              <h2>Student Details</h2>
+              
+             <BubbleText color="#9C27B0" fontSize="70px">Student Details</BubbleText>
               <StudentItem   onDeleteStudent={handleDelete} isBlocked={isBlocked} role={roles.admin} onlyDetails={true} content={student}  />
             </>
           )
