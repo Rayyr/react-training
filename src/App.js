@@ -7,7 +7,7 @@ import RegistrationForm from "./pages/RegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/UserDefined UI/NavBar.jsx";
-import NotFoundError from "./pages/404NotFound.jsx";
+import NotFoundError from "./pages/404NotFound.jsx"; 
 import { StudentProvider } from "./context/StudentContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
