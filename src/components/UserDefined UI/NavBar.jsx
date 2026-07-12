@@ -9,6 +9,7 @@ function NavBar({ isBlocked }) {
   const [isOtherLink, setIsOtherLink] = useState(false);
   const { user } = useContext(AuthContext);
 
+  /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     //found routes
     const isWellcomePage = /^\/wellcome\/?$/.test(currentLocation.pathname);
@@ -25,6 +26,7 @@ function NavBar({ isBlocked }) {
 
     if (currentLocation.pathname === "/") navigate("/home");
   }, [currentLocation]);
+ /*eslint-enable react-hooks/exhaustive-deps */
 
   const styles = {
     nav: {

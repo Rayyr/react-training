@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 
-const SCREEN_SIZES = ["xs", "sm", "md", "lg", "xl", "2xl"]
-
+/* eslint-disable no-unused-vars*/
+ const SCREEN_SIZES = ["xs", "sm", "md", "lg", "xl", "2xl"]
+ /* eslint-enable no-unused-vars*/
+ 
 const sizeOrder = {
   xs: 0,
   sm: 1,

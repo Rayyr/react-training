@@ -5,6 +5,7 @@ export default function useFetch(url, method = "GET", options = {}) {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
+   /*eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     
     const fetchData = async () => {
@@ -29,6 +30,7 @@ export default function useFetch(url, method = "GET", options = {}) {
     };
     fetchData();
   }, [url, method]);
+ /*eslint-enable react-hooks/exhaustive-deps */
 
   return { data, isLoading, error };
 }

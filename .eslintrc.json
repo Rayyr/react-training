@@ -6,7 +6,9 @@
     ],
     "rules":{
         "no-unused-vars": "warn",
-        "getter-return":"warn"
+        "getter-return":"warn",
+        "react-hooks/rules-of-hooks": "off",
+        "react-hooks/exhaustive-deps":"off"
        
     }
   

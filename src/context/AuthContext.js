@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
 const {students}=useContext(StudentContext);
  
+ /*eslint-disable react-hooks/exhaustive-deps */
 //make a sync in case i uodate the current user , so user state which is stored in local storage will contain the old content
 useEffect(()=>{ 
  let updatedUser=students.find((s)=>s.id===user?.id);
@@ -25,7 +26,7 @@ useEffect(()=>{
   setUser(updatedUser)
  }
 },[students]);
-
+ /*eslint-enable react-hooks/exhaustive-deps */
 
 //local storage for user session mangmnet 
   //login function

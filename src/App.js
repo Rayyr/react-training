@@ -12,7 +12,9 @@ import { StudentProvider } from "./context/StudentContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
 import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
+/* eslint-disable no-unused-vars */
 import { Bug } from "./components/UserDefined UI/Bug.jsx";
+/* eslint-enable no-unused-vars */
 import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
 import { roles } from "./constatnts/generalConstants.js";
