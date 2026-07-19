@@ -7,8 +7,8 @@ import RegistrationForm from "./pages/RegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/UserDefined UI/NavBar.jsx";
-import NotFoundError from "./pages/404NotFound.jsx"; 
-import { StudentProvider } from "./context/StudentContext.js"; 
+import NotFoundError from "./pages/404NotFound.jsx";
+import { StudentProvider } from "./context/StudentContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
 import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
@@ -34,7 +34,12 @@ function App() {
             {/*  <Bug></Bug>*/}
             {/*//just to test error boundry at root level , but actually i handle the expexted errors at lower levels of each component*/}
             <Routes>
-              <Route path="/login" element={<Login />} />{" "}
+              <Route
+                path="/login"
+                element={
+                  <Login isBlocked={isBlocked} setIsBlocked={setIsBlocked} />
+                }
+              />{" "}
               {/*accessable from anyone(even if they are not authanticated)*/}
               <Route path="/home" element={<Home />} />{" "}
               {/*accessable from anyone(even if they are not authanticated)*/}
