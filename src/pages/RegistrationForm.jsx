@@ -126,7 +126,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
               >
                 <Input
                   type="text"
-                  name="username"
+                  
                   placeholder="Username*"
                   disabled={isBlocked}
                   autoFocus={true}
@@ -143,7 +143,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 <br />
                 <Input
                   type="email"
-                  name="email"
+                  
                   placeholder="Email*"
                   disabled={isBlocked}
                   sx={inputStyle}
@@ -159,7 +159,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 <br />
                 <Input
                   type="number"
-                  name="gpa"
+                  
                   placeholder="GPA*"
                   step="0.01"
                   disabled={isBlocked}
@@ -176,7 +176,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
                 <br />
                 <Input
                   type="text"
-                  name="course"
+                   
                   placeholder="Course*"
                   disabled={isBlocked}
                   sx={inputStyle}

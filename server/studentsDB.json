@@ -1,5 +1,20 @@
 {
-  "students": [],
+  "students": [
+    {
+      "course": "we",
+      "gpa": 2,
+      "email": "khasaatirayaa@gmail.com",
+      "username": "raya",
+      "id": "L_TgyDgYj5c"
+    },
+    {
+      "username": "asad",
+      "email": "asd2@gmail.com",
+      "course": "wg",
+      "gpa": 3,
+      "id": "UIsj4C9xIw4"
+    }
+  ],
   "admins": [
     {
       "username": "manager",

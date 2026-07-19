@@ -9,6 +9,10 @@ import Button from "../components/BuiltIn UI/Button.jsx";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
 import "../styles/gravityStartsBackground.css";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function Login({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
@@ -16,12 +20,59 @@ function Login({ isBlocked, setIsBlocked }) {
 
   const [role, setRole] = useState("student"); //default
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // to access anything inside form using buik in form hook we need its name thats why we register it first  so it is =name attribute
+  const formSchema = yup.object({
+    username: yup
+      .string()
+      .required("Username is required!")
+      .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
 
-    const { username, email, role } = e.target;
+    email: yup
+      .string()
+      .required("Email is required!")
+      .matches(/@gmail\.com$/, "Email must end with @gmail.com") //domain const , already is done by built in validation related to email input feild type
+      .test(
+        //check if first char is a digit or special char
+        "first letter of email",
+        "Email must not start by digit or special char!",
+        (email) => (email ? /^[a-zA-Z]/.test(email) : true),
+      )
+      .test(
+        //check if example != username
+        "Not as same as username",
+        "Email name must not equal username",
+        function (email) {
+          const { username } = this.parent;
+
+          if (!email) return true;
+
+          const namePart = email.split("@")[0];
+          return namePart !== username;
+        },
+      ),
+  });
+
+  const {
+    register,
+    reset,
+    clearErrors,
+    watch,
+    setValue,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      role: roles.student,
+    },
+    resolver: yupResolver(formSchema),
+    mode: "onChange",
+  });
+
+  const makeSubmission = async (data) => {
     // console.log(user);
-    const isValid = await login(username.value, email.value, role.value);
+    const isValid = await login(data.username, data.email, data.role);
     if (isValid)
       navigate("/wellcome"); //send authonticated users to Wellcome Page
     else {
@@ -32,11 +83,11 @@ function Login({ isBlocked, setIsBlocked }) {
         onOpen: () => setIsBlocked(true),
         onClose: () => setIsBlocked(false),
       });
-
     }
-    e.target.email.value="";
-    e.target.username.value="";
-    //navigate("/invalidRoute"); //send unauthonticated (different roles) to Error Page
+    reset();
+    setRole(roles.student);
+
+    clearErrors();
   };
 
   const inputStyle = {
@@ -76,28 +127,53 @@ function Login({ isBlocked, setIsBlocked }) {
             <div className="main-cont">
               <div className="child1">
                 <form
-                  onSubmit={handleSubmit}
+                  noValidate
+                  onSubmit={handleSubmit(makeSubmission)}
                   style={{ width: "100%", margin: "0 auto" }}
                 >
                   <Input
                     sx={inputStyle}
-                    name="username"
                     disabled={isBlocked}
+                    autoFocus={true}
                     type="text"
                     placeholder="Username"
+                    {...register("username")}
                   />
+                  {errors.username && (
+                    <ErrorMessage
+                      name="username"
+                      errors={errors}
+                      render={({ message }) => (
+                        <p className="error">{message}</p>
+                      )}
+                    />
+                  )}
                   <Input
                     sx={inputStyle}
-                    name="email"
                     disabled={isBlocked}
                     type="email"
                     placeholder="Email"
+                    {...register("email")}
                   />
-
+                  {errors.email && (
+                    <ErrorMessage
+                      name="email"
+                      errors={errors}
+                      render={({ message }) => (
+                        <p className="error">{message}</p>
+                      )}
+                    />
+                  )}
                   <RadioGroup
                     row
                     value={role}
-                    onChange={(e) => setRole(e.target.value)}
+                    onChange={(event) => {
+                      const selectedRole = event.target.value;
+
+                      setValue("role", event.target.value);
+                      setRole(selectedRole);
+                      setValue("role", selectedRole);
+                    }}
                     sx={{
                       justifyContent: "center",
                       gap: 2,
@@ -115,13 +191,15 @@ function Login({ isBlocked, setIsBlocked }) {
                               color: "#9C27B0",
                             },
                           }}
-                          name="role"
-                          id="student"
+                          {...register("role")}
                         />
                       }
                       label="Student"
                       sx={{
-                        color: role === roles.student ? "#9C27B0" : "#E1BEE7",
+                        color:
+                          watch("role") === roles.student
+                            ? "#9C27B0"
+                            : "#E1BEE7",
                       }}
                     />
 
@@ -136,13 +214,13 @@ function Login({ isBlocked, setIsBlocked }) {
                               color: "#9C27B0",
                             },
                           }}
-                          name="role"
-                          id="admin"
+                          {...register("role")}
                         />
                       }
                       label="Admin"
                       sx={{
-                        color: role === roles.admin ? "#9C27B0" : "#E1BEE7",
+                        color:
+                          watch("role") === roles.admin ? "#9C27B0" : "#E1BEE7",
                       }}
                     />
                   </RadioGroup>
@@ -155,7 +233,7 @@ function Login({ isBlocked, setIsBlocked }) {
                       marginTop: "100px",
                     }}
                     type="submit"
-                    disabled={isBlocked}
+                    disabled={isBlocked || !isValid}
                   >
                     Login
                   </Button>

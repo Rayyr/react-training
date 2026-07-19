@@ -128,7 +128,7 @@ export default function UpdateForm({ open, onClose, content }) {
           <Input
             fullWidth
             type="text"
-            name="username"
+            
             placeholder="Username"
             disabled={isBlocked}
             autoFocus={true}
@@ -145,7 +145,7 @@ export default function UpdateForm({ open, onClose, content }) {
           <Input
             fullWidth
             type="email"
-            name="email"
+             
             placeholder="Email"
             disabled={isBlocked}
             sx={{ mb: 2 }}
@@ -161,7 +161,7 @@ export default function UpdateForm({ open, onClose, content }) {
           <Input
             fullWidth
             type="text"
-            name="course"
+            
             placeholder="Course"
             disabled={isBlocked}
             sx={{ mb: 2 }}
@@ -177,7 +177,7 @@ export default function UpdateForm({ open, onClose, content }) {
           <Input
             fullWidth
             type="number"
-            name="gpa"
+            
             placeholder="GPA"
             disabled={isBlocked}
             step="0.01"
