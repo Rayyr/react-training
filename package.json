@@ -15,6 +15,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.18.1",
     "eslint": "^8.57.1",
     "framer-motion": "^12.42.2",
     "json-server": "^1.0.0-beta.15",
