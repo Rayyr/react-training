@@ -9,16 +9,14 @@ import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { formSchema } from "../utils/formSchema.js";
 import { useNavigate } from "react-router-dom";
 import GravityStarsBackground from "../components/BuiltIn UI/Animated Background/GravityStarsBackground.jsx";
 import "../styles/gravityStartsBackground.css";
 
-
- function RegistrationForm({ isBlocked, setIsBlocked }) {
+function RegistrationForm({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
 
- 
   const { students, addStudent } = useContext(StudentContext);
 
   const formData = {
@@ -27,57 +25,6 @@ import "../styles/gravityStartsBackground.css";
     course: "",
     gpa: "",
   };
-
-  //blueprint for inputs validation via yup library : client side validation : no dependency on browser-level validation(tags themselves)
-  const formSchema = yup.object({
-    username: yup
-      .string()
-      .required("Username is required!")
-      .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
-
-    email: yup
-      .string()
-      .required("Email is required!") //requirness const
-      .matches(/@gmail\.com$/, "Email must end with @gmail.com") //domain const , already is done by built in validation related to email input feild type
-      .test(
-        //check if first char is a digit or special char
-        "first letter of email",
-        "Email must not start by digit or special char!",
-        (email) => (email ? /^[a-zA-Z]/.test(email) : true),
-      )
-      .test(
-        //check if example != username
-        "Not as same as username",
-        "Email name must not equal username",
-        function (email) {
-          const { username } = this.parent;
-
-          if (!email) return true;
-
-          const namePart = email.split("@")[0];
-          return namePart !== username;
-        },
-      ),
-    gpa: yup
-      .number()
-      .min(0, "GPA must be >= 0!")
-      .max(4, "GPA must be <= 4!")
-      .test(
-        "decimal-precision",
-        "GPA must have max 2 decimal places",
-        (value) =>
-          value === undefined || /^(\d+(\.\d{1,2})?)$/.test(value.toString()),
-      )
-      .required("GPA is required!"), //handles not nullable
-
-    course: yup
-      .string()
-      .matches(
-        /^[a-zA-Z\s]+$/,
-        "Course must not contain any special characters!",
-      )
-      .required("Course is required!"),
-  });
 
   const {
     register,
@@ -158,8 +105,10 @@ import "../styles/gravityStartsBackground.css";
 
   return (
     <>
-      <GravityStarsBackground >
-        <BubbleText color="#9C27B0" fontSize="70px">Student Registeration Form</BubbleText>
+      <GravityStarsBackground>
+        <BubbleText color="#9C27B0" fontSize="70px">
+          Student Registeration Form
+        </BubbleText>
         <Box
           sx={{
             backgroundColor: "transparent",
@@ -173,7 +122,7 @@ import "../styles/gravityStartsBackground.css";
                 noValidate
                 id="stu-form"
                 onSubmit={handleSubmit(makeSubmission)}
-                   style={{ width: "100%" , margin: "0 auto" }}
+                style={{ width: "100%", margin: "0 auto" }}
               >
                 <Input
                   type="text"

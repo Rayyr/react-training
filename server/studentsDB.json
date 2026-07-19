@@ -1,13 +1,5 @@
 {
-  "students": [
-    {
-      "course": "itj",
-      "gpa": 2.1,
-      "email": "asd2@gmail.com",
-      "username": "asd",
-      "id": "VKFHwN9xfQY"
-    }
-  ],
+  "students": [],
   "admins": [
     {
       "username": "manager",
