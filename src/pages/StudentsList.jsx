@@ -25,7 +25,7 @@ function StudentsList({ isBlocked, setIsBlocked }) {
         filters.username === "" ||
         student.username.toLowerCase() === filters.username.toLowerCase();
 
-      const matchesGpa = filters.gpa === "" || student.gpa === filters.gpa;
+      const matchesGpa = filters.gpa === "" || Number(student.gpa) === Number(filters.gpa);
 
       const matchesCourse =
         filters.course === "" || student.course === filters.course;
