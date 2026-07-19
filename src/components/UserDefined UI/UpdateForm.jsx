@@ -1,16 +1,84 @@
 import { Input, Modal, Button, Box, Typography } from "@mui/material";
 import { StudentContext } from "../../context/StudentContext.js";
 import { useContext, useState } from "react";
-import useForm from "../../hooks/useForm.js";
-import validateForm from "../../utils/validateForm.js";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function UpdateForm({ open, onClose, content }) {
-  const { students, updateStudentDetails, errors } = useContext(StudentContext);
+  const { students, updateStudentDetails } = useContext(StudentContext);
 
   const [isBlocked, setIsBlocked] = useState(false);
 
-  const student = students.find((s) => s.email === content.email);
+  const formSchema = yup.object({
+    username: yup
+      .string()
+      .required("Username is required!")
+      .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
+
+    email: yup
+      .string()
+      .required("Email is required!") //requirness const
+      .matches(/@gmail\.com$/, "Email must end with @gmail.com") //domain const , already is done by built in validation related to email input feild type
+      .test(
+        //check if first char is a digit or special char
+        "first letter of email",
+        "Email must not start by digit or special char!",
+        (email) => (email ? /^[a-zA-Z]/.test(email) : true),
+      )
+      .test(
+        //check if example != username
+        "Not as same as username",
+        "Email name must not equal username",
+        function (email) {
+          const { username } = this.parent;
+
+          if (!email) return true;
+
+          const namePart = email.split("@")[0];
+          return namePart !== username;
+        },
+      ),
+    gpa: yup
+      .number()
+      .min(0, "GPA must be >= 0!")
+      .max(4, "GPA must be <= 4!")
+      .test(
+        "decimal-precision",
+        "GPA must have max 2 decimal places",
+        (value) =>
+          value === undefined || /^(\d+(\.\d{1,2})?)$/.test(value.toString()),
+      )
+      .required("GPA is required!"), //handles not nullable
+
+    course: yup
+      .string()
+      .matches(
+        /^[a-zA-Z\s]+$/,
+        "Course must not contain any special characters!",
+      )
+      .required("Course is required!"),
+  });
+
+  //errors:form validation ones
+  const {
+    register,
+    handleSubmit,
+    reset,
+    clearErrors,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      username: content.username,
+      email: content.email, //unique
+      course: content.course,
+      gpa: content.gpa,
+    },
+    resolver: yupResolver(formSchema),
+    mode: "onChange",
+  });
 
   const buttonStyle = {
     whiteSpace: "nowrap",
@@ -35,27 +103,26 @@ export default function UpdateForm({ open, onClose, content }) {
     },
   };
 
-  const { formData, handleChange, handleSubmit } = useForm(
-    //initial values 1st param
-    {
-      username: content.username,
-      email: content.email, //unique
-      course: content.course,
-      gpa: content.gpa,
-    },
-    //i set isUpdateOp param in validateForm=true then i can access the id otherwise(add operation) then there is no passed id
-    (formData) =>
-      validateForm(
-        { ...formData, id: student.id },
-        students,
-        toast,
-        setIsBlocked,
-        true,
-      ), //2nd param validatForm()
-    (formData) => {
-      //3rd param of hook onSubmit here the submission means updateStudent info
+  const makeSubmission = (data) => {
+    //we need to check email uniqness aming other students  : server side validation(DB level)
 
-      updateStudentDetails(content.email, formData)
+    const otherStudent = students.find(
+      (st) => st.email === data.email && st.email !== content.email,
+    );
+    if (otherStudent) {
+      toast.error(
+        "Sorry,the email is assioated with other regeisterted user!",
+        {
+          style: {
+            width: "500px",
+          },
+          onOpen: () => setIsBlocked(true),
+          onClose: () => setIsBlocked(false),
+        },
+      );
+      reset();
+    } else {
+      updateStudentDetails(content.email, data)
         .then(() => {
           toast.success("Student details has been updated successfully!", {
             style: {
@@ -64,9 +131,12 @@ export default function UpdateForm({ open, onClose, content }) {
             onOpen: () => setIsBlocked(true),
             onClose: () => setIsBlocked(false),
           });
+
+          reset(data);
         })
         .catch((err) => {
-          toast.error(err || errors.PUT || "Failed to update student details", {
+          toast.error(err || "Failed to update student details", {
+            //err:in case of DB itself failre (connection ..) , err.post in case of specefically in POST op
             style: {
               width: "500px",
             },
@@ -74,9 +144,9 @@ export default function UpdateForm({ open, onClose, content }) {
             onClose: () => setIsBlocked(false),
           });
         });
-    },
-    true,
-  );
+    }
+    clearErrors();
+  };
 
   return (
     <Modal
@@ -86,7 +156,7 @@ export default function UpdateForm({ open, onClose, content }) {
       }}
       disableEscapeKeyDown={isBlocked}
     >
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit(makeSubmission)}>
         <Box
           sx={{
             position: "absolute",
@@ -107,44 +177,70 @@ export default function UpdateForm({ open, onClose, content }) {
 
           <Input
             fullWidth
+            type="text"
             name="username"
-            value={formData.username}
             placeholder="Username"
-            onChange={handleChange}
             disabled={isBlocked}
             autoFocus={true}
             sx={{ mb: 2 }}
+            {...register("username")}
           />
+          {errors.username && (
+            <ErrorMessage
+              name="username"
+              errors={errors}
+              render={({ message }) => <p className="error">{message}</p>}
+            />
+          )}
           <Input
             fullWidth
+            type="email"
             name="email"
-            value={formData.email}
             placeholder="Email"
-            onChange={handleChange}
             disabled={isBlocked}
-            autoFocus={true}
             sx={{ mb: 2 }}
+            {...register("email")}
           />
+          {errors.email && (
+            <ErrorMessage
+              name="email"
+              errors={errors}
+              render={({ message }) => <p className="error">{message}</p>}
+            />
+          )}
           <Input
             fullWidth
+            type="text"
             name="course"
-            value={formData.course}
             placeholder="Course"
-            onChange={handleChange}
             disabled={isBlocked}
-            autoFocus={true}
             sx={{ mb: 2 }}
+            {...register("course")}
           />
+          {errors.course && (
+            <ErrorMessage
+              name="course"
+              errors={errors}
+              render={({ message }) => <p className="error">{message}</p>}
+            />
+          )}
           <Input
             fullWidth
+            type="number"
             name="gpa"
-            value={formData.gpa}
             placeholder="GPA"
-            onChange={handleChange}
             disabled={isBlocked}
-            autoFocus={true}
+            step="0.01"
             sx={{ mb: 2 }}
+            {...register("gpa")}
           />
+          {errors.gpa && (
+            <ErrorMessage
+              name="gpa"
+              errors={errors}
+              render={({ message }) => <p className="error">{message}</p>}
+            />
+          )}
 
           <Box
             sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mt: 2 }}
@@ -156,19 +252,13 @@ export default function UpdateForm({ open, onClose, content }) {
               variant="contained"
               color="primary"
               disabled={isBlocked}
-               sx={buttonStyle}
+              sx={buttonStyle}
             >
               Close
             </Button>
 
             <Button
-              disabled={
-                !formData.email ||
-                !formData.username ||
-                !formData.course ||
-                !formData.gpa ||
-                isBlocked
-              }
+              disabled={isBlocked || !isValid}
               type="submit"
               variant="contained"
               color="primary"

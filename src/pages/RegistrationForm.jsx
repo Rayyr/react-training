@@ -78,6 +78,7 @@ import "../styles/gravityStartsBackground.css";
       )
       .required("Course is required!"),
   });
+
   const {
     register,
     handleSubmit,
