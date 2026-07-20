@@ -19,6 +19,7 @@ import Login from "./pages/Login.jsx";
 import ProtectedRoute from "./components/UserDefined UI/ProtectedRoute.jsx";
 import { roles } from "./constatnts/generalConstants.js";
 import Wellcome from "./pages/Wellcome.jsx";
+import GuestRoute from "./components/UserDefined UI/GuestRoute.jsx";
 
 function App() {
   //form blocking state when there is a toast notification , untill it is terminated
@@ -37,14 +38,18 @@ function App() {
               <Route
                 path="/login"
                 element={
-                  <Login isBlocked={isBlocked} setIsBlocked={setIsBlocked} />
+                  <GuestRoute setIsBlocked={setIsBlocked}>
+                    {" "}
+                    <Login isBlocked={isBlocked} setIsBlocked={setIsBlocked} />
+                  </GuestRoute>
                 }
               />{" "}
-              {/*accessable from anyone(even if they are not authanticated)*/}
-              <Route path="/home" element={<Home />} />{" "}
-              {/*accessable from anyone(even if they are not authanticated)*/}
-              <Route path="/" element={<Home />} />{" "}
-              {/*accessable from anyone(even if they are not authanticated)*/}
+              {/*accessable from anyone not logged in*/}
+              <Route path="/home" element={ <GuestRoute setIsBlocked={setIsBlocked}><Home /></GuestRoute>} />{" "}
+            {/*accessable from anyone not logged in*/}
+              <Route path="/" element={<GuestRoute setIsBlocked={setIsBlocked}><Home /></GuestRoute>} />{" "}
+              {/*accessable from anyone not logged in*/}
+
               <Route
                 path="/wellcome"
                 element={

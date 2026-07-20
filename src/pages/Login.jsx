@@ -20,6 +20,8 @@ function Login({ isBlocked, setIsBlocked }) {
 
   const [role, setRole] = useState("student"); //default
 
+
+
   // to access anything inside form using buik in form hook we need its name thats why we register it first  so it is =name attribute
   const formSchema = yup.object({
     username: yup
@@ -72,7 +74,7 @@ function Login({ isBlocked, setIsBlocked }) {
 
   const makeSubmission = async (data) => {
     // console.log(user);
-    const isValid = await login(data.username, data.email, data.role);
+    const isValid = await login(data.username, data.email,  data.role);
     if (isValid)
       navigate("/wellcome"); //send authonticated users to Wellcome Page
     else {
@@ -169,10 +171,8 @@ function Login({ isBlocked, setIsBlocked }) {
                     value={role}
                     onChange={(event) => {
                       const selectedRole = event.target.value;
-
-                      setValue("role", event.target.value);
                       setRole(selectedRole);
-                      setValue("role", selectedRole);
+                      setValue("role", selectedRole);//==register("role")
                     }}
                     sx={{
                       justifyContent: "center",
@@ -191,7 +191,7 @@ function Login({ isBlocked, setIsBlocked }) {
                               color: "#9C27B0",
                             },
                           }}
-                          {...register("role")}
+                           
                         />
                       }
                       label="Student"
@@ -214,7 +214,7 @@ function Login({ isBlocked, setIsBlocked }) {
                               color: "#9C27B0",
                             },
                           }}
-                          {...register("role")}
+                          
                         />
                       }
                       label="Admin"
