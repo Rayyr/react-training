@@ -1,0 +1,61 @@
+{
+  "students": [
+    {
+      "course": "we",
+      "gpa": 2,
+      "email": "khasaatirayaa@gmail.com",
+      "username": "raya",
+      "id": "L_TgyDgYj5c"
+    },
+    {
+      "username": "asad",
+      "email": "asd2@gmail.com",
+      "course": "wg",
+      "gpa": 3,
+      "id": "UIsj4C9xIw4"
+    },
+    {
+      "course": "as",
+      "gpa": 2,
+      "email": "faya22@gmail.com",
+      "username": "faya",
+      "id": "nwMF8GIqBZM"
+    },
+    {
+      "course": "as",
+      "gpa": 3,
+      "email": "qws2@gmail.com",
+      "username": "qws",
+      "id": "CbHt35DwAdE"
+    },
+    {
+      "course": "we",
+      "gpa": 4,
+      "email": "ola2@gmail.com",
+      "username": "ola",
+      "id": "FOKNWZ5ELyY"
+    },
+    {
+      "course": "hgj",
+      "gpa": 2,
+      "email": "nabeel2@gmail.com",
+      "username": "nabeel",
+      "id": "kZDCugG8ivM"
+    },
+    {
+      "course": "adf",
+      "gpa": 3,
+      "email": "l@gmail.com",
+      "username": "lamees",
+      "id": "-Bx7gRd8hbE"
+    }
+  ],
+  "admins": [
+    {
+      "username": "manager",
+      "email": "manager2@gmail.com",
+      "id": "41vbEeCYeAY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
