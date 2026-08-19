@@ -11,6 +11,7 @@ import NavBar from "./components/UserDefined UI/NavBar.jsx";
 import NotFoundError from "./pages/404NotFound.jsx";
 import { StudentProvider } from "./context/StudentContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
+import { AdminProvider } from "./context/AdminContext.js";
 import { ToastContainer, Bounce } from "react-toastify";
 import ErrorBoundary from "./components/UserDefined UI/ErrorBoundary.jsx";
 /* eslint-disable no-unused-vars */
@@ -31,6 +32,7 @@ function App() {
       {/*i make first studentprovider then authprovider since authprovier internally contani student context */}
       <StudentProvider>
         <AuthProvider>
+          <AdminProvider>
           <NavBar isBlocked={isBlocked} />
           <ErrorBoundary>
             {/*  <Bug></Bug>*/}
@@ -110,7 +112,8 @@ function App() {
               {/*accessable from anyone(even if they are not authanticated)==for invalid routes*/}
               <Route path="*" element={<NotFoundError />} />
             </Routes>
-          </ErrorBoundary>
+            </ErrorBoundary>
+          </AdminProvider>
         </AuthProvider>
       </StudentProvider>
       <ToastContainer

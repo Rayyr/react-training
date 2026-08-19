@@ -51,3 +51,33 @@ import * as yup from "yup";
       )
       .required("Course is required!"),
   });
+ 
+  // Schema for admin registration (only username and email)
+  export const adminFormSchema = yup.object({
+    username: yup
+      .string()
+      .required("Username is required!")
+      .matches(/^[a-zA-Z0-9]+$/, "only letters , numbers are allowed!"),
+
+    email: yup
+      .string()
+      .required("Email is required!")
+      .matches(/@gmail\.com$/, "Email must end with @gmail.com")
+      .test(
+        "first letter of email",
+        "Email must not start by digit or special char!",
+        (email) => (email ? /^[a-zA-Z]/.test(email) : true),
+      )
+      .test(
+        "Not as same as username",
+        "Email name must not equal username",
+        function (email) {
+          const { username } = this.parent;
+
+          if (!email) return true;
+
+          const namePart = email.split("@")[0];
+          return namePart !== username;
+        },
+      ),
+  });

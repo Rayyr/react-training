@@ -29,13 +29,6 @@
       "id": "CbHt35DwAdE"
     },
     {
-      "course": "we",
-      "gpa": 4,
-      "email": "ola2@gmail.com",
-      "username": "ola",
-      "id": "FOKNWZ5ELyY"
-    },
-    {
       "course": "hgj",
       "gpa": 2,
       "email": "nabeel2@gmail.com",
@@ -55,6 +48,11 @@
       "username": "manager",
       "email": "manager2@gmail.com",
       "id": "41vbEeCYeAY"
+    },
+    {
+      "username": "olaa",
+      "email": "ali@gmail.com",
+      "id": "S5hhwmviJHA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

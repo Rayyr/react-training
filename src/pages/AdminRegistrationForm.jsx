@@ -3,21 +3,25 @@ import { toast } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Box } from "@mui/material";
 import PreviewCard from "../components/UserDefined UI/PreviewCard.jsx";
-import { StudentContext } from "../context/StudentContext.js";
+import {AdminContext } from "../context/AdminContext.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema } from "../utils/formSchema.js";
+import { adminFormSchema as formSchema } from "../utils/formSchema.js";
 import { useNavigate } from "react-router-dom";
 import GravityStarsBackground from "../components/BuiltIn UI/Animated Background/GravityStarsBackground.jsx";
 import "../styles/gravityStartsBackground.css";
+import { StudentContext } from "../context/StudentContext.js";
 
 function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
 
-  const { students, addStudent } = useContext(StudentContext);
+  const { admins, addAdmin, errors: adminErrors } = useContext(AdminContext);
+
+    const { students } = useContext(StudentContext);
+
 
   const formData = {
     username: "",
@@ -28,7 +32,7 @@ function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
   const {
     register,
     handleSubmit,
-    watch,
+    
     reset,
     clearErrors,
 
@@ -59,54 +63,49 @@ function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
     },
   };
 
-  const makeSubmission = (data) => {
-    //once reached here so of course the inouts are being validated succesfully so the issues that may appear will be from DB not inputs themselves ( logically)
-
-    // unique email const : server side validation(DB level)
-    const student = students.find((st) => st.email === data.email);
-    if (student) {
-      toast.error(
-        "Sorry,the email is assioated with other regeisterted user!",
-        {
-          style: {
-            width: "500px",
-          },
+  const makeSubmission = async (data) => {
+    // client-side unique email check
+    setIsBlocked(true);
+    try {
+      const admin = admins.find((ad) => ad.email === data.email);
+       const stu = students.find((st) => st.email === data.email);
+      if (admin || stu) {
+        toast.error("Sorry, the email is associated with another registered user!", {
+          style: { width: "500px" },
           onOpen: () => setIsBlocked(true),
           onClose: () => setIsBlocked(false),
-        },
-      );
-    } else {
-      addStudent(data)
-        .then(() => {
-          toast.success("New student has been registerd successfully!", {
-            style: {
-              width: "500px",
-            },
-            onOpen: () => setIsBlocked(true),
-            onClose: () => setIsBlocked(false),
-          });
-        })
-        .catch((err) => {
-          toast.error(err.message || err.POST, {
-            //err:in case of DB itself failre (connection ..) , err.post in case of specefically in POST op
-            style: {
-              width: "500px",
-            },
-            onOpen: () => setIsBlocked(true),
-            onClose: () => setIsBlocked(false),
-          });
         });
+        return;
+      }
+
+      const created = await addAdmin(data);
+      toast.success("New admin has been registered successfully!", {
+        style: { width: "500px" },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
 
       reset();
+      return created;
+    } catch (err) {
+      const message = err?.message || adminErrors?.POST || "Failed to register admin";
+      toast.error(message, {
+        style: { width: "500px" },
+        onOpen: () => setIsBlocked(true),
+        onClose: () => setIsBlocked(false),
+      });
+      throw err;
+    } finally {
+      clearErrors();
+      setIsBlocked(false);
     }
-    clearErrors();
   };
 
   return (
     <>
       <GravityStarsBackground>
         <BubbleText color="#9C27B0" fontSize="70px">
-          Student Registeration Form
+          Admin Registeration Form
         </BubbleText>
         <Box
           sx={{
@@ -156,39 +155,8 @@ function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
                   />
                 )}
                 <br />
-                <Input
-                  type="number"
-                  
-                  placeholder="GPA*"
-                  step="0.01"
-                  disabled={isBlocked}
-                  sx={inputStyle}
-                  {...register("gpa")}
-                ></Input>{" "}
-                {errors.gpa && (
-                  <ErrorMessage
-                    name="gpa"
-                    errors={errors}
-                    render={({ message }) => <p className="error">{message}</p>}
-                  />
-                )}
-                <br />
-                <Input
-                  type="text"
-                   
-                  placeholder="Course*"
-                  disabled={isBlocked}
-                  sx={inputStyle}
-                  {...register("course")}
-                ></Input>{" "}
-                {errors.course && (
-                  <ErrorMessage
-                    name="course"
-                    errors={errors}
-                    render={({ message }) => <p className="error">{message}</p>}
-                  />
-                )}{" "}
-                <br />
+               
+                
                 <Button
                   type="submit"
                   disabled={isBlocked || !isValid}
@@ -203,17 +171,7 @@ function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
               </form>
             </div>
 
-            <div className="child2">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "40px",
-                }}
-              >
-                <PreviewCard content={watch()} />
-              </div>
-            </div>
+            
 
             <button disabled={isBlocked} onClick={() => navigate("/home")}>
               <div>

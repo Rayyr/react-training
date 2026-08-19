@@ -11,7 +11,7 @@ A modern **Student Management System** built with React that allows administrato
 - Update existing student details  
 - Delete students  
 - View student list in a responsive layout
-- Single user session at a time using LocalStorage
+- Single user session (student or admin) at a time using LocalStorage
 ---
 
 ### 📄 Data Handling
@@ -122,7 +122,7 @@ npm start
 ### 🌐 Live Demo
 
 - **Frontend (Vercel):**  
-  [App](https://react-training-mauve.vercel.app)
+  [App](https://react-training-mauve.vercel.app/)
 
 - **Backend (Render):**  
  [Backend](https://back-end-yp7x.onrender.com)
