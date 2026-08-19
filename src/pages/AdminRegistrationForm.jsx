@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import GravityStarsBackground from "../components/BuiltIn UI/Animated Background/GravityStarsBackground.jsx";
 import "../styles/gravityStartsBackground.css";
 
-function RegistrationForm({ isBlocked, setIsBlocked }) {
+function AdminRegistrationForm({ isBlocked, setIsBlocked }) {
   const navigate = useNavigate();
 
   const { students, addStudent } = useContext(StudentContext);
@@ -22,8 +22,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   const formData = {
     username: "",
     email: "",
-    course: "",
-    gpa: "",
+    
   };
 
   const {
@@ -61,7 +60,7 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   };
 
   const makeSubmission = (data) => {
-    //once reached here so of course the inouts are being validated succesfully so the issues that may appear will be from DB not inouts themselves ( logically)
+    //once reached here so of course the inouts are being validated succesfully so the issues that may appear will be from DB not inputs themselves ( logically)
 
     // unique email const : server side validation(DB level)
     const student = students.find((st) => st.email === data.email);
@@ -248,4 +247,4 @@ function RegistrationForm({ isBlocked, setIsBlocked }) {
   );
 }
 
-export default RegistrationForm;
+export default AdminRegistrationForm;

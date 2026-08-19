@@ -58,10 +58,17 @@ function Home() {
               Login
             </Button>
             <Button
-              sx={{ ...buttonStyle, width: "150px" }}
-              onClick={() => navigate("/register")}
+              sx={{ ...buttonStyle, width: "230px" }}
+              onClick={() => navigate("/stu-register")}
             >
-              Register
+              Student Register
+            </Button>
+
+               <Button
+              sx={{ ...buttonStyle, width: "230px" }}
+              onClick={() => navigate("/ad-register")}
+            >
+              Admin Register
             </Button>
           </div>
         </div>

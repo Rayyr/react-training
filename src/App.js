@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import StudentsList from "./pages/StudentsList.jsx";
 import About from "./pages/About.jsx";
-import RegistrationForm from "./pages/RegistrationForm.jsx";
+import StuRegistrationForm from "./pages/StuRegistrationForm.jsx";
+import AdminRegistrationForm from "./pages/AdminRegistrationForm.jsx";
 import { useState } from "react";
 import StudentDetails from "./pages/StudentDetails.jsx";
 import NavBar from "./components/UserDefined UI/NavBar.jsx";
@@ -72,15 +73,27 @@ function App() {
               />
               {/*accessable only for authorized users with these roles*/}
               <Route
-                path="/register"
+                path="/stu-register"
                 element={
-                  <RegistrationForm
+                  <StuRegistrationForm
                     isBlocked={isBlocked}
                     setIsBlocked={setIsBlocked}
                   />
                 }
               />{" "}
-              {/*===sign up ,accessable from anyone(even if they are not authanticated)*/}
+              {/*===student sign up ,accessable from anyone(even if they are not authanticated)*/}
+
+                            <Route
+                path="/ad-register"
+                element={
+                  <AdminRegistrationForm
+                    isBlocked={isBlocked}
+                    setIsBlocked={setIsBlocked}
+                  />
+                }
+              />{" "}
+              {/*===admin sign up ,accessable from anyone(even if they are not authanticated)*/}
+
               <Route
                 path="/students/:email"
                 element={
