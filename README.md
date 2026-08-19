@@ -56,7 +56,7 @@ A modern **Student Management System** built with React that allows administrato
 ---
 
 ### 📊 Additional Features
-- Role-based UI (Admin / Student roles) (1 - many )
+- Role-based UI (Admin / Student roles) (many - many )
 - Protected Routes based to RPAC
 
 ---
@@ -136,8 +136,5 @@ npm start
 ```env
 REACT_APP_API_URL=deplyed_backend
 ```
-
-There is noly 1 admin as follow :
-<img width="1271" height="892" alt="image" src="https://github.com/user-attachments/assets/52a7fbd2-df82-49ce-8943-de3a775d4626" />
-
+  
 ---
