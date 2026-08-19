@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import "../styles/RegisterationForm.css";
 import { Input, Box } from "@mui/material";
-import PreviewCard from "../components/UserDefined UI/PreviewCard.jsx";
 import {AdminContext } from "../context/AdminContext.js";
 import Button from "../components/BuiltIn UI/Button.jsx";
 import BubbleText from "../components/BuiltIn UI/BubbleText/BubbleText.jsx";
