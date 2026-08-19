@@ -122,10 +122,11 @@ npm start
 ### 🌐 Live Demo
 
 - **Frontend (Vercel):**  
-  [App](https://react-training-mauve.vercel.app/)
+  [App](https://react-training-3934qkbb2-rayyrs-projects.vercel.app)
 
 - **Backend (Render):**  
  [Backend](https://back-end-yp7x.onrender.com)
+
 ---
 ### ⚠️ Notes
 
