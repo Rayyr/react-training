@@ -134,6 +134,10 @@ npm start
 - The backend API is deployed on **Render**  
 - Make sure the frontend `.env` is pointing to the deployed backend:
 
+---
+### Notes 
+https://docs.google.com/document/d/1anrSDSNI98hS049Gq7O5wJrach7Zs6hcFnMAEd6xV8M/edit?usp=sharing 
+
 ```env
 REACT_APP_API_URL=deplyed_backend
 ```
