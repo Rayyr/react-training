@@ -137,6 +137,7 @@ npm start
 ---
 ### Notes 
 https://docs.google.com/document/d/1anrSDSNI98hS049Gq7O5wJrach7Zs6hcFnMAEd6xV8M/edit?usp=sharing 
+https://chatgpt.com/share/6ac60d21-4684-83eb-97c9-96ff8653670c
 
 ```env
 REACT_APP_API_URL=deplyed_backend
